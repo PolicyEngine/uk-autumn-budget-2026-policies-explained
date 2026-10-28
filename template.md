@@ -50,6 +50,8 @@ The day before the Budget we circulated 20 measures most likely to come up. This
 - **Our estimate**, only where the dashboard publishes one, with the reasons it differs from the official costing.
 - **How we model it**, or "not modelled".
 
+After the cards for the measures in our dashboard, a page for each of our six explainers gives its key points and one of its charts.
+
 Our estimates differ from the official costings for four main reasons: timing (we score each tax year's liability; the official costings are on a National Accounts basis, in which tax paid through Self Assessment can fall in a later year), coverage (we use household survey data, so we estimate less fully the effects outside households and on incomes the survey records thinly), behaviour (ours are static; most official costings include responses) and scope (the parts of a policy each models).
 
 ## In our dashboard
@@ -189,6 +191,60 @@ The official costing includes some savers moving their savings into ISAs and oth
 [Why ours differs]{.why} From 2028-29 ours falls {{gap:trading_allowance_raise:15:Income tax+NICs:2029}} million to {{gap:trading_allowance_raise:15:Income tax+NICs:2028}} million a year below the OBR's income tax and NICs lines ({{gappct:trading_allowance_raise:15:Income tax+NICs:2031}} to {{gappct:trading_allowance_raise:15:Income tax+NICs:2028}}), with the largest gap in 2028-29. The official costing includes people switching from deducting their actual expenses to the larger allowance, which we don't model. Without gross receipts in the survey data, we give traders with profits above £3,000 nothing from the change and give miscellaneous income no allowance at all, while for some profits between £1,000 and £3,000 we overstate the gain, because we leave them unrelieved under the current £1,000 allowance. In 2027-28 the OBR's lines have no cost and ours has {{peabs:trading_allowance_raise:2027}} million. The dashboard gives the reason in its description of the comparison: the official costings are on a National Accounts basis, in which tax paid through Self Assessment can fall in a later year, so a change such as the trading allowance can appear about a year later in them than in ours.
 :::
 
+## Our explainers
+
+We have published an explainer on six of the measures above. Each of the next six pages gives an explainer's key points as published on policyengine.org, then one of its charts, drawn from the data published with it. The three income decile charts show the dashboard's results, and each bar matches the dashboard to the pound. Words in square brackets replace a reference to another part of the post.
+
+::: {.explainer}
+### [Analysis of the Autumn Budget 2026 energy bill measures](https://www.policyengine.org/uk/research/budget-2026-energy-bills)
+
+The Household Energy Payment and the extended zero rate of VAT on household electricity.
+
+{{keypoints:budget-2026-energy-bills}}
+
+![Average change in household net income by income decile, 2026-27, from the energy bill measures](charts/energy-bills-deciles.svg){.chart}\
+:::
+
+::: {.explainer}
+### [The fuel duty cut extension in the Autumn Budget 2026](https://www.policyengine.org/uk/research/fuel-duty-cut-extension)
+
+{{keypoints:fuel-duty-cut-extension}}
+
+![Average gain from the fuel duty measure by income decile, 2026-27 and 2027-28](charts/fuel-duty-deciles.svg){.chart}\
+:::
+
+::: {.explainer}
+### [The Pension Tax Allowance in the Autumn Budget 2026](https://www.policyengine.org/uk/research/pension-tax-allowance)
+
+{{keypoints:pension-tax-allowance}}
+
+![Income tax for a single pensioner by total income in 2027-28, with and without the Pension Tax Allowance](charts/pension-tax-allowance-income-tax.svg){.chart}\
+:::
+
+::: {.explainer}
+### [The Carer's Allowance earnings taper in the Autumn Budget 2026](https://www.policyengine.org/uk/research/carers-allowance-taper)
+
+{{keypoints:carers-allowance-taper}}
+
+![Weekly Carer's Allowance by gross weekly pay in 2031-32, with and without the taper](charts/carers-allowance-by-pay.svg){.chart}\
+:::
+
+::: {.explainer}
+### [Autumn Budget 2026: higher tax on property income](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-property-income-tax)
+
+{{keypoints:uk-autumn-budget-2026-property-income-tax:1}}
+
+![Average change in household net income by income decile from the property income tax measure, 2027-28 and 2031-32](charts/property-income-deciles.svg){.chart}\
+:::
+
+::: {.explainer}
+### [Autumn Budget 2026: raising the trading allowance](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-trading-allowance)
+
+{{keypoints:uk-autumn-budget-2026-trading-allowance}}
+
+![Annual income tax reduction from the trading allowance by side-business receipts, for a £30,000 employee in 2027-28](charts/trading-allowance-receipts.svg){.chart}\
+:::
+
 ## Announced, not in our Budget dashboard
 
 ::: {.card}
@@ -321,5 +377,6 @@ We are also working on:
 
 - Budget 2026 document: [gov.uk/government/publications/budget-2026-document](https://www.gov.uk/government/publications/budget-2026-document/budget-2026-html). Table 6.1 of policy decisions and the policy costings: [supporting documents for Budget 2026](https://www.gov.uk/government/publications/supporting-documents-for-budget-2026). The OBR's [October 2026 Economic and fiscal outlook](https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/) and its detailed forecast table 1.1, policy.xlsx (sha256 cdcc2a06), the source of every official figure in the costing tables apart from the Table 6.1 totals given for context. The triple lock estimates are the Department for Work and Pensions' [State Pension uprating analysis](https://www.gov.uk/government/publications/state-pension-uprating-analysis-2026/state-pension-uprating); other official figures in the text come from the Budget documents, Table 6.2 for the Your First Home loans included, and the OBR's outlook. Fuel duty's path before the Budget, 3p back on 1 January 2027 and 2p more on 1 March, is from [SI 2026/164](https://www.legislation.gov.uk/uksi/2026/164) as amended by [SI 2026/555](https://www.legislation.gov.uk/uksi/2026/555/made), and HMRC's [Amended Fuel Duty rates: 2026 to 2027](https://www.gov.uk/government/publications/amended-fuel-duty-rates-for-2026-to-2027/amended-fuel-duty-rates-2026-to-2027). Pension Tax Allowance: the Treasury's [explainer](https://www.gov.uk/government/publications/pension-tax-allowance-explainer/pension-tax-allowance-explainer).
 - PolicyEngine estimates: the Autumn Budget dashboard's publication manifest, revision {{meta:revision}}, from [{{meta:source_label}}]({{meta:url}}), on policyengine.py 6.11.1, with data calibrated before the Budget and grown with the OBR's October 2026 forecast. Every PolicyEngine figure in the costing tables, and the combined totals, was read from an artifact whose files match the digests in its receipt, and is traced with each official figure to its file, row and column. The combined figure is one simulation of the seven measures together. Other PolicyEngine figures in the text are quoted from the dashboard's notes and from our published posts.
+- The explainer pages quote each post's key points as published on policyengine.org (policyengine-app-v2 at {{post_sha}}) and draw one of its charts from the data published with it. Every bar of the three income decile charts was checked against the dashboard artifact for that measure and year.
 - The reasons each estimate differs from the official costing come from the dashboard's notes on its comparison with the official costings, from the OBR's October 2026 Economic and fiscal outlook and from the Budget documents. The notes compare our figures with Table 6.1's totals and also draw on further runs of our model, so some of their figures aren't in our published results.
 - How we model each measure follows the dashboard's description of it; the few details added here (static fuel purchases, the whole period costed for electricity, the council funding left out of the energy payment, no change in carers' work) were checked against the dashboard and PolicyEngine UK code at the release commit. Our estimates are static and use survey data; the dashboard withholds any result that rests on fewer than three survey households.

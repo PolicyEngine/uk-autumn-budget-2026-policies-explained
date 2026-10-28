@@ -50,6 +50,8 @@ The day before the Budget we circulated 20 measures most likely to come up. This
 - **Our estimate**, only where the dashboard publishes one, with the reasons it differs from the official costing.
 - **How we model it**, or "not modelled".
 
+After the cards for the measures in our dashboard, a page for each of our six explainers gives its key points and one of its charts.
+
 Our estimates differ from the official costings for four main reasons: timing (we score each tax year's liability; the official costings are on a National Accounts basis, in which tax paid through Self Assessment can fall in a later year), coverage (we use household survey data, so we estimate less fully the effects outside households and on incomes the survey records thinly), behaviour (ours are static; most official costings include responses) and scope (the parts of a policy each models).
 
 ## In our dashboard
@@ -232,6 +234,99 @@ Table 6.1's total also includes the measure's other lines in the OBR's table: PS
 [Why ours differs]{.why} From 2028-29 ours falls £46 million to £103 million a year below the OBR's income tax and NICs lines (27% to 47%), with the largest gap in 2028-29. The official costing includes people switching from deducting their actual expenses to the larger allowance, which we don't model. Without gross receipts in the survey data, we give traders with profits above £3,000 nothing from the change and give miscellaneous income no allowance at all, while for some profits between £1,000 and £3,000 we overstate the gain, because we leave them unrelieved under the current £1,000 allowance. In 2027-28 the OBR's lines have no cost and ours has £110 million. The dashboard gives the reason in its description of the comparison: the official costings are on a National Accounts basis, in which tax paid through Self Assessment can fall in a later year, so a change such as the trading allowance can appear about a year later in them than in ours.
 :::
 
+## Our explainers
+
+We have published an explainer on six of the measures above. Each of the next six pages gives an explainer's key points as published on policyengine.org, then one of its charts, drawn from the data published with it. The three income decile charts show the dashboard's results, and each bar matches the dashboard to the pound. Words in square brackets replace a reference to another part of the post.
+
+::: {.explainer}
+### [Analysis of the Autumn Budget 2026 energy bill measures](https://www.policyengine.org/uk/research/budget-2026-energy-bills)
+
+The Household Energy Payment and the extended zero rate of VAT on household electricity.
+
+Key results for 2026-27:
+
+- The two measures cost £2.81 billion: £1.97 billion for the payment and £0.84 billion for the VAT cut
+- 19.7 million households in England, 80.6% of the total, receive the £100 payment
+- Household net income increases by an average of £96 per UK household
+- The Gini index of income inequality falls by 0.12% from the payment and 0.04% from the VAT cut
+
+![Average change in household net income by income decile, 2026-27, from the energy bill measures](charts/energy-bills-deciles.svg){.chart}\
+:::
+
+::: {.explainer}
+### [The fuel duty cut extension in the Autumn Budget 2026](https://www.policyengine.org/uk/research/fuel-duty-cut-extension)
+
+Key figures:
+
+- The main rate of fuel duty stays at 52.95p a litre to 30 June 2027. Before the Budget, the rate was due to rise to 55.95p on 1 January 2027 and 57.95p on 1 March 2027, with an RPI increase planned for April 2027.
+- On 1 July 2027, the rate rises to 60.59p. From that date, on our assumption for April 2027, it follows the same path as before the Budget.
+- With the VAT on the duty, a litre costs 3.6p less in January and February 2027, 6.0p less in March 2027 and 9.2p less from April to June 2027.
+- A household that uses 1,000 litres of fuel a year, about 19 litres a week, pays £34 less in total: £12 in 2026-27 and £22 in 2027-28.
+- PolicyEngine estimates that the measure costs £301 million in 2026-27 and £521 million in 2027-28 on fuel that households buy, and nothing in later years. For context, the government estimates that it reduces fuel duty receipts by £574 million and £782 million. The OBR used that estimate in its forecast but could not certify it ([Economic and fiscal outlook, October 2026](https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/), chapter 3 and detailed forecast tables, policy, Table 1.1).
+- In 2027-28, household net income rises by £18 a year on average, from £12 in the lowest income decile to £24 in the ninth.
+
+![Average gain from the fuel duty measure by income decile, 2026-27 and 2027-28](charts/fuel-duty-deciles.svg){.chart}\
+:::
+
+::: {.explainer}
+### [The Pension Tax Allowance in the Autumn Budget 2026](https://www.policyengine.org/uk/research/pension-tax-allowance)
+
+Key figures for 2027-28:
+
+- The full new State Pension is £13,036 a year, £466 above the £12,570 Personal Allowance.
+- The full PTA is £94.
+- A pensioner with the standard Personal Allowance, income taxed at the 20% basic rate and total income up to £13,036 pays no income tax.
+- The PTA falls by £1 for each £3 of income above £13,036 and reaches zero at £13,319.
+- In that withdrawal range, a taxpayer outside Scotland has an effective marginal tax rate of 53.3%, against 20% without the PTA.
+- For a pensioner who claims means-tested benefits, those benefits fall as income tax falls, so net income rises by less than the PTA. A Pension Credit claimant aged 75 or over without Savings Credit can lose up to £180, because leaving Pension Credit ends the free TV licence.
+
+![Income tax for a single pensioner by total income in 2027-28, with and without the Pension Tax Allowance](charts/pension-tax-allowance-income-tax.svg){.chart}\
+:::
+
+::: {.explainer}
+### [The Carer's Allowance earnings taper in the Autumn Budget 2026](https://www.policyengine.org/uk/research/carers-allowance-taper)
+
+Key figures for 2031-32:
+
+- The Weekly Earnings Limit is 16 hours at the National Living Wage, rounded up to the next pound: £234 a week, on the OBR's forecast for April 2031.
+- PolicyEngine UK projects Carer's Allowance at £98 a week.
+- Under current rules, the earnings limit is a cliff: a carer whose net earnings exceed the limit by any amount, even 1p, loses the whole allowance for that week. With the taper, the allowance falls by £1 for each £1 above the limit. It falls to nothing once a carer's net earnings (pay after income tax and National Insurance, as the test counts them) exceed the £234 limit by the full weekly rate of about £98: at £333 a week or more, which is about £366 a week of gross pay for an employee with no pension contributions.
+- A carer who does not claim Universal Credit and earns £240 a week gains £75 a week. At £300 a week, the gain is £38.
+- Universal Credit counts Carer's Allowance in full, so it falls by £1 for each £1 of allowance, and the allowance is taxable, so a carer on Universal Credit who pays tax on it loses. At £240 a week of pay, the loss is about £8 a week for an employee whose tax code takes account of the allowance, because Universal Credit then gives back 55% of the tax, as [the explainer sets out].
+- The government's costing, which the OBR certified, is £38 million in 2030-31 and £79 million in 2031-32 after behavioural responses, of which £5 million and £10 million is extra block grant for Scotland. Our static estimate of the net cost, the figure on PolicyEngine's [Autumn Budget 2026 dashboard](https://policyengine.org/uk/autumn-budget-2026), is £24 million and £48 million.
+
+![Weekly Carer's Allowance by gross weekly pay in 2031-32, with and without the taper](charts/carers-allowance-by-pay.svg){.chart}\
+:::
+
+::: {.explainer}
+### [Autumn Budget 2026: higher tax on property income](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-property-income-tax)
+
+Key figures:
+
+- A landlord in England with £10,000 of property profit and £4,000 of fully usable mortgage interest pays £120 more income tax.
+- A mortgage-free landlord in England with the same profit pays £200 more.
+- A landlord who lives in Scotland, with £4,000 of fully usable finance costs, pays £80 less income tax. The property income tax rate rise does not apply to Scottish taxpayers, but their finance-cost reduction still rises with the property basic rate.
+- PolicyEngine estimates £399 million of additional net government revenue and a £14 reduction in average household net income in 2027–28.
+- The government's costing, certified by the OBR, has £394 million to £412 million a year of extra income tax from 2029–30 to 2031–32, £539 million in 2028–29 and none in 2027–28. Its total in the Budget's Table 6.1, which adds the costing's other lines, is £35 million in 2027–28, £575 million in 2028–29 and £435 million to £455 million a year from 2029–30.
+
+The 2027–28 and 2028–29 figures use different collection-timing bases and are not directly comparable. From 2029–30, PolicyEngine's estimate exceeds the costing's income tax line by 9% to 11%; see the [budgetary impact section](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-property-income-tax#budgetary-impact).
+
+![Average change in household net income by income decile from the property income tax measure, 2027-28 and 2031-32](charts/property-income-deciles.svg){.chart}\
+:::
+
+::: {.explainer}
+### [Autumn Budget 2026: raising the trading allowance](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-trading-allowance)
+
+Key figures:
+
+- An employee paying 20% income tax on eligible side income can save £400 a year from the extra £2,000 deduction.
+- A sole trader with £20,000 of receipts and £500 of expenses gains £520 through lower income tax and Class 4 National Insurance.
+- A Universal Credit claimant in [the explainer's] example keeps £180 of a £400 tax reduction, after UC falls by £220.
+- The government's costing, certified by the OBR, puts the cost in income tax and National Insurance at nothing in 2027–28 and £221 million in 2028–29. The Budget's [Table 6.1, row 15](https://www.gov.uk/government/publications/supporting-documents-for-budget-2026) rounds the measure's total to £225 million in 2028–29.
+
+![Annual income tax reduction from the trading allowance by side-business receipts, for a £30,000 employee in 2027-28](charts/trading-allowance-receipts.svg){.chart}\
+:::
+
 ## Announced, not in our Budget dashboard
 
 ::: {.card}
@@ -366,5 +461,6 @@ We are also working on:
 
 - Budget 2026 document: [gov.uk/government/publications/budget-2026-document](https://www.gov.uk/government/publications/budget-2026-document/budget-2026-html). Table 6.1 of policy decisions and the policy costings: [supporting documents for Budget 2026](https://www.gov.uk/government/publications/supporting-documents-for-budget-2026). The OBR's [October 2026 Economic and fiscal outlook](https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/) and its detailed forecast table 1.1, policy.xlsx (sha256 cdcc2a06), the source of every official figure in the costing tables apart from the Table 6.1 totals given for context. The triple lock estimates are the Department for Work and Pensions' [State Pension uprating analysis](https://www.gov.uk/government/publications/state-pension-uprating-analysis-2026/state-pension-uprating); other official figures in the text come from the Budget documents, Table 6.2 for the Your First Home loans included, and the OBR's outlook. Fuel duty's path before the Budget, 3p back on 1 January 2027 and 2p more on 1 March, is from [SI 2026/164](https://www.legislation.gov.uk/uksi/2026/164) as amended by [SI 2026/555](https://www.legislation.gov.uk/uksi/2026/555/made), and HMRC's [Amended Fuel Duty rates: 2026 to 2027](https://www.gov.uk/government/publications/amended-fuel-duty-rates-for-2026-to-2027/amended-fuel-duty-rates-2026-to-2027). Pension Tax Allowance: the Treasury's [explainer](https://www.gov.uk/government/publications/pension-tax-allowance-explainer/pension-tax-allowance-explainer).
 - PolicyEngine estimates: the Autumn Budget dashboard's publication manifest, revision 17, from [the published dashboard](https://www.policyengine.org/uk/autumn-budget-2026/data/manifest.json), on policyengine.py 6.11.1, with data calibrated before the Budget and grown with the OBR's October 2026 forecast. Every PolicyEngine figure in the costing tables, and the combined totals, was read from an artifact whose files match the digests in its receipt, and is traced with each official figure to its file, row and column. The combined figure is one simulation of the seven measures together. Other PolicyEngine figures in the text are quoted from the dashboard's notes and from our published posts.
+- The explainer pages quote each post's key points as published on policyengine.org (policyengine-app-v2 at 85571f7a3) and draw one of its charts from the data published with it. Every bar of the three income decile charts was checked against the dashboard artifact for that measure and year.
 - The reasons each estimate differs from the official costing come from the dashboard's notes on its comparison with the official costings, from the OBR's October 2026 Economic and fiscal outlook and from the Budget documents. The notes compare our figures with Table 6.1's totals and also draw on further runs of our model, so some of their figures aren't in our published results.
 - How we model each measure follows the dashboard's description of it; the few details added here (static fuel purchases, the whole period costed for electricity, the council funding left out of the energy payment, no change in carers' work) were checked against the dashboard and PolicyEngine UK code at the release commit. Our estimates are static and use survey data; the dashboard withholds any result that rests on fewer than three survey households.

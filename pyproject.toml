@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "PolicyEngine's post-Budget briefing: what the Autumn Budget 2026 did with each measure, and what it costs"
 requires-python = ">=3.11"
 dependencies = [
+    "matplotlib>=3.10",
     "openpyxl>=3.1",
     # PolicyEngine's document template and build CLI (private repo; org members can read it)
     "pe-doc @ git+https://github.com/PolicyEngine/document-templates@7c8bce3189f68cbddcb814150b363c155cb7596b",

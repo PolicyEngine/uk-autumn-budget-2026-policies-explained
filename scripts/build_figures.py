@@ -28,6 +28,8 @@ Placeholders in the template:
   {{meta:<key>}}                  manifest revision, updated_at, source URL, source label
   {{signoff:<combined key>}}      whether the combined run carries both signatures
   {{status_note}}                 the opening note: provisional or approved, test or production
+  {{keypoints:<post slug>[:<n>]}} a live explainer's key points as published, and n paragraphs after them
+  {{post_sha}}                    the policyengine-app-v2 commit the saved explainers come from
 """
 
 import argparse
@@ -35,9 +37,13 @@ import csv
 import hashlib
 import json
 import re
+import sys
 from pathlib import Path
 
 import openpyxl
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # python -I leaves out the script's folder
+from explainers import POSTS, key_points  # noqa: E402
 
 YEARS = [2026, 2027, 2028, 2029, 2030, 2031]
 MINUS = "−"
@@ -280,6 +286,10 @@ def main():
             if signed(entry.get("attestation")):
                 return "The combined run is signed off."
             return "The combined run's sign-off is still pending."
+        if kind == "post_sha":
+            return (POSTS / "APP_V2_MAIN_SHA").read_text().strip()
+        if kind == "keypoints":
+            return key_points(parts[1], int(parts[2]) if len(parts) > 2 else 0)
         if kind == "status_note":
             shown = [k for k, v in manifest["measures"].items() if v.get("status") in ("approved", "provisional")]
             provisional = any(manifest["measures"][k]["status"] == "provisional" for k in shown)
