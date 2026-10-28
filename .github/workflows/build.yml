@@ -1,0 +1,59 @@
+name: Build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      # pe-doc lives in a private repo; mint a read-only token for that repo alone
+      - name: Token for PolicyEngine/document-templates
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: PolicyEngine
+          repositories: document-templates
+          permission-contents: read
+
+      - name: Let uv fetch pe-doc with that token
+        env:
+          TOKEN: ${{ steps.app-token.outputs.token }}
+        run: git config --global url."https://x-access-token:${TOKEN}@github.com/PolicyEngine/document-templates".insteadOf "https://github.com/PolicyEngine/document-templates"
+
+      - name: Install pandoc and WeasyPrint's system libraries
+        run: |
+          curl -fsSL -o pandoc.deb https://github.com/jgm/pandoc/releases/download/3.11/pandoc-3.11-1-amd64.deb
+          sudo apt-get update
+          sudo apt-get install -y ./pandoc.deb libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz-subset0
+
+      - uses: astral-sh/setup-uv@v10.3.0
+
+      - name: Install
+        run: uv sync --frozen
+
+      - name: Build and check the PDF
+        run: scripts/build.sh
+
+      - name: Generated files match template.md
+        run: |
+          git diff --exit-code -- document/proposal.md document/figures.json || {
+            echo "::error::document/proposal.md or document/figures.json is stale. Run scripts/build.sh and commit the result."
+            exit 1
+          }
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: policies-explained-pdf
+          path: document/PolicyEngine - Autumn Budget 2026 policies explained.pdf
+          if-no-files-found: error

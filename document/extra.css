@@ -1,0 +1,138 @@
+/*
+ * Document-specific CSS, loaded after the PolicyEngine template.
+ * Cards follow the layout of the pre-Budget "policies explained" PDF:
+ * one bordered card per measure, a label column and a text column.
+ * PolicyEngine ui-kit colors only.
+ */
+
+.flag {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 8pt;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #c2410c; /* text-warning */
+  border: 0.6pt solid #c2410c; /* text-warning */
+  border-radius: 3pt;
+  padding: 0 4pt;
+  margin-right: 4pt;
+}
+
+.card {
+  border: 0.6pt solid #E2E8F0; /* gray-200 */
+  border-radius: 6pt;
+  padding: 2mm 4mm 2.5mm 4mm;
+  margin: 0 0 4mm 0;
+  break-inside: avoid;
+}
+
+.card h3 {
+  margin: 1mm 0 1mm 0;
+  font-size: 12pt;
+  color: #101828; /* gray-900 */
+}
+
+.card p {
+  margin: 1mm 0;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 3pt;
+  padding: 0.3pt 4pt;
+  margin-right: 4pt;
+}
+
+.badge.announced {
+  color: #FFFFFF; /* white */
+  background: #285E61; /* teal-700 */
+}
+
+.badge.changed {
+  color: #234E52; /* teal-800 */
+  background: #B2F5EA; /* teal-100 */
+}
+
+.badge.new {
+  color: #FFFFFF; /* white */
+  background: #026AA2; /* blue-700 */
+}
+
+.prev {
+  font-size: 8pt;
+  color: #64748B; /* gray-500 */
+}
+
+.why {
+  font-weight: 700;
+  color: #285E61; /* teal-700 */
+  margin-right: 3pt;
+}
+
+.card table {
+  margin: 1.5mm 0;
+  font-size: 9pt;
+}
+
+.card table td {
+  vertical-align: top;
+  padding-top: 1.2mm;
+  padding-bottom: 1.2mm;
+}
+
+.card table td:first-child strong {
+  color: #285E61; /* teal-700 */
+}
+
+.card {
+  font-size: 8.6pt;
+  line-height: 1.35;
+  margin-bottom: 3mm;
+  padding-top: 1.5mm;
+  padding-bottom: 1.5mm;
+}
+
+.card h3 {
+  font-size: 11pt;
+}
+
+.card p {
+  margin: 0.6mm 0;
+}
+
+.card table {
+  font-size: 8.3pt;
+  margin: 1mm 0;
+}
+
+.card table td,
+.card table th {
+  padding-top: 0.45mm;
+  padding-bottom: 0.45mm;
+}
+
+.costs table {
+  table-layout: fixed;
+  width: 100%;
+  font-size: 8.2pt;
+}
+
+.costs table th,
+.costs table td {
+  padding-left: 2pt;
+  padding-right: 2pt;
+}
+
+.glance table {
+  font-size: 8.8pt;
+}
+
+.glance table td,
+.glance table th {
+  padding-top: 0.7mm;
+  padding-bottom: 0.7mm;
+}

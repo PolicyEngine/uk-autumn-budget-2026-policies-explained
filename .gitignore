@@ -1,0 +1,7 @@
+.cache/
+.venv/
+__pycache__/
+document/*.pdf
+document/*.html
+document/*.docx
+.DS_Store

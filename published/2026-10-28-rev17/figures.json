@@ -1,0 +1,2977 @@
+{
+ "manifest_url": "https://www.policyengine.org/uk/autumn-budget-2026/data/manifest.json",
+ "revision": 17,
+ "updated_at": "2026-10-28T19:24:46.179205+00:00",
+ "figures": [
+  {
+   "kind": "pe",
+   "key": "combined--f91fe847275730cb",
+   "year": "2026-27",
+   "value": -3109.7958361134743,
+   "printed": "£3,110",
+   "file": "artifacts/combined--f91fe847275730cb/4faed20984703c7d/budgetary_impact.csv",
+   "row": "year=2026",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "combined--f91fe847275730cb",
+   "year": "2027-28",
+   "value": -614.9258172121646,
+   "printed": "£615",
+   "file": "artifacts/combined--f91fe847275730cb/4faed20984703c7d/budgetary_impact.csv",
+   "row": "year=2027",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "combined--f91fe847275730cb",
+   "year": "2028-29",
+   "value": 210.33320623799239,
+   "printed": "£210",
+   "file": "artifacts/combined--f91fe847275730cb/4faed20984703c7d/budgetary_impact.csv",
+   "row": "year=2028",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "obr",
+   "key": "1, PSCE in RDEL",
+   "year": "2026-27",
+   "value": -2627.162870111888,
+   "printed": "−2,627",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 1, PSCE in RDEL",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "1, PSCE in RDEL",
+   "year": "2027-28",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 1, PSCE in RDEL",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "1, PSCE in RDEL",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 1, PSCE in RDEL",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "1, PSCE in RDEL",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 1, PSCE in RDEL",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "1, PSCE in RDEL",
+   "year": "2030-31",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 1, PSCE in RDEL",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "1, PSCE in RDEL",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 1, PSCE in RDEL",
+   "column": "2031-32"
+  },
+  {
+   "kind": "t61",
+   "key": "1",
+   "year": "2026-27",
+   "value": -2625,
+   "printed": "−2,625",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 1",
+   "column": "2026-27"
+  },
+  {
+   "kind": "t61",
+   "key": "1",
+   "year": "2027-28",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 1",
+   "column": "2027-28"
+  },
+  {
+   "kind": "t61",
+   "key": "1",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 1",
+   "column": "2028-29"
+  },
+  {
+   "kind": "t61",
+   "key": "1",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 1",
+   "column": "2029-30"
+  },
+  {
+   "kind": "t61",
+   "key": "1",
+   "year": "2030-31",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 1",
+   "column": "2030-31"
+  },
+  {
+   "kind": "t61",
+   "key": "1",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 1",
+   "column": "2031-32"
+  },
+  {
+   "kind": "pe",
+   "key": "household_energy_payment_2026",
+   "year": "2026-27",
+   "value": -1968.5071950228078,
+   "printed": "−1,969",
+   "file": "artifacts/household_energy_payment_2026/101a07dc7238a10e/budgetary_impact.csv",
+   "row": "year=2026",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "household_energy_payment_2026",
+   "year": "2027-28",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/household_energy_payment_2026/101a07dc7238a10e/budgetary_impact.csv",
+   "row": "year=2027",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "household_energy_payment_2026",
+   "year": "2028-29",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/household_energy_payment_2026/101a07dc7238a10e/budgetary_impact.csv",
+   "row": "year=2028",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "household_energy_payment_2026",
+   "year": "2029-30",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/household_energy_payment_2026/101a07dc7238a10e/budgetary_impact.csv",
+   "row": "year=2029",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "household_energy_payment_2026",
+   "year": "2030-31",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/household_energy_payment_2026/101a07dc7238a10e/budgetary_impact.csv",
+   "row": "year=2030",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "household_energy_payment_2026",
+   "year": "2031-32",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/household_energy_payment_2026/101a07dc7238a10e/budgetary_impact.csv",
+   "row": "year=2031",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "gap",
+   "key": "gappct household_energy_payment_2026 vs OBR 1, PSCE in RDEL",
+   "year": "2026-27",
+   "value": 25.04758279406166,
+   "printed": "25%",
+   "file": "computed",
+   "row": "gappct household_energy_payment_2026 vs OBR 1, PSCE in RDEL",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "1, PSCE in RDEL",
+   "year": "2026-27",
+   "value": -2627.162870111888,
+   "printed": "£2,627",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 1, PSCE in RDEL",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "2, VAT",
+   "year": "2026-27",
+   "value": -733.9477925232627,
+   "printed": "−734",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 2, VAT",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "2, VAT",
+   "year": "2027-28",
+   "value": -295.7984168774406,
+   "printed": "−296",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 2, VAT",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "2, VAT",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 2, VAT",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "2, VAT",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 2, VAT",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "2, VAT",
+   "year": "2030-31",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 2, VAT",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "2, VAT",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 2, VAT",
+   "column": "2031-32"
+  },
+  {
+   "kind": "t61",
+   "key": "2",
+   "year": "2026-27",
+   "value": -755,
+   "printed": "−755",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 2",
+   "column": "2026-27"
+  },
+  {
+   "kind": "t61",
+   "key": "2",
+   "year": "2027-28",
+   "value": -305,
+   "printed": "−305",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 2",
+   "column": "2027-28"
+  },
+  {
+   "kind": "t61",
+   "key": "2",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 2",
+   "column": "2028-29"
+  },
+  {
+   "kind": "t61",
+   "key": "2",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 2",
+   "column": "2029-30"
+  },
+  {
+   "kind": "t61",
+   "key": "2",
+   "year": "2030-31",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 2",
+   "column": "2030-31"
+  },
+  {
+   "kind": "t61",
+   "key": "2",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 2",
+   "column": "2031-32"
+  },
+  {
+   "kind": "pe",
+   "key": "domestic_electricity_zero_vat",
+   "year": "2026-27",
+   "value": -839.8907961023904,
+   "printed": "−840",
+   "file": "artifacts/domestic_electricity_zero_vat/2d9c65726915303e/budgetary_impact.csv",
+   "row": "year=2026",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "domestic_electricity_zero_vat",
+   "year": "2027-28",
+   "value": -353.31766060686937,
+   "printed": "−353",
+   "file": "artifacts/domestic_electricity_zero_vat/2d9c65726915303e/budgetary_impact.csv",
+   "row": "year=2027",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "domestic_electricity_zero_vat",
+   "year": "2028-29",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/domestic_electricity_zero_vat/2d9c65726915303e/budgetary_impact.csv",
+   "row": "year=2028",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "domestic_electricity_zero_vat",
+   "year": "2029-30",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/domestic_electricity_zero_vat/2d9c65726915303e/budgetary_impact.csv",
+   "row": "year=2029",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "domestic_electricity_zero_vat",
+   "year": "2030-31",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/domestic_electricity_zero_vat/2d9c65726915303e/budgetary_impact.csv",
+   "row": "year=2030",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "domestic_electricity_zero_vat",
+   "year": "2031-32",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/domestic_electricity_zero_vat/2d9c65726915303e/budgetary_impact.csv",
+   "row": "year=2031",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "gap",
+   "key": "gap domestic_electricity_zero_vat vs OBR 2, VAT",
+   "year": "2026-27",
+   "value": 106,
+   "printed": "£106",
+   "file": "computed",
+   "row": "gap domestic_electricity_zero_vat vs OBR 2, VAT",
+   "column": "2026-27"
+  },
+  {
+   "kind": "gap",
+   "key": "gappct domestic_electricity_zero_vat vs OBR 2, VAT",
+   "year": "2026-27",
+   "value": 14.441416893732972,
+   "printed": "14%",
+   "file": "computed",
+   "row": "gappct domestic_electricity_zero_vat vs OBR 2, VAT",
+   "column": "2026-27"
+  },
+  {
+   "kind": "gap",
+   "key": "gap domestic_electricity_zero_vat vs OBR 2, VAT",
+   "year": "2027-28",
+   "value": 57,
+   "printed": "£57",
+   "file": "computed",
+   "row": "gap domestic_electricity_zero_vat vs OBR 2, VAT",
+   "column": "2027-28"
+  },
+  {
+   "kind": "gap",
+   "key": "gappct domestic_electricity_zero_vat vs OBR 2, VAT",
+   "year": "2027-28",
+   "value": 19.256756756756754,
+   "printed": "19%",
+   "file": "computed",
+   "row": "gappct domestic_electricity_zero_vat vs OBR 2, VAT",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "3, Fuel Duty",
+   "year": "2026-27",
+   "value": -573.8323354125157,
+   "printed": "−574",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 3, Fuel Duty",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "3, Fuel Duty",
+   "year": "2027-28",
+   "value": -781.7540758566728,
+   "printed": "−782",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 3, Fuel Duty",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "3, Fuel Duty",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 3, Fuel Duty",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "3, Fuel Duty",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 3, Fuel Duty",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "3, Fuel Duty",
+   "year": "2030-31",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 3, Fuel Duty",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "3, Fuel Duty",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 3, Fuel Duty",
+   "column": "2031-32"
+  },
+  {
+   "kind": "t61",
+   "key": "3",
+   "year": "2026-27",
+   "value": -575,
+   "printed": "−575",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 3",
+   "column": "2026-27"
+  },
+  {
+   "kind": "t61",
+   "key": "3",
+   "year": "2027-28",
+   "value": -780,
+   "printed": "−780",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 3",
+   "column": "2027-28"
+  },
+  {
+   "kind": "t61",
+   "key": "3",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 3",
+   "column": "2028-29"
+  },
+  {
+   "kind": "t61",
+   "key": "3",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 3",
+   "column": "2029-30"
+  },
+  {
+   "kind": "t61",
+   "key": "3",
+   "year": "2030-31",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 3",
+   "column": "2030-31"
+  },
+  {
+   "kind": "t61",
+   "key": "3",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 3",
+   "column": "2031-32"
+  },
+  {
+   "kind": "pe",
+   "key": "fuel_duty_rise_deferral",
+   "year": "2026-27",
+   "value": -301.3976629217685,
+   "printed": "−301",
+   "file": "artifacts/fuel_duty_rise_deferral/e077f8d4b70440c8/budgetary_impact.csv",
+   "row": "year=2026",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "fuel_duty_rise_deferral",
+   "year": "2027-28",
+   "value": -520.5739488272055,
+   "printed": "−521",
+   "file": "artifacts/fuel_duty_rise_deferral/e077f8d4b70440c8/budgetary_impact.csv",
+   "row": "year=2027",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "fuel_duty_rise_deferral",
+   "year": "2028-29",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/fuel_duty_rise_deferral/e077f8d4b70440c8/budgetary_impact.csv",
+   "row": "year=2028",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "fuel_duty_rise_deferral",
+   "year": "2029-30",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/fuel_duty_rise_deferral/e077f8d4b70440c8/budgetary_impact.csv",
+   "row": "year=2029",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "fuel_duty_rise_deferral",
+   "year": "2030-31",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/fuel_duty_rise_deferral/e077f8d4b70440c8/budgetary_impact.csv",
+   "row": "year=2030",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "fuel_duty_rise_deferral",
+   "year": "2031-32",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/fuel_duty_rise_deferral/e077f8d4b70440c8/budgetary_impact.csv",
+   "row": "year=2031",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "gap",
+   "key": "gap fuel_duty_rise_deferral vs OBR 3, Fuel Duty",
+   "year": "2026-27",
+   "value": 273,
+   "printed": "£273",
+   "file": "computed",
+   "row": "gap fuel_duty_rise_deferral vs OBR 3, Fuel Duty",
+   "column": "2026-27"
+  },
+  {
+   "kind": "gap",
+   "key": "gap fuel_duty_rise_deferral vs OBR 3, Fuel Duty",
+   "year": "2027-28",
+   "value": 261,
+   "printed": "£261",
+   "file": "computed",
+   "row": "gap fuel_duty_rise_deferral vs OBR 3, Fuel Duty",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "52, Income tax",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 52, Income tax",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "52, Income tax",
+   "year": "2027-28",
+   "value": -44.06,
+   "printed": "−44",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 52, Income tax",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "52, Income tax",
+   "year": "2028-29",
+   "value": -83.24000000000001,
+   "printed": "−83",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 52, Income tax",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "52, Income tax",
+   "year": "2029-30",
+   "value": -143.89,
+   "printed": "−144",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 52, Income tax",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "52, Income tax",
+   "year": "2030-31",
+   "value": 49.050000000000004,
+   "printed": "+49",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 52, Income tax",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "52, Income tax",
+   "year": "2031-32",
+   "value": -15.4,
+   "printed": "−15",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 52, Income tax",
+   "column": "2031-32"
+  },
+  {
+   "kind": "t61",
+   "key": "52",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 52",
+   "column": "2026-27"
+  },
+  {
+   "kind": "t61",
+   "key": "52",
+   "year": "2027-28",
+   "value": -45,
+   "printed": "−45",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 52",
+   "column": "2027-28"
+  },
+  {
+   "kind": "t61",
+   "key": "52",
+   "year": "2028-29",
+   "value": -90,
+   "printed": "−90",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 52",
+   "column": "2028-29"
+  },
+  {
+   "kind": "t61",
+   "key": "52",
+   "year": "2029-30",
+   "value": -150,
+   "printed": "−150",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 52",
+   "column": "2029-30"
+  },
+  {
+   "kind": "t61",
+   "key": "52",
+   "year": "2030-31",
+   "value": 50,
+   "printed": "+50",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 52",
+   "column": "2030-31"
+  },
+  {
+   "kind": "t61",
+   "key": "52",
+   "year": "2031-32",
+   "value": -15,
+   "printed": "−15",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 52",
+   "column": "2031-32"
+  },
+  {
+   "kind": "pe",
+   "key": "state_pension_income_tax_protection",
+   "year": "2026-27",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/state_pension_income_tax_protection/1bfeed3c27a3c9b9/budgetary_impact.csv",
+   "row": "year=2026",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "state_pension_income_tax_protection",
+   "year": "2027-28",
+   "value": -29.629875989708307,
+   "printed": "−30",
+   "file": "artifacts/state_pension_income_tax_protection/1bfeed3c27a3c9b9/budgetary_impact.csv",
+   "row": "year=2027",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "state_pension_income_tax_protection",
+   "year": "2028-29",
+   "value": -82.5717060029112,
+   "printed": "−83",
+   "file": "artifacts/state_pension_income_tax_protection/1bfeed3c27a3c9b9/budgetary_impact.csv",
+   "row": "year=2028",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "state_pension_income_tax_protection",
+   "year": "2029-30",
+   "value": -143.66170165635913,
+   "printed": "−144",
+   "file": "artifacts/state_pension_income_tax_protection/1bfeed3c27a3c9b9/budgetary_impact.csv",
+   "row": "year=2029",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "state_pension_income_tax_protection",
+   "year": "2030-31",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/state_pension_income_tax_protection/1bfeed3c27a3c9b9/budgetary_impact.csv",
+   "row": "year=2030",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "state_pension_income_tax_protection",
+   "year": "2031-32",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/state_pension_income_tax_protection/1bfeed3c27a3c9b9/budgetary_impact.csv",
+   "row": "year=2031",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "obr",
+   "key": "52, Income tax",
+   "year": "2027-28",
+   "value": -44.06,
+   "printed": "£44",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 52, Income tax",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "52, Income tax",
+   "year": "2028-29",
+   "value": -83.24000000000001,
+   "printed": "£83",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 52, Income tax",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "52, Income tax",
+   "year": "2029-30",
+   "value": -143.89,
+   "printed": "£144",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 52, Income tax",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Welfare inside cap",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Welfare inside cap",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Welfare inside cap",
+   "year": "2027-28",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Welfare inside cap",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Welfare inside cap",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Welfare inside cap",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Welfare inside cap",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Welfare inside cap",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Welfare inside cap",
+   "year": "2030-31",
+   "value": -33.17067837376652,
+   "printed": "−33",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Welfare inside cap",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Welfare inside cap",
+   "year": "2031-32",
+   "value": -68.73206440705692,
+   "printed": "−69",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Welfare inside cap",
+   "column": "2031-32"
+  },
+  {
+   "kind": "t61",
+   "key": "7",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 7",
+   "column": "2026-27"
+  },
+  {
+   "kind": "t61",
+   "key": "7",
+   "year": "2027-28",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 7",
+   "column": "2027-28"
+  },
+  {
+   "kind": "t61",
+   "key": "7",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 7",
+   "column": "2028-29"
+  },
+  {
+   "kind": "t61",
+   "key": "7",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 7",
+   "column": "2029-30"
+  },
+  {
+   "kind": "t61",
+   "key": "7",
+   "year": "2030-31",
+   "value": -40,
+   "printed": "−40",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 7",
+   "column": "2030-31"
+  },
+  {
+   "kind": "t61",
+   "key": "7",
+   "year": "2031-32",
+   "value": -80,
+   "printed": "−80",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 7",
+   "column": "2031-32"
+  },
+  {
+   "kind": "pe",
+   "key": "carers_allowance_earnings_taper",
+   "year": "2026-27",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/carers_allowance_earnings_taper/9458905cefca3e88/budgetary_impact.csv",
+   "row": "year=2026",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "carers_allowance_earnings_taper",
+   "year": "2027-28",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/carers_allowance_earnings_taper/9458905cefca3e88/budgetary_impact.csv",
+   "row": "year=2027",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "carers_allowance_earnings_taper",
+   "year": "2028-29",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/carers_allowance_earnings_taper/9458905cefca3e88/budgetary_impact.csv",
+   "row": "year=2028",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "carers_allowance_earnings_taper",
+   "year": "2029-30",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/carers_allowance_earnings_taper/9458905cefca3e88/budgetary_impact.csv",
+   "row": "year=2029",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "carers_allowance_earnings_taper",
+   "year": "2030-31",
+   "value": -23.79284926553212,
+   "printed": "−24",
+   "file": "artifacts/carers_allowance_earnings_taper/9458905cefca3e88/budgetary_impact.csv",
+   "row": "year=2030",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "carers_allowance_earnings_taper",
+   "year": "2031-32",
+   "value": -47.58383316873633,
+   "printed": "−48",
+   "file": "artifacts/carers_allowance_earnings_taper/9458905cefca3e88/budgetary_impact.csv",
+   "row": "year=2031",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Total",
+   "year": "2030-31",
+   "value": -38.088875872766515,
+   "printed": "£38",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Total",
+   "year": "2031-32",
+   "value": -78.89673465705692,
+   "printed": "£79",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Scottish BGA (current)",
+   "year": "2030-31",
+   "value": -4.918197499,
+   "printed": "£5",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Scottish BGA (current)",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Scottish BGA (current)",
+   "year": "2031-32",
+   "value": -10.16467025,
+   "printed": "£10",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Scottish BGA (current)",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Welfare inside cap",
+   "year": "2030-31",
+   "value": -33.17067837376652,
+   "printed": "£33",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Welfare inside cap",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Welfare inside cap",
+   "year": "2031-32",
+   "value": -68.73206440705692,
+   "printed": "£69",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Welfare inside cap",
+   "column": "2031-32"
+  },
+  {
+   "kind": "pe",
+   "key": "carers_allowance_earnings_taper",
+   "year": "2030-31",
+   "value": -23.79284926553212,
+   "printed": "£24",
+   "file": "artifacts/carers_allowance_earnings_taper/9458905cefca3e88/budgetary_impact.csv",
+   "row": "year=2030",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "carers_allowance_earnings_taper",
+   "year": "2031-32",
+   "value": -47.58383316873633,
+   "printed": "£48",
+   "file": "artifacts/carers_allowance_earnings_taper/9458905cefca3e88/budgetary_impact.csv",
+   "row": "year=2031",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "obr",
+   "key": "61, Income tax",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 61, Income tax",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "61, Income tax",
+   "year": "2027-28",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 61, Income tax",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "61, Income tax",
+   "year": "2028-29",
+   "value": 539.1045887340936,
+   "printed": "+539",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 61, Income tax",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "61, Income tax",
+   "year": "2029-30",
+   "value": 394.2895549353098,
+   "printed": "+394",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 61, Income tax",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "61, Income tax",
+   "year": "2030-31",
+   "value": 403.3830388298876,
+   "printed": "+403",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 61, Income tax",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "61, Income tax",
+   "year": "2031-32",
+   "value": 412.2421884858772,
+   "printed": "+412",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 61, Income tax",
+   "column": "2031-32"
+  },
+  {
+   "kind": "t61",
+   "key": "61",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 61",
+   "column": "2026-27"
+  },
+  {
+   "kind": "t61",
+   "key": "61",
+   "year": "2027-28",
+   "value": 35,
+   "printed": "+35",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 61",
+   "column": "2027-28"
+  },
+  {
+   "kind": "t61",
+   "key": "61",
+   "year": "2028-29",
+   "value": 575,
+   "printed": "+575",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 61",
+   "column": "2028-29"
+  },
+  {
+   "kind": "t61",
+   "key": "61",
+   "year": "2029-30",
+   "value": 435,
+   "printed": "+435",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 61",
+   "column": "2029-30"
+  },
+  {
+   "kind": "t61",
+   "key": "61",
+   "year": "2030-31",
+   "value": 445,
+   "printed": "+445",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 61",
+   "column": "2030-31"
+  },
+  {
+   "kind": "t61",
+   "key": "61",
+   "year": "2031-32",
+   "value": 455,
+   "printed": "+455",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 61",
+   "column": "2031-32"
+  },
+  {
+   "kind": "pe",
+   "key": "property_income_rates_up",
+   "year": "2026-27",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/property_income_rates_up/7bf77b35e33233e0/budgetary_impact.csv",
+   "row": "year=2026",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "property_income_rates_up",
+   "year": "2027-28",
+   "value": 399.04530993807765,
+   "printed": "+399",
+   "file": "artifacts/property_income_rates_up/7bf77b35e33233e0/budgetary_impact.csv",
+   "row": "year=2027",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "property_income_rates_up",
+   "year": "2028-29",
+   "value": 411.9757916565002,
+   "printed": "+412",
+   "file": "artifacts/property_income_rates_up/7bf77b35e33233e0/budgetary_impact.csv",
+   "row": "year=2028",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "property_income_rates_up",
+   "year": "2029-30",
+   "value": 429.4018583620151,
+   "printed": "+429",
+   "file": "artifacts/property_income_rates_up/7bf77b35e33233e0/budgetary_impact.csv",
+   "row": "year=2029",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "property_income_rates_up",
+   "year": "2030-31",
+   "value": 445.5556472126524,
+   "printed": "+446",
+   "file": "artifacts/property_income_rates_up/7bf77b35e33233e0/budgetary_impact.csv",
+   "row": "year=2030",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "property_income_rates_up",
+   "year": "2031-32",
+   "value": 459.49044206416823,
+   "printed": "+459",
+   "file": "artifacts/property_income_rates_up/7bf77b35e33233e0/budgetary_impact.csv",
+   "row": "year=2031",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "gap",
+   "key": "gappct property_income_rates_up vs OBR 61, Income tax",
+   "year": "2029-30",
+   "value": 8.883248730964466,
+   "printed": "9%",
+   "file": "computed",
+   "row": "gappct property_income_rates_up vs OBR 61, Income tax",
+   "column": "2029-30"
+  },
+  {
+   "kind": "gap",
+   "key": "gappct property_income_rates_up vs OBR 61, Income tax",
+   "year": "2031-32",
+   "value": 11.407766990291268,
+   "printed": "11%",
+   "file": "computed",
+   "row": "gappct property_income_rates_up vs OBR 61, Income tax",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "62, Income tax",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 62, Income tax",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "62, Income tax",
+   "year": "2027-28",
+   "value": 63,
+   "printed": "+63",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 62, Income tax",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "62, Income tax",
+   "year": "2028-29",
+   "value": 483,
+   "printed": "+483",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 62, Income tax",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "62, Income tax",
+   "year": "2029-30",
+   "value": 443,
+   "printed": "+443",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 62, Income tax",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "62, Income tax",
+   "year": "2030-31",
+   "value": 475,
+   "printed": "+475",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 62, Income tax",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "62, Income tax",
+   "year": "2031-32",
+   "value": 510,
+   "printed": "+510",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 62, Income tax",
+   "column": "2031-32"
+  },
+  {
+   "kind": "t61",
+   "key": "62",
+   "year": "2026-27",
+   "value": 15,
+   "printed": "+15",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 62",
+   "column": "2026-27"
+  },
+  {
+   "kind": "t61",
+   "key": "62",
+   "year": "2027-28",
+   "value": 125,
+   "printed": "+125",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 62",
+   "column": "2027-28"
+  },
+  {
+   "kind": "t61",
+   "key": "62",
+   "year": "2028-29",
+   "value": 555,
+   "printed": "+555",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 62",
+   "column": "2028-29"
+  },
+  {
+   "kind": "t61",
+   "key": "62",
+   "year": "2029-30",
+   "value": 520,
+   "printed": "+520",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 62",
+   "column": "2029-30"
+  },
+  {
+   "kind": "t61",
+   "key": "62",
+   "year": "2030-31",
+   "value": 555,
+   "printed": "+555",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 62",
+   "column": "2030-31"
+  },
+  {
+   "kind": "t61",
+   "key": "62",
+   "year": "2031-32",
+   "value": 590,
+   "printed": "+590",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 62",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "15, Income tax+NICs",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 15, Income tax+NICs",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "15, Income tax+NICs",
+   "year": "2027-28",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 15, Income tax+NICs",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "15, Income tax+NICs",
+   "year": "2028-29",
+   "value": -221.33919815904076,
+   "printed": "−221",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 15, Income tax+NICs",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "15, Income tax+NICs",
+   "year": "2029-30",
+   "value": -165.22326462366024,
+   "printed": "−165",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 15, Income tax+NICs",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "15, Income tax+NICs",
+   "year": "2030-31",
+   "value": -171.10414405290214,
+   "printed": "−171",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 15, Income tax+NICs",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "15, Income tax+NICs",
+   "year": "2031-32",
+   "value": -177.7392490602727,
+   "printed": "−178",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 15, Income tax+NICs",
+   "column": "2031-32"
+  },
+  {
+   "kind": "t61",
+   "key": "15",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 15",
+   "column": "2026-27"
+  },
+  {
+   "kind": "t61",
+   "key": "15",
+   "year": "2027-28",
+   "value": 0,
+   "printed": "0",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 15",
+   "column": "2027-28"
+  },
+  {
+   "kind": "t61",
+   "key": "15",
+   "year": "2028-29",
+   "value": -225,
+   "printed": "−225",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 15",
+   "column": "2028-29"
+  },
+  {
+   "kind": "t61",
+   "key": "15",
+   "year": "2029-30",
+   "value": -165,
+   "printed": "−165",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 15",
+   "column": "2029-30"
+  },
+  {
+   "kind": "t61",
+   "key": "15",
+   "year": "2030-31",
+   "value": -175,
+   "printed": "−175",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 15",
+   "column": "2030-31"
+  },
+  {
+   "kind": "t61",
+   "key": "15",
+   "year": "2031-32",
+   "value": -180,
+   "printed": "−180",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.1 row 15",
+   "column": "2031-32"
+  },
+  {
+   "kind": "pe",
+   "key": "trading_allowance_raise",
+   "year": "2026-27",
+   "value": 0.0,
+   "printed": "0",
+   "file": "artifacts/trading_allowance_raise/eddde823a65b7be4/budgetary_impact.csv",
+   "row": "year=2026",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "trading_allowance_raise",
+   "year": "2027-28",
+   "value": -109.66234280988546,
+   "printed": "−110",
+   "file": "artifacts/trading_allowance_raise/eddde823a65b7be4/budgetary_impact.csv",
+   "row": "year=2027",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "trading_allowance_raise",
+   "year": "2028-29",
+   "value": -118.29155030737965,
+   "printed": "−118",
+   "file": "artifacts/trading_allowance_raise/eddde823a65b7be4/budgetary_impact.csv",
+   "row": "year=2028",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "trading_allowance_raise",
+   "year": "2029-30",
+   "value": -118.67158256147393,
+   "printed": "−119",
+   "file": "artifacts/trading_allowance_raise/eddde823a65b7be4/budgetary_impact.csv",
+   "row": "year=2029",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "trading_allowance_raise",
+   "year": "2030-31",
+   "value": -119.77850095710808,
+   "printed": "−120",
+   "file": "artifacts/trading_allowance_raise/eddde823a65b7be4/budgetary_impact.csv",
+   "row": "year=2030",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "pe",
+   "key": "trading_allowance_raise",
+   "year": "2031-32",
+   "value": -129.68814826323904,
+   "printed": "−130",
+   "file": "artifacts/trading_allowance_raise/eddde823a65b7be4/budgetary_impact.csv",
+   "row": "year=2031",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "gap",
+   "key": "gap trading_allowance_raise vs OBR 15, Income tax+NICs",
+   "year": "2029-30",
+   "value": 46,
+   "printed": "£46",
+   "file": "computed",
+   "row": "gap trading_allowance_raise vs OBR 15, Income tax+NICs",
+   "column": "2029-30"
+  },
+  {
+   "kind": "gap",
+   "key": "gap trading_allowance_raise vs OBR 15, Income tax+NICs",
+   "year": "2028-29",
+   "value": 103,
+   "printed": "£103",
+   "file": "computed",
+   "row": "gap trading_allowance_raise vs OBR 15, Income tax+NICs",
+   "column": "2028-29"
+  },
+  {
+   "kind": "gap",
+   "key": "gappct trading_allowance_raise vs OBR 15, Income tax+NICs",
+   "year": "2031-32",
+   "value": 26.96629213483146,
+   "printed": "27%",
+   "file": "computed",
+   "row": "gappct trading_allowance_raise vs OBR 15, Income tax+NICs",
+   "column": "2031-32"
+  },
+  {
+   "kind": "gap",
+   "key": "gappct trading_allowance_raise vs OBR 15, Income tax+NICs",
+   "year": "2028-29",
+   "value": 46.60633484162896,
+   "printed": "47%",
+   "file": "computed",
+   "row": "gappct trading_allowance_raise vs OBR 15, Income tax+NICs",
+   "column": "2028-29"
+  },
+  {
+   "kind": "pe",
+   "key": "trading_allowance_raise",
+   "year": "2027-28",
+   "value": -109.66234280988546,
+   "printed": "£110",
+   "file": "artifacts/trading_allowance_raise/eddde823a65b7be4/budgetary_impact.csv",
+   "row": "year=2027",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "obr",
+   "key": "55, Total",
+   "year": "2026-27",
+   "value": 306,
+   "printed": "+306",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 55, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "55, Total",
+   "year": "2027-28",
+   "value": 951,
+   "printed": "+951",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 55, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "55, Total",
+   "year": "2028-29",
+   "value": 220,
+   "printed": "+220",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 55, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "55, Total",
+   "year": "2029-30",
+   "value": -1,
+   "printed": "−1",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 55, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "55, Total",
+   "year": "2030-31",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 55, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "55, Total",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 55, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "83, Total",
+   "year": "2026-27",
+   "value": -230,
+   "printed": "−230",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 83, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "83, Total",
+   "year": "2027-28",
+   "value": -172,
+   "printed": "−172",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 83, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "83, Total",
+   "year": "2028-29",
+   "value": -12,
+   "printed": "−12",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 83, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "83, Total",
+   "year": "2029-30",
+   "value": -10,
+   "printed": "−10",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 83, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "83, Total",
+   "year": "2030-31",
+   "value": -3,
+   "printed": "−3",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 83, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "83, Total",
+   "year": "2031-32",
+   "value": -15,
+   "printed": "−15",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 83, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "8, Total",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 8, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "8, Total",
+   "year": "2027-28",
+   "value": -141.72817652767333,
+   "printed": "−142",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 8, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "8, Total",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 8, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "8, Total",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 8, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "8, Total",
+   "year": "2030-31",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 8, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "8, Total",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 8, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "5, Total",
+   "year": "2026-27",
+   "value": -28.03577264269496,
+   "printed": "−28",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 5, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "5, Total",
+   "year": "2027-28",
+   "value": -198.88752050694606,
+   "printed": "−199",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 5, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "5, Total",
+   "year": "2028-29",
+   "value": -222.0143463107192,
+   "printed": "−222",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 5, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "5, Total",
+   "year": "2029-30",
+   "value": -223.78854263303177,
+   "printed": "−224",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 5, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "5, Total",
+   "year": "2030-31",
+   "value": -236.94785131361445,
+   "printed": "−237",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 5, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "5, Total",
+   "year": "2031-32",
+   "value": -245.19484717663568,
+   "printed": "−245",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 5, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "6, Total",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 6, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "6, Total",
+   "year": "2027-28",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 6, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "6, Total",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 6, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "6, Total",
+   "year": "2029-30",
+   "value": -68.9295503798458,
+   "printed": "−69",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 6, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "6, Total",
+   "year": "2030-31",
+   "value": -70.4813187359882,
+   "printed": "−70",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 6, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "6, Total",
+   "year": "2031-32",
+   "value": -72.10550294875057,
+   "printed": "−72",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 6, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "11, Total",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 11, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "11, Total",
+   "year": "2027-28",
+   "value": -3.740825396155683,
+   "printed": "−4",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 11, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "11, Total",
+   "year": "2028-29",
+   "value": -19.82442135155546,
+   "printed": "−20",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 11, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "11, Total",
+   "year": "2029-30",
+   "value": -34.85515801552989,
+   "printed": "−35",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 11, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "11, Total",
+   "year": "2030-31",
+   "value": -51.737699472897354,
+   "printed": "−52",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 11, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "11, Total",
+   "year": "2031-32",
+   "value": -71.87933311769879,
+   "printed": "−72",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 11, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "26, Total",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 26, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "26, Total",
+   "year": "2027-28",
+   "value": -258.4924392197447,
+   "printed": "−258",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 26, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "26, Total",
+   "year": "2028-29",
+   "value": -180.02854724445154,
+   "printed": "−180",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 26, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "26, Total",
+   "year": "2029-30",
+   "value": -261.3527406430634,
+   "printed": "−261",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 26, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "26, Total",
+   "year": "2030-31",
+   "value": -282.6834498472033,
+   "printed": "−283",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 26, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "26, Total",
+   "year": "2031-32",
+   "value": -302.113940842485,
+   "printed": "−302",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 26, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "60, Total",
+   "year": "2026-27",
+   "value": 3.1289388471391604,
+   "printed": "+3",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 60, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "60, Total",
+   "year": "2027-28",
+   "value": 59.68427975107025,
+   "printed": "+60",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 60, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "60, Total",
+   "year": "2028-29",
+   "value": 177.85497348185103,
+   "printed": "+178",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 60, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "60, Total",
+   "year": "2029-30",
+   "value": 252.82996188932367,
+   "printed": "+253",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 60, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "60, Total",
+   "year": "2030-31",
+   "value": 278.87468884953506,
+   "printed": "+279",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 60, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "60, Total",
+   "year": "2031-32",
+   "value": 302.9175882261386,
+   "printed": "+303",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 60, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "4, Total",
+   "year": "2026-27",
+   "value": -50.07690328901942,
+   "printed": "−50",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 4, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "4, Total",
+   "year": "2027-28",
+   "value": -181.0485218921772,
+   "printed": "−181",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 4, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "4, Total",
+   "year": "2028-29",
+   "value": 63.02527863143951,
+   "printed": "+63",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 4, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "4, Total",
+   "year": "2029-30",
+   "value": 170.47821269159866,
+   "printed": "+170",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 4, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "4, Total",
+   "year": "2030-31",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 4, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "4, Total",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 4, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "10, Total",
+   "year": "2026-27",
+   "value": -48.51820661,
+   "printed": "−49",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 10, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "10, Total",
+   "year": "2027-28",
+   "value": -77.27229127999998,
+   "printed": "−77",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 10, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "10, Total",
+   "year": "2028-29",
+   "value": -56.588123709999984,
+   "printed": "−57",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 10, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "10, Total",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 10, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "10, Total",
+   "year": "2030-31",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 10, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "10, Total",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 10, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "32, Total",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 32, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "32, Total",
+   "year": "2027-28",
+   "value": -51.725611871413626,
+   "printed": "−52",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 32, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "32, Total",
+   "year": "2028-29",
+   "value": -51.725611871413626,
+   "printed": "−52",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 32, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "32, Total",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 32, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "32, Total",
+   "year": "2030-31",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 32, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "32, Total",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 32, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "t62",
+   "key": "5",
+   "year": null,
+   "value": -4700,
+   "printed": "£4,700",
+   "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
+   "row": "Table 6.2 row 5",
+   "column": "sum 2026-27 to 2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "37, Total",
+   "year": "2026-27",
+   "value": -14.286591400479022,
+   "printed": "−14",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 37, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "37, Total",
+   "year": "2027-28",
+   "value": 48.09297221542919,
+   "printed": "+48",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 37, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "37, Total",
+   "year": "2028-29",
+   "value": 94.6173664824152,
+   "printed": "+95",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 37, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "37, Total",
+   "year": "2029-30",
+   "value": 94.6173664824152,
+   "printed": "+95",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 37, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "37, Total",
+   "year": "2030-31",
+   "value": 94.6173664824152,
+   "printed": "+95",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 37, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "37, Total",
+   "year": "2031-32",
+   "value": 94.6173664824152,
+   "printed": "+95",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 37, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "39, Total",
+   "year": "2026-27",
+   "value": -17.18044593522,
+   "printed": "−17",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 39, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "39, Total",
+   "year": "2027-28",
+   "value": -19.9391343634,
+   "printed": "−20",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 39, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "39, Total",
+   "year": "2028-29",
+   "value": -21.42250062148,
+   "printed": "−21",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 39, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "39, Total",
+   "year": "2029-30",
+   "value": -23.00012746787,
+   "printed": "−23",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 39, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "39, Total",
+   "year": "2030-31",
+   "value": -24.66846067389,
+   "printed": "−25",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 39, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "39, Total",
+   "year": "2031-32",
+   "value": -26.40845588484,
+   "printed": "−26",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 39, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "38, Total",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 38, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "38, Total",
+   "year": "2027-28",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 38, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "38, Total",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 38, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "38, Total",
+   "year": "2029-30",
+   "value": 110.69092778349999,
+   "printed": "+111",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 38, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "38, Total",
+   "year": "2030-31",
+   "value": 108.41347804800002,
+   "printed": "+108",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 38, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "38, Total",
+   "year": "2031-32",
+   "value": 233.1333133328,
+   "printed": "+233",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 38, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "59, Total",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 59, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "59, Total",
+   "year": "2027-28",
+   "value": 92.67025356191982,
+   "printed": "+93",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 59, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "59, Total",
+   "year": "2028-29",
+   "value": 383.1698429828034,
+   "printed": "+383",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 59, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "59, Total",
+   "year": "2029-30",
+   "value": 394.2004365319086,
+   "printed": "+394",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 59, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "59, Total",
+   "year": "2030-31",
+   "value": 408.65619334726995,
+   "printed": "+409",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 59, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "59, Total",
+   "year": "2031-32",
+   "value": 423.3056327634364,
+   "printed": "+423",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 59, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "95, Total",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 95, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "95, Total",
+   "year": "2027-28",
+   "value": -0.7243042257831459,
+   "printed": "−1",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 95, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "95, Total",
+   "year": "2028-29",
+   "value": 215.61976046102893,
+   "printed": "+216",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 95, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "95, Total",
+   "year": "2029-30",
+   "value": -0.08848227370172879,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 95, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "95, Total",
+   "year": "2030-31",
+   "value": -12.364190297775966,
+   "printed": "−12",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 95, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "95, Total",
+   "year": "2031-32",
+   "value": -15.166266108803335,
+   "printed": "−15",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 95, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "86, Total",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 86, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "86, Total",
+   "year": "2027-28",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 86, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "86, Total",
+   "year": "2028-29",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 86, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "86, Total",
+   "year": "2029-30",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 86, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "86, Total",
+   "year": "2030-31",
+   "value": 312.0029823817127,
+   "printed": "+312",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 86, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "86, Total",
+   "year": "2031-32",
+   "value": 343.25014673696813,
+   "printed": "+343",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 86, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "49, Total",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 49, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "49, Total",
+   "year": "2027-28",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 49, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "49, Total",
+   "year": "2028-29",
+   "value": 55.110639233065726,
+   "printed": "+55",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 49, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "49, Total",
+   "year": "2029-30",
+   "value": 802.2042423363121,
+   "printed": "+802",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 49, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "49, Total",
+   "year": "2030-31",
+   "value": 775.0415992624834,
+   "printed": "+775",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 49, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "49, Total",
+   "year": "2031-32",
+   "value": 784.5631357849529,
+   "printed": "+785",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 49, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "82, Total",
+   "year": "2026-27",
+   "value": -362,
+   "printed": "−362",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 82, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "82, Total",
+   "year": "2027-28",
+   "value": -353,
+   "printed": "−353",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 82, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "82, Total",
+   "year": "2028-29",
+   "value": -263,
+   "printed": "−263",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 82, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "82, Total",
+   "year": "2029-30",
+   "value": -89,
+   "printed": "−89",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 82, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "82, Total",
+   "year": "2030-31",
+   "value": -74,
+   "printed": "−74",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 82, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "82, Total",
+   "year": "2031-32",
+   "value": -1,
+   "printed": "−1",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 82, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "34, Total",
+   "year": "2026-27",
+   "value": 121.4360269040717,
+   "printed": "£121",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 34, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "34, Total",
+   "year": "2027-28",
+   "value": 404.78675634690563,
+   "printed": "£405",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 34, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "33, Total",
+   "year": "2026-27",
+   "value": -173.62811113828317,
+   "printed": "−174",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 33, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "33, Total",
+   "year": "2027-28",
+   "value": -514.1693898644904,
+   "printed": "−514",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 33, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "33, Total",
+   "year": "2028-29",
+   "value": -581.9331219488217,
+   "printed": "−582",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 33, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "33, Total",
+   "year": "2029-30",
+   "value": -84,
+   "printed": "−84",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 33, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "33, Total",
+   "year": "2030-31",
+   "value": -89,
+   "printed": "−89",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 33, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "33, Total",
+   "year": "2031-32",
+   "value": -96,
+   "printed": "−96",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 33, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "35, Total",
+   "year": "2026-27",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 35, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "35, Total",
+   "year": "2027-28",
+   "value": -250.1153956666496,
+   "printed": "−250",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 35, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "35, Total",
+   "year": "2028-29",
+   "value": -500.2307913332992,
+   "printed": "−500",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 35, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "35, Total",
+   "year": "2029-30",
+   "value": -500.2307913332992,
+   "printed": "−500",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 35, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "35, Total",
+   "year": "2030-31",
+   "value": -500.2307913332992,
+   "printed": "−500",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 35, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "35, Total",
+   "year": "2031-32",
+   "value": 0,
+   "printed": "0",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 35, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "93, Total",
+   "year": "2028-29",
+   "value": -45.18480318999997,
+   "printed": "£45",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 93, Total",
+   "column": "2028-29"
+  }
+ ]
+}
