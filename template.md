@@ -27,6 +27,22 @@ A PolicyEngine briefing on the Budget of 28 October 2026 · 29 October 2026
 [Funded by the Nuffield Foundation]{.funder}
 :::
 
+::: {.toc}
+[Contents]{.toc-title}
+
+- [At a glance](#at-a-glance)
+- [How to read this](#how-to-read-this)
+- [In our dashboard](#in-our-dashboard)
+- [Our explainers](#our-explainers)
+- [In the Budget, not in our dashboard](#in-the-budget-not-in-our-dashboard)
+    - [Seven smaller measures](#seven-smaller-measures)
+    - [Other measures that reach households](#other-measures-that-reach-households)
+    - [Spending on services and compensation](#spending-on-services-and-compensation)
+- [On our list, not in the Budget](#on-our-list-not-in-the-budget)
+- [Limitations](#limitations)
+- [Sources and method](#sources-and-method)
+:::
+
 {{status_note}}
 
 ## At a glance
@@ -386,3 +402,19 @@ The numbers give each measure's place on our list of 27 October, the day before 
 - The explainer pages quote each post's key points from policyengine.org (policyengine-app-v2 at {{post_sha}}) and include one of its charts, using the post's own chart data.
 - The reasons each estimate differs from the official costing come from the dashboard's notes on its comparison with the official costings, from the OBR's October 2026 Economic and fiscal outlook and from the Budget documents. The notes compare our figures with Table 6.1's totals and include some estimates from our model that the dashboard doesn't publish.
 - How we model each measure follows the dashboard's description of it, plus four details the description leaves out: households buy the same fuel, carers work the same hours, our electricity costing covers the cut's whole period, including the months already in force, and our energy payment figure leaves out the £100 million for councils. Our estimates are static and use survey data; the dashboard withholds any result that rests on fewer than three survey households.
+
+::: {.back}
+![PolicyEngine](assets/policyengine-white.png){.back-logo}\
+
+[Contact]{.label}\
+[vahid@policyengine.org](mailto:vahid@policyengine.org)
+
+[Autumn Budget 2026 dashboard]{.label}\
+[policyengine.org/uk/autumn-budget-2026](https://www.policyengine.org/uk/autumn-budget-2026)
+
+[Post-Budget briefing]{.label}\
+[policyengine.org/uk/research/uk-autumn-budget-2026-briefing](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-briefing)
+
+[PolicyEngine]{.label}\
+[policyengine.org](https://www.policyengine.org)
+:::

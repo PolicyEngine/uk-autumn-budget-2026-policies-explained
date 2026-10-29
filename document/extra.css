@@ -1,9 +1,277 @@
 /*
  * Document-specific CSS, loaded after the PolicyEngine template.
- * Cards follow the layout of the pre-Budget "policies explained" PDF:
- * one bordered card per measure, a label column and a text column.
- * PolicyEngine ui-kit colors only.
+ *
+ * Layout: an A4 report in the house style of PolicyEngine's Budget-day
+ * report. A full-bleed teal cover under the letterhead, a contents page,
+ * running headers and footers with page numbers, one callout card per
+ * measure, numbered figures, and a teal back page with contact and links.
+ * PolicyEngine ui-kit colors only; type is pe-doc's vendored Inter.
  */
+
+/* ---------- Page frame ---------- */
+
+@page {
+  size: A4;
+  margin: 22mm 20mm 20mm 20mm;
+
+  @top-left {
+    content: "Autumn Budget 2026: the policies explained";
+    font: 7.5pt "Inter", sans-serif;
+    color: #64748B; /* gray-500 */
+    vertical-align: bottom;
+    padding-bottom: 3mm;
+  }
+  @top-right {
+    content: url("assets/policyengine-teal.png");
+    image-resolution: 640dpi; /* about 40mm wide */
+    vertical-align: bottom;
+    padding-bottom: 2.4mm;
+  }
+  @bottom-left {
+    content: "PolicyEngine  |  policyengine.org";
+    font: 7.5pt "Inter", sans-serif;
+    color: #64748B; /* gray-500 */
+    vertical-align: top;
+    padding-top: 3mm;
+  }
+  @bottom-center {
+    content: none;
+    border-top: none;
+  }
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+    font: 7.5pt "Inter", sans-serif;
+    color: #64748B; /* gray-500 */
+    vertical-align: top;
+    padding-top: 3mm;
+  }
+}
+
+/* The cover runs to the edges; the letterhead keeps its own padding. */
+@page :first {
+  margin: 0;
+  background: #2C7A7B; /* teal-600: the cover panel runs to the page foot */
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-left { content: none; border-top: none; }
+  @bottom-center { content: none; border-top: none; }
+  @bottom-right { content: none; border-top: none; }
+}
+
+/* The back page: teal to the edges, no running header or footer. */
+@page back {
+  margin: 0;
+  background: #234E52; /* teal-800 */
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-left { content: none; border-top: none; }
+  @bottom-center { content: none; border-top: none; }
+  @bottom-right { content: none; border-top: none; }
+}
+
+/* ---------- Type ---------- */
+
+body {
+  font-size: 9.6pt;
+  line-height: 1.5;
+}
+
+h2 {
+  font-size: 15pt;
+  line-height: 1.2;
+  color: #234E52; /* teal-800 */
+  margin: 7mm 0 3mm;
+  padding-bottom: 1.6mm;
+  border-bottom: 1.2pt solid #319795; /* teal-500 */
+  break-after: avoid;
+}
+
+h3 {
+  font-size: 11.5pt;
+  line-height: 1.25;
+  color: #101828; /* gray-900 */
+  margin: 5mm 0 2mm;
+  break-after: avoid;
+}
+
+h2 + p,
+h3 + p {
+  break-before: avoid;
+}
+
+ul {
+  padding-left: 4.5mm;
+}
+
+li::marker {
+  color: #319795; /* teal-500 */
+}
+
+/* ---------- Cover ---------- */
+
+#letterhead {
+  text-align: left;
+  border-bottom: none;
+  margin: 0;
+  padding: 16mm 20mm 9mm 20mm;
+  background: #FFFFFF; /* white, so the canonical wordmark sits on white */
+}
+
+#letterhead img {
+  width: 58mm;
+}
+
+#letterhead .org {
+  font-size: 8pt;
+  color: #64748B; /* gray-500 */
+  margin-top: 2mm;
+}
+
+.cover {
+  position: relative;
+  box-sizing: border-box;
+  height: 240mm;
+  margin: 0;
+  padding: 58mm 20mm 0 20mm;
+  background: #2C7A7B; /* teal-600 */
+  color: #FFFFFF; /* white */
+  break-after: page;
+}
+
+.cover::before {
+  /* a thin rule above the title */
+  content: "";
+  position: absolute;
+  top: 44mm;
+  left: 20mm;
+  width: 24mm;
+  height: 1.6mm;
+  background: #81E6D9; /* teal-200 */
+}
+
+.cover h1 {
+  font-size: 34pt;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: #FFFFFF; /* white */
+  margin: 0 0 7mm;
+  max-width: 150mm;
+}
+
+.cover h1 + p {
+  font-size: 13.5pt;
+  line-height: 1.35;
+  color: #FFFFFF; /* white */
+  margin-bottom: 4mm;
+  max-width: 145mm;
+}
+
+.cover h1 + p strong {
+  color: #FFFFFF; /* white */
+}
+
+.cover h1 + p + p {
+  font-size: 10.5pt;
+  color: #E6FFFA; /* teal-50 */
+  margin-bottom: 0;
+}
+
+.cover-links {
+  margin-top: 30mm;
+  padding: 5mm 6mm 1mm 6mm;
+  border-left: none;
+  background: #234E52; /* teal-800 */
+  border-radius: 4pt;
+  max-width: 150mm;
+}
+
+.cover-links p {
+  margin: 0 0 4mm;
+  font-size: 10.5pt;
+}
+
+.cover-links .label {
+  color: #E6FFFA; /* teal-50 */
+  font-size: 9pt;
+}
+
+.cover-links a {
+  color: #FFFFFF; /* white */
+  font-weight: 700;
+}
+
+.cover .funder {
+  position: absolute;
+  bottom: 10mm;
+  left: 20mm;
+  font-size: 9pt;
+  color: #E6FFFA; /* teal-50 */
+}
+
+/* ---------- Contents ---------- */
+
+.toc {
+  break-after: page;
+  padding-top: 6mm;
+}
+
+.toc .toc-title {
+  display: block;
+  font-size: 22pt;
+  font-weight: 700;
+  color: #234E52; /* teal-800 */
+  padding-bottom: 3mm;
+  margin-bottom: 6mm;
+  border-bottom: 1.2pt solid #319795; /* teal-500 */
+}
+
+.toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.toc li {
+  margin: 0;
+  padding: 2.4mm 0;
+  border-bottom: 0.5pt solid #E2E8F0; /* gray-200 */
+  font-size: 10.5pt;
+}
+
+.toc li::marker {
+  content: none;
+}
+
+.toc li ul {
+  margin-top: 1.6mm;
+}
+
+.toc li li {
+  padding: 1.2mm 0 1.2mm 6mm;
+  border-bottom: none;
+  font-size: 9.5pt;
+}
+
+.toc a {
+  color: #1E293B; /* gray-800 */
+}
+
+.toc li > a {
+  font-weight: 700;
+}
+
+.toc li li > a {
+  font-weight: 400;
+  color: #475569; /* gray-600 */
+}
+
+.toc a::after {
+  content: leader(".") target-counter(attr(href url), page);
+  color: #319795; /* teal-500 */
+  font-weight: 700;
+}
+
+/* ---------- Measure cards ---------- */
 
 .flag {
   display: inline-block;
@@ -19,31 +287,37 @@
 }
 
 .card {
-  border: 0.6pt solid #E2E8F0; /* gray-200 */
-  border-radius: 6pt;
-  padding: 2mm 4mm 2.5mm 4mm;
+  border: 0.6pt solid #CBD5E1; /* gray-300 */
+  border-left: 3pt solid #2C7A7B; /* teal-600 */
+  border-radius: 0 5pt 5pt 0;
+  padding: 0 4mm 1.6mm 4mm;
   margin: 0 0 4mm 0;
+  font-size: 8.5pt;
+  line-height: 1.34;
   break-inside: avoid;
 }
 
 .card h3 {
-  margin: 1mm 0 1mm 0;
-  font-size: 12pt;
-  color: #101828; /* gray-900 */
+  margin: 0 -4mm 1.2mm -4mm;
+  padding: 2mm 4mm 1.6mm 4mm;
+  font-size: 11.5pt;
+  color: #234E52; /* teal-800 */
+  background: #E6FFFA; /* teal-50 */
+  border-radius: 0 5pt 0 0;
 }
 
 .card p {
-  margin: 1mm 0;
+  margin: 0.8mm 0;
 }
 
 .badge {
   display: inline-block;
-  font-size: 7.5pt;
+  font-size: 7pt;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   border-radius: 3pt;
-  padding: 0.3pt 4pt;
+  padding: 0.4pt 4pt;
   margin-right: 4pt;
 }
 
@@ -74,45 +348,29 @@
 }
 
 .card table {
-  margin: 1.5mm 0;
-  font-size: 9pt;
+  margin: 1.4mm 0;
+  font-size: 8.3pt;
 }
 
-.card table td {
+.card table td,
+.card table th {
   vertical-align: top;
-  padding-top: 1.2mm;
-  padding-bottom: 1.2mm;
+  padding-top: 0.45mm;
+  padding-bottom: 0.45mm;
 }
 
 .card table td:first-child strong {
   color: #285E61; /* teal-700 */
 }
 
-.card {
-  font-size: 8.6pt;
-  line-height: 1.35;
-  margin-bottom: 3mm;
-  padding-top: 1.5mm;
-  padding-bottom: 1.5mm;
+/* The label column of each card's "what changes / who it affects" table */
+.card table td:first-child {
+  width: 24mm;
 }
 
-.card h3 {
-  font-size: 11pt;
-}
-
-.card p {
-  margin: 0.6mm 0;
-}
-
-.card table {
-  font-size: 8.3pt;
-  margin: 1mm 0;
-}
-
-.card table td,
+/* Cost tables inside cards and the costs sections */
 .card table th {
-  padding-top: 0.45mm;
-  padding-bottom: 0.45mm;
+  background: #F8FAFC; /* gray-50 */
 }
 
 .costs table {
@@ -127,14 +385,22 @@
   padding-right: 2pt;
 }
 
+.costs table th {
+  background: #F8FAFC; /* gray-50 */
+}
+
 .glance table {
   font-size: 8.8pt;
 }
 
+.glance table th {
+  background: #F8FAFC; /* gray-50 */
+}
+
 .glance table td,
 .glance table th {
-  padding-top: 0.7mm;
-  padding-bottom: 0.7mm;
+  padding-top: 0.9mm;
+  padding-bottom: 0.9mm;
 }
 
 /* A section that would otherwise leave its heading at the foot of a page */
@@ -142,93 +408,86 @@
   break-before: page;
 }
 
+/* ---------- Explainers and figures ---------- */
+
+body {
+  counter-reset: figure;
+}
+
 /* One page per explainer: its key points, then one of its charts */
 .explainer {
   break-before: page;
 }
 
+.explainer h3 {
+  font-size: 13pt;
+  margin-top: 0;
+  padding-bottom: 2mm;
+  border-bottom: 0.8pt solid #CBD5E1; /* gray-300 */
+}
+
 .explainer h3 a {
-  color: #101828; /* gray-900 */
+  color: #234E52; /* teal-800 */
   text-decoration: none;
+}
+
+/* Each chart sits in a light frame under a numbered label. The chart's own
+   title and source line are drawn inside the SVG. */
+.explainer p:has(> img.chart) {
+  counter-increment: figure;
+  margin-top: 5mm;
+  padding: 3mm 3mm 2mm 3mm;
+  border-top: 1.2pt solid #319795; /* teal-500 */
+  background: #F8FAFC; /* gray-50 */
+  break-inside: avoid;
+}
+
+.explainer p:has(> img.chart)::before {
+  content: "Figure " counter(figure);
+  display: block;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #285E61; /* teal-700 */
+  margin-bottom: 2mm;
 }
 
 img.chart {
   display: block;
   width: 100%;
-  margin: 4mm 0 0 0;
+  margin: 0;
 }
 
-/* Cover page: the letterhead (pe-doc's wordmark and address line) leads, then
-   the title block, the two links and the funder line. The letterhead appears
-   once, at the top of the first page, so these rules only touch the cover. */
-@page :first {
-  @bottom-center {
-    content: none;
-    border-top: none;
-  }
-  @bottom-right {
-    content: none;
-  }
-}
+/* ---------- Back page ---------- */
 
-#letterhead {
-  padding-top: 6mm;
-  padding-bottom: 4mm;
-}
-
-#letterhead img {
-  width: 62mm;
-}
-
-.cover {
-  position: relative;
+.back {
+  page: back;
+  break-before: page;
   box-sizing: border-box;
-  height: 200mm;
-  padding-top: 48mm;
-  break-after: page;
+  height: 297mm;
+  padding: 120mm 22mm 0 22mm;
+  color: #FFFFFF; /* white */
 }
 
-.cover h1 {
-  font-size: 30pt;
-  line-height: 1.1;
-  margin-bottom: 5mm;
+.back p {
+  margin: 0 0 6mm;
+  font-size: 11pt;
 }
 
-.cover h1 + p {
-  font-size: 12.5pt;
-  line-height: 1.3;
-  margin-bottom: 3mm;
+.back img.back-logo {
+  width: 70mm;
+  margin-bottom: 8mm;
 }
 
-.cover h1 + p + p {
-  font-size: 10.5pt;
-  margin-bottom: 0;
-}
-
-.cover-links {
-  margin-top: 22mm;
-  border-left: 1.5pt solid #319795; /* teal-500 */
-  padding-left: 4mm;
-}
-
-.cover-links p {
-  margin: 0 0 4mm;
-  font-size: 10.5pt;
-}
-
-.cover-links .label {
-  color: #475569; /* gray-600 */
-  font-size: 9pt;
-}
-
-.cover-links a {
-  font-weight: 700;
-}
-
-.cover .funder {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.back .label {
   font-size: 8.5pt;
-  color: #64748B; /* gray-500 */
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #B2F5EA; /* teal-100 */
+}
+
+.back a {
+  color: #FFFFFF; /* white */
+  font-weight: 700;
 }
