@@ -356,6 +356,112 @@ img.chart {
   margin: 0;
 }
 
+/* ---------- Vertical rhythm ----------
+   One 4pt base: headings sit closer to what follows than to what precedes;
+   paragraphs 7pt apart; 12pt clear around each table and figure, with the
+   caption 4pt above it and the note 3pt below. */
+
+p {
+  margin: 0 0 7pt;
+}
+
+h2 {
+  margin: 20pt 0 6pt;
+}
+
+h3 {
+  margin: 16pt 0 4pt;
+}
+
+h2 + h3 {
+  margin-top: 8pt;
+}
+
+ul,
+ol {
+  margin: 0 0 7pt;
+}
+
+li {
+  margin-bottom: 3pt;
+}
+
+li > p {
+  margin-bottom: 0;
+}
+
+/* Measure sections */
+.card {
+  margin: 0;
+}
+
+.card p:has(> .keyfact) {
+  margin: 0 0 2pt;
+}
+
+.tags p {
+  margin: 0 0 8pt;
+}
+
+.card p:has(> .why) {
+  margin: 12pt 0 7pt;
+  padding: 1pt 0 1pt 10pt;
+}
+
+.card table + p:has(> .why) {
+  margin-top: 12pt;
+}
+
+.readmore p {
+  margin: 0;
+}
+
+/* Tables: caption 4pt above, note 3pt below, 12pt clear around the group */
+p:has(> .tcap) {
+  margin: 12pt 0 4pt;
+}
+
+table {
+  margin: 0 0 12pt;
+}
+
+.costs table,
+.glance table {
+  margin-bottom: 3pt;
+}
+
+.card table:has(+ p:not(:has(.why))) {
+  margin-bottom: 3pt;
+}
+
+.card table + p:not(:has(.why)),
+.costs + p {
+  margin: 0 0 12pt;
+}
+
+.glance + p {
+  margin-top: 9pt;
+}
+
+#on-our-list-not-in-the-budget + p + table {
+  margin-bottom: 7pt;
+}
+
+/* Figures: caption 4pt above, 12pt clear around */
+.explainer p:has(> .figcap) {
+  margin: 12pt 0 4pt;
+}
+
+.explainer p:has(img.chart) {
+  margin: 0 0 12pt;
+}
+
+/* Sources and limitations */
+#sources-and-method + ol li,
+#limitations + ul li {
+  margin-bottom: 4pt;
+}
+
 /* ---------- Links ---------- */
 
 a {
