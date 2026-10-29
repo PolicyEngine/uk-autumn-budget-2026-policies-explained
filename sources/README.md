@@ -8,10 +8,10 @@ We saved here everything the briefing's figures and claims rest on, on 28 Octobe
 | `Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx` | HM Treasury, Budget 2026, Tables 6.1 (policy decisions) and 6.2 | The [Budget 2026 publication](https://www.gov.uk/government/publications/budget-2026-document/budget-2026-html) on GOV.UK | `359958df6b1ab974` |
 | `efo-oct-2026.txt` | Text of the OBR's [Economic and fiscal outlook, October 2026](https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/), for checking reasons | pdftotext of the OBR PDF | `0d449b8015fec840` |
 | `manifest-rev17.json` | The dashboard's publication manifest, production revision 17 (2026-10-28 19:24 UTC). `scripts/build.sh` builds on it unless you pass `--latest` | [policyengine.org/uk/autumn-budget-2026/data/manifest.json](https://www.policyengine.org/uk/autumn-budget-2026/data/manifest.json) | `9685adc1bcd8c5eb` |
-| `notes-prod-rev17.json` | The dashboard's per-measure notes as rendered on production at revision 17 | We captured it from the live page and matched its hash against the page | `e98d885574fbc77c` |
-| `comparables-rev17.md` | Each estimate beside its OBR line and Table 6.1 total, with the gap and its reason | The written briefing's comparables review | `2ff7744b9f1560de` |
-| `article-6a14eb17.md` | The written post-Budget briefing, whose comparison section the cards follow | [policyengine-app-v2#1469](https://github.com/PolicyEngine/policyengine-app-v2/pull/1469) at 6a14eb17 (a draft, so the PDF doesn't link it) | `063533e327027e32` |
-| `whats-improving-note.md` | The "What we're improving" section, quoted verbatim | The Budget coordinator's note | `bbf13048d3b848cc` |
+| `notes-prod-rev17.json` | The dashboard's per-measure notes as production rendered them at revision 17 | We captured it from the live page and matched its hash against the page | `e98d885574fbc77c` |
+| `comparables-rev17.md` | Each estimate beside its OBR line and Table 6.1 total, with the gap and its reason | The post-Budget briefing article's comparables review | `2ff7744b9f1560de` |
+| `article-6a14eb17.md` | The post-Budget briefing article, whose comparison section the cards follow | [policyengine-app-v2#1469](https://github.com/PolicyEngine/policyengine-app-v2/pull/1469) at 6a14eb17 (a draft, so the PDF doesn't link it) | `063533e327027e32` |
+| `whats-improving-note.md` | The "What we're improving" section, which the briefing quotes word for word | The Budget coordinator's note | `bbf13048d3b848cc` |
 | `pr1466-state.json` | The savings explainer's PR state when we built: open, so the PDF doesn't link it | [policyengine-app-v2#1466](https://github.com/PolicyEngine/policyengine-app-v2/pull/1466) | `8f558929c85345c8` |
 | `posts/*.md` | The live explainers the cards cite and link | policyengine-app-v2 `main` at the commit in `posts/APP_V2_MAIN_SHA` | see below |
 
@@ -25,4 +25,4 @@ We saved here everything the briefing's figures and claims rest on, on 28 Octobe
 | `uk-autumn-budget-2026-trading-allowance.md` | `bef16a328e7ec9d6` |
 | `uk-triple-lock-budget-2026.md` | `901ee28ee7a12ec7` |
 
-We don't save the dashboard's artifacts (one folder of CSVs per measure) here. `scripts/fetch_artifacts.py` downloads the ones the pinned manifest lists and checks every file against its receipt's digest.
+We don't save the dashboard's artifacts (one folder of CSVs per measure) here. `scripts/fetch_artifacts.py` downloads the ones `manifest-rev17.json` lists and checks every file against its receipt's digest.

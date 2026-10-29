@@ -3,8 +3,8 @@
 Invariants:
 - Every list item comes out whole, however the post wraps or spaces it.
 - Nothing after the list comes out unless the template asks for paragraphs.
-- The build stops if the opening line is missing, repeated, inside another
-  paragraph, or not followed straight away by a bullet list.
+- The build stops if the opening line is missing, repeated (indented or not),
+  inside another paragraph, or not followed straight away by a bullet list.
 """
 
 import pytest
@@ -35,6 +35,18 @@ def test_wrapped_items_come_out_whole(monkeypatch):
 def test_items_apart_by_blank_lines_stay_one_list(monkeypatch):
     out = quote(monkeypatch, "Key results:\n\n- one\n\n- two\n\n  second paragraph of two\n\n- three\n\n## Next\n")
     assert out == "Key results:\n\n- one\n\n- two\n\n  second paragraph of two\n\n- three"
+
+
+@pytest.mark.parametrize("indent", [" ", "  ", "   "])
+def test_indented_opening_is_still_an_opening(monkeypatch, indent):
+    assert quote(monkeypatch, f"{indent}Key results:\n\n- one\n") == "Key results:\n\n- one"
+
+
+@pytest.mark.parametrize("indent", [" ", "  ", "   "])
+def test_indented_second_opening_stops_the_build(monkeypatch, indent):
+    # Sol review r2: Markdown reads both as openings, so the build must too
+    with pytest.raises(SystemExit, match="found 2"):
+        quote(monkeypatch, f"Key results:\n\n- first\n\n## Split\n\n{indent}Key figures:\n\n- second\n")
 
 
 def test_list_straight_after_the_opening_line(monkeypatch):

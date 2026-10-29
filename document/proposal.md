@@ -24,21 +24,21 @@ PolicyEngine figures are from the Budget dashboard at [policyengine.org/uk/budge
 | Measure | What the Budget did | Our estimate |
 |:------------------------------|:---------------------------------------------|:-------------------------|
 | Household Energy Payment | New: £100 for bands A to D in England | In the dashboard |
-| Zero VAT on electricity | Extended by three months to 1 July 2027 | In the dashboard |
+| Zero VAT on electricity | Extended it by three months, to 1 July 2027 | In the dashboard |
 | Fuel duty | Kept the 5p cut to 1 July 2027, not March 2028 | In the dashboard |
-| Pension Tax Allowance | Announced, with a taper instead of a cliff edge | In the dashboard |
-| Carer's Allowance taper | Announced, from 2030-31, England and Wales | In the dashboard |
+| Pension Tax Allowance | Announced it, with a taper instead of a cliff edge | In the dashboard |
+| Carer's Allowance taper | Announced it, from 2030-31, England and Wales | In the dashboard |
 | Property income tax | Rates up 2 points from April 2027 | In the dashboard |
 | Savings income tax | Rates up 2 points from April 2027 | Follows with a data update |
 | Trading allowance | New: £1,000 to £3,000 from April 2027 | In the dashboard |
-| Triple lock | Adjusted from April 2030 | Separate post, pre-Budget scenarios |
+| Triple lock | Changed it from April 2030 | Separate post, pre-Budget scenarios |
 | National Living Wage | £13.21 an hour from 1 April 2027 | Not in our model |
 | Bank surcharge | 3% to 6% for 15 months, not 8% | Not in our model |
 | Seven smaller measures | Student loans, Universal Credit, mileage and more | Not in our model |
 | 12 of our 20, among them the Warm Home Discount top-up | Not in the Budget | — |
 :::
 
-Run together, the seven measures in the dashboard cost £3,110 million in 2026-27 and £615 million in 2027-28, and raise £210 million in 2028-29, when the property income rise outweighs the two tax cuts still in force. The combined run has passed sign-off.
+In our combined run, the seven measures in the dashboard cost £3,110 million in 2026-27 and £615 million in 2027-28, and raise £210 million in 2028-29, when the property income rise outweighs the two tax cuts still in force. The combined run has passed sign-off.
 
 ## How to read this
 
@@ -80,13 +80,13 @@ Our estimates differ from the official costings for four main reasons: timing (w
 ::: {.card}
 ### Zero VAT on household electricity runs to 1 July 2027
 
-[Announced in a different form]{.badge .changed} [Our list: no. 8, odds 21%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: no. 8, odds 21%]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
 | **What changes** | The Budget extends the 0% rate on domestic electricity, in force in Great Britain since 1 October 2026, by three months to July 2027, and expects the rate to apply in Northern Ireland from April 2027; until then Northern Ireland's Executive gets funding for comparable support. We had listed an extension to March 2028. |
 | **Who it affects** | Around 29 million households across the UK. The Budget expects it to take around £50 off the annual Ofgem price cap in April 2027. |
-| **How we model it** | VAT on household electricity is 0% instead of 5% from 1 October 2026 to 30 June 2027, in Great Britain from October 2026 and across the UK from April 2027. Each year counts its share of a year's electricity use: about 57% in 2026-27 and 22% in 2027-28. Like the Treasury, we cost the whole period, the cut already in force this winter included. Gas stays at 5%. |
+| **How we model it** | VAT on household electricity is 0% instead of 5% from 1 October 2026 to 30 June 2027, in Great Britain from October 2026 and across the UK from April 2027. Each year counts its share of a year's electricity use: about 57% in 2026-27 and 22% in 2027-28. Like the Treasury, we cost the whole period, including the cut already in force this winter. We leave gas VAT as it is. |
 | **Read more** | [Analysis of the Autumn Budget 2026 energy bill measures](https://www.policyengine.org/uk/research/budget-2026-energy-bills) |
 
 | £ million | 2026-27 | 2027-28 | 2028-29 | 2029-30 | 2030-31 | 2031-32 |
@@ -103,7 +103,7 @@ Table 6.1's total also includes the measure's other line in the OBR's table: Oth
 ::: {.card}
 ### Fuel duty: the 5p cut runs to July 2027
 
-[Announced in a different form]{.badge .changed} [Our list: no. 1, "Fuel duty freeze", odds 93%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: no. 1, "Fuel duty freeze", odds 93%]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -124,7 +124,7 @@ Table 6.1's total also includes the measure's other line in the OBR's table: Oth
 ::: {.card}
 ### Pension Tax Allowance
 
-[Announced in a different form]{.badge .changed} [Our list: no. 3, "State Pension tax protection", odds 90%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: no. 3, "State Pension tax protection", odds 90%]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -147,7 +147,7 @@ Table 6.1's total also includes the measure's other lines in the OBR's table: PS
 ::: {.card}
 ### Carer's Allowance: a taper above the earnings limit
 
-[Announced]{.badge .announced} [Our list: no. 2, odds 92%]{.prev}
+[In the Budget]{.badge .announced} [Our list: no. 2, odds 92%]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -170,13 +170,13 @@ Table 6.1's total also includes the measure's other line in the OBR's table: Sco
 ::: {.card}
 ### Property income: tax rates up 2 points
 
-[Announced in a different form]{.badge .changed} [Our list: part of no. 14, "Unearned income tax", odds 14%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: part of no. 14, "Unearned income tax", odds 14%]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
-| **What changes** | From 6 April 2027, the income tax rates on property income rise a further 2 points, on top of Budget 2025's rise, to 24%, 44% and 49% in England, Wales and Northern Ireland. Finance cost relief for landlords stays aligned with the property basic rate. Dividend rates, which our list expected to rise too, stay the same. |
+| **What changes** | From 6 April 2027, the income tax rates on property income rise a further 2 points, on top of Budget 2025's rise, to 24%, 44% and 49% in England, Wales and Northern Ireland. Finance cost relief for landlords still follows the property basic rate. Dividend rates, which our list expected to rise too, stay the same. |
 | **Who it affects** | Landlords and others with property income in England, Wales and Northern Ireland. |
-| **How we model it** | The three rates rise to 24%, 44% and 49% from 2027-28. Finance cost relief follows the property basic rate to 24%, Scottish landlords' included. We hold incomes fixed, with no behavioural response. |
+| **How we model it** | The three rates rise to 24%, 44% and 49% from 2027-28. Finance cost relief follows the property basic rate to 24%, for Scottish landlords too. We hold incomes fixed, with no behavioural response. |
 | **Read more** | [Autumn Budget 2026: higher tax on property income](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-property-income-tax) |
 
 | £ million | 2026-27 | 2027-28 | 2028-29 | 2029-30 | 2030-31 | 2031-32 |
@@ -193,7 +193,7 @@ Table 6.1's total also includes the measure's other lines in the OBR's table: On
 ::: {.card}
 ### Savings income: tax rates up 2 points
 
-[Announced in a different form]{.badge .changed} [Our list: part of no. 14, "Unearned income tax", odds 14%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: part of no. 14, "Unearned income tax", odds 14%]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -327,16 +327,16 @@ Key figures:
 ![Annual income tax reduction from the trading allowance by side-business receipts, for a £30,000 employee in 2027-28](charts/trading-allowance-receipts.svg){.chart}\
 :::
 
-## Announced, not in our Budget dashboard
+## In the Budget, not in our dashboard
 
 ::: {.card}
 ### Triple lock: a new rule from April 2030
 
-[Announced]{.badge .announced} [Our list: no. 4, "Triple lock replaced", odds 80%]{.prev}
+[In the Budget]{.badge .announced} [Our list: no. 4, "Triple lock replaced", odds 80%]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
-| **What changes** | The triple lock continues through April 2029. From April 2030 the State Pension rises each year by the highest of 2.5%, inflation, or the amount needed to keep its value relative to earnings as reached in April 2029. |
+| **What changes** | The triple lock continues through April 2029. From April 2030 the State Pension rises each year by the highest of 2.5%, inflation, or whatever rise keeps its value relative to earnings where it stands in April 2029. |
 | **Who it affects** | Pensioners, over the long run. The OBR finds it does not affect State Pension costs over its forecast, because 2.5% applies under both rules in 2030-31 and 2031-32. |
 | **Official costing** | Not in the OBR's table of policy decisions or in Table 6.1. The Department for Work and Pensions estimates it cuts State Pension spending in Great Britain by £15 billion in 2039-40 and £50 billion in 2049-50, in cash terms, before any effect on tax or debt interest. |
 | **Our estimate** | Not in the Budget dashboard, whose years end in 2031-32. Our post reports two pre-Budget scenarios for 2039-40, neither a forecast: a saving of £0.9 billion on the OBR's March 2026 central path, and £10.3 billion if the triple lock instead raises the pension 0.6 percentage points a year faster than earnings, as the OBR assumes in its long-term projections. We have withdrawn the average across 50,000 simulated paths we first published, after the model behind it failed a test we had registered before the Budget. |
@@ -346,7 +346,7 @@ Key figures:
 ::: {.card}
 ### National Living Wage: £13.21 an hour
 
-[Announced]{.badge .announced} [Our list: no. 19, odds 90%]{.prev}
+[In the Budget]{.badge .announced} [Our list: no. 19, odds 90%]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -359,7 +359,7 @@ Key figures:
 ::: {.card}
 ### Bank surcharge: 3% to 6% for 15 months
 
-[Announced in a different form]{.badge .changed} [Our list: no. 20, "Bank tax increase", odds 82%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: no. 20, "Bank tax increase", odds 82%]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -427,16 +427,16 @@ Official costings, £ million: each measure's total in the OBR's detailed foreca
 |:-----------------------------------|:----------------------------------------------------------------|
 | 5. Warm Home Discount top-up (66%) | Not in the Budget. The £100 Household Energy Payment came instead. |
 | 6. Working-age benefits below CPI (58%) | No new cut. The policy costings' uprating table keeps the plans the government announced before: the Universal Credit standard allowance rising above inflation to CPI + 4.8% by April 2029, and the lower health element staying at its 2026-27 rate until 2029-30. |
-| 7. Threshold freeze extended (30%) | No extension. The personal allowance and basic rate limit stay frozen up to and including 2030-31, then rise with CPI. |
+| 7. Threshold freeze extended (30%) | No extension. The freeze on the personal allowance and basic rate limit still ends after 2030-31, when they start rising with CPI. |
 | 9. £2 bus fare cap beyond 2027 (21%) | No extension. The Budget costs the £2 cap for 2027 only (above). |
 | 10. Employer National Insurance threshold (19%) | Not in the Budget. |
 | 11. Local Housing Allowance (16%) | Not in the Budget. |
-| 12. Plan 2 threshold unfrozen (15%) | Still frozen. The Budget caps interest on Plan 2 and Plan 3 loans at 6% for a year instead (above). |
+| 12. Plan 2 threshold unfrozen (15%) | The freeze continues. The Budget caps interest on Plan 2 and Plan 3 loans at 6% for a year instead (above). |
 | 13. High-value council tax threshold lowered (15%) | No cut to the threshold. The Budget confirms a deferral scheme, discounts and exemptions for the High Value Council Tax Surcharge, costing £45 million in 2028-29 (measure 93), and a 100% surcharge premium on properties that stand empty and unoccupied for 12 months or more. |
 | 14. Dividend tax rates up (part of 14%) | Dividend rates stay the same; only savings and property rates rise (above). |
 | 15. VAT on domestic gas (13%) | Not in the Budget. |
 | 16. Capital Gains Tax rates up (11%) | Main rates stay at 18% and 24%. The Budget adds Founders' Relief and halves the Business Asset Disposal Relief limit (above). |
-| 17. Personal allowance raised (10%) | No rise; it stays frozen to 2030-31 as before. The Pension Tax Allowance helps pensioners instead (above). |
+| 17. Personal allowance raised (10%) | No rise; its freeze runs to 2030-31 as before. The Pension Tax Allowance helps pensioners instead (above). |
 | 18. VAT on road fuel (about 10%) | No cut; the Budget extends the fuel duty cut instead (above). |
 
 Odds are those on our pre-Budget list of 27 October.

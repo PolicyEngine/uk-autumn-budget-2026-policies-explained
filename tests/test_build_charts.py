@@ -7,7 +7,8 @@ Invariants:
 - A withheld artifact value, or a post value with more decimals than CHARTS
   gives, fails.
 - CHARTS gives each checked chart the precision its post's data carries.
-- Inter resolves to pe-doc's own files even when the machine has another Inter.
+- Inter resolves to pe-doc's own files even when the machine has another Inter,
+  in any letter case.
 """
 
 import csv
@@ -103,11 +104,13 @@ def test_charts_precision_matches_the_posts(name, slug, index, decimals, checks)
         assert seen == decimals, f"{name}: CHARTS gives {decimals} decimals, the post's data has up to {seen}"
 
 
-def test_bundled_inter_beats_an_installed_one(monkeypatch):
-    # Two "Inter" entries ahead of the bundled ones, as an installed copy would be;
-    # they point at DejaVu Sans so a wrong match is visible
+@pytest.mark.parametrize("family", ["Inter", "inter", "INTER"])
+def test_bundled_inter_beats_an_installed_one(monkeypatch, family):
+    # Two Inter entries ahead of the bundled ones, as an installed copy would be;
+    # they point at DejaVu Sans so a wrong match is visible. Matplotlib matches
+    # family names ignoring case, so an installed "inter" competes too
     dejavu = str(Path(matplotlib.get_data_path()) / "fonts" / "ttf" / "DejaVuSans.ttf")
-    impostors = [font_manager.FontEntry(fname=dejavu, name="Inter", weight=w, size="scalable") for w in (400, 700)]
+    impostors = [font_manager.FontEntry(fname=dejavu, name=family, weight=w, size="scalable") for w in (400, 700)]
     monkeypatch.setattr(font_manager.fontManager, "ttflist", impostors + list(font_manager.fontManager.ttflist))
     monkeypatch.setattr(matplotlib, "rcParams", matplotlib.rcParams.copy())
     setup_fonts()

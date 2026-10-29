@@ -68,11 +68,13 @@ def key_points(slug, extra_paragraphs=0):
     """The opening line, the bullet list, and `extra_paragraphs` paragraphs after them.
 
     The build stops unless the post has exactly one opening line, standing as
-    a paragraph of its own, with a bullet list straight after it.
+    a paragraph of its own, with a bullet list straight after it. Markdown
+    lets a paragraph start with up to three spaces, so the search ignores
+    indentation, and any indented copy counts as a second opening.
     """
     text = _text(slug)
     lines = text.split("\n")
-    starts = [i for i, x in enumerate(lines) if OPENING.match(x)]
+    starts = [i for i, x in enumerate(lines) if OPENING.match(x.strip())]
     if len(starts) != 1:
         raise SystemExit(f"{slug}: expected one 'Key results/figures/findings ...:' line, found {len(starts)}")
     blocks = _blocks(text)
@@ -89,10 +91,10 @@ def key_points(slug, extra_paragraphs=0):
             part.pop()
         return part
 
-    out = [lines[starts[0]], "", *block_lines(k + 1)]
+    out = [lines[starts[0]].strip(), "", *block_lines(k + 1)]
     for j in range(k + 2, k + 2 + extra_paragraphs):
         # A paragraph that opens with a link or image is a caption or a chart's source, not prose
-        if j >= len(blocks) or blocks[j][0] != "paragraph" or lines[blocks[j][1]].startswith(("_[", "[", "!")):
+        if j >= len(blocks) or blocks[j][0] != "paragraph" or lines[blocks[j][1]].lstrip().startswith(("_[", "[", "!")):
             raise SystemExit(f"{slug}: no plain paragraph {j - k - 1} after the key points")
         out += ["", *block_lines(j)]
     return adapt(_absolute_links("\n".join(out), slug), slug)

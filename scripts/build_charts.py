@@ -74,11 +74,11 @@ def setup_fonts():
     """Draw with pe-doc's own Inter files, whatever fonts the machine has."""
     fonts = Path(pe_doc.__file__).parent / "template" / "fonts"
     files = {"normal": fonts / "Inter-Regular.ttf", "bold": fonts / "Inter-Bold.ttf"}
-    # An installed Inter would tie with the bundled one on family name, and
-    # matplotlib keeps the first of equal matches; drop it, so glyphs and
-    # layout come out the same on every machine
+    # An installed Inter would tie with the bundled one on family name, which
+    # matplotlib compares ignoring case, and matplotlib keeps the first of equal
+    # matches; drop it, so glyphs and layout come out the same on every machine
     manager = font_manager.fontManager
-    manager.ttflist = [f for f in manager.ttflist if f.name != "Inter"]
+    manager.ttflist = [f for f in manager.ttflist if f.name.casefold() != "inter"]
     for path in files.values():
         manager.addfont(str(path))  # also clears matplotlib's font lookup cache
     for weight, path in files.items():
