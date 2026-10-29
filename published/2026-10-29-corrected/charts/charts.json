@@ -1,0 +1,101 @@
+[
+ {
+  "chart": "energy-bills-deciles.svg",
+  "post": "budget-2026-energy-bills.md",
+  "app_v2_main": "85571f7a3",
+  "block": 0,
+  "title": "Average change in household net income by income decile, 2026-27",
+  "post_sha256": "08d97fbe57e8d7ac",
+  "dashboard_checks": [
+   {
+    "series": "payment",
+    "artifact": "household_energy_payment_2026/winners_losers.csv",
+    "year": 2026,
+    "deciles": 10,
+    "precision": "0 decimals"
+   },
+   {
+    "series": "vat",
+    "artifact": "domestic_electricity_zero_vat/winners_losers.csv",
+    "year": 2026,
+    "deciles": 10,
+    "precision": "0 decimals"
+   }
+  ]
+ },
+ {
+  "chart": "fuel-duty-deciles.svg",
+  "post": "fuel-duty-cut-extension.md",
+  "app_v2_main": "85571f7a3",
+  "block": 2,
+  "title": "Average gain by income decile",
+  "post_sha256": "ccc7ddd081d8175e",
+  "dashboard_checks": [
+   {
+    "series": "y2026",
+    "artifact": "fuel_duty_rise_deferral/winners_losers.csv",
+    "year": 2026,
+    "deciles": 10,
+    "precision": "3 decimals"
+   },
+   {
+    "series": "y2027",
+    "artifact": "fuel_duty_rise_deferral/winners_losers.csv",
+    "year": 2027,
+    "deciles": 10,
+    "precision": "3 decimals"
+   }
+  ]
+ },
+ {
+  "chart": "pension-tax-allowance-income-tax.svg",
+  "post": "pension-tax-allowance.md",
+  "app_v2_main": "85571f7a3",
+  "block": 1,
+  "title": "Income tax for a single pensioner, 2027-28",
+  "post_sha256": "87d63b808fc82081",
+  "dashboard_checks": []
+ },
+ {
+  "chart": "carers-allowance-by-pay.svg",
+  "post": "carers-allowance-taper.md",
+  "app_v2_main": "85571f7a3",
+  "block": 0,
+  "title": "Carer's Allowance by gross weekly pay, 2031-32",
+  "post_sha256": "fe9e66d17d86b482",
+  "dashboard_checks": []
+ },
+ {
+  "chart": "property-income-deciles.svg",
+  "post": "uk-autumn-budget-2026-property-income-tax.md",
+  "app_v2_main": "85571f7a3",
+  "block": 0,
+  "title": "Average change in household net income by income decile",
+  "post_sha256": "36525e4368a49cee",
+  "dashboard_checks": [
+   {
+    "series": "y2027",
+    "artifact": "property_income_rates_up/winners_losers.csv",
+    "year": 2027,
+    "deciles": 10,
+    "precision": "unrounded"
+   },
+   {
+    "series": "y2031",
+    "artifact": "property_income_rates_up/winners_losers.csv",
+    "year": 2031,
+    "deciles": 10,
+    "precision": "unrounded"
+   }
+  ]
+ },
+ {
+  "chart": "trading-allowance-receipts.svg",
+  "post": "uk-autumn-budget-2026-trading-allowance.md",
+  "app_v2_main": "85571f7a3",
+  "block": 0,
+  "title": "Trading allowance: the income tax reduction depends on expenses",
+  "post_sha256": "bef16a328e7ec9d6",
+  "dashboard_checks": []
+ }
+]
