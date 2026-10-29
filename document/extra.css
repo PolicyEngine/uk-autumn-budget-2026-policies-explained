@@ -12,7 +12,7 @@
 
 @page {
   size: A4;
-  margin: 16mm 22mm 20mm 22mm;
+  margin: 16mm 25mm 20mm 25mm;
 
   /* A slim header: the logo on the left, the title on the right, a hairline under both */
   @top-left {
@@ -36,22 +36,22 @@
     border-bottom: 0.4pt solid #CBD5E1; /* gray-300 */
   }
   @bottom-left {
-    content: "PolicyEngine  |  policyengine.org";
+    content: none; /* the footer carries only the page number */
     font: 7.5pt "Inter", sans-serif;
     color: #64748B; /* gray-500 */
     vertical-align: top;
     padding-top: 3mm;
   }
   @bottom-center {
-    content: none;
-    border-top: none;
-  }
-  @bottom-right {
     content: "Page " counter(page) " of " counter(pages);
     font: 7.5pt "Inter", sans-serif;
     color: #64748B; /* gray-500 */
     vertical-align: top;
     padding-top: 3mm;
+    border-top: none;
+  }
+  @bottom-right {
+    content: none;
   }
 }
 
@@ -462,6 +462,149 @@ table {
   margin-bottom: 4pt;
 }
 
+/* ---------- Structure ----------
+   Sections open with a short teal bar and a teal number; measures and
+   explainers are separated by a full-width rule; inside a measure, its
+   heading block, description, costing, explanation and link sit in groups
+   with larger gaps between groups than within them. */
+
+body {
+  font-size: 10pt;
+}
+
+h2 {
+  font-size: 17pt;
+  color: #101828; /* gray-900 */
+  margin: 30pt 0 10pt;
+  padding-top: 9pt;
+  /* a short teal-500 bar above the heading, 14mm by 2.5pt */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='53' height='3.3'><rect width='53' height='3.3' fill='%23319795'/></svg>");
+  background-repeat: no-repeat;
+  background-position: left top;
+}
+
+h2::before {
+  color: #2C7A7B; /* teal-600 */
+  min-width: 10mm;
+}
+
+h2.section-page {
+  break-before: page;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 12pt;
+  color: #101828; /* gray-900 */
+}
+
+h3::before {
+  color: #2C7A7B; /* teal-600 */
+  min-width: 11mm;
+}
+
+h3 a {
+  color: #101828; /* gray-900 */
+}
+
+/* Each measure and each explainer is its own unit under a full-width rule */
+.card,
+.explainer {
+  margin: 24pt 0 0;
+  padding-top: 12pt;
+  border-top: 0.5pt solid #94A3B8; /* gray-400 */
+}
+
+h2 + .card,
+h2 + p + .explainer,
+.card:first-child {
+  margin-top: 6pt;
+  padding-top: 0;
+  border-top: none;
+}
+
+.card h3,
+.explainer h3 {
+  margin-top: 0;
+}
+
+/* Heading block: number and title, standfirst, status */
+.card p:has(> .keyfact),
+.card .tags p {
+  padding-left: 11mm;
+}
+
+.card .tags p {
+  margin-bottom: 12pt;
+}
+
+/* Description: hanging labels in a 28mm column */
+.card p:has(> .runin) {
+  position: relative;
+  padding-left: 30mm;
+  margin-bottom: 6pt;
+}
+
+.runin {
+  position: absolute;
+  left: 0;
+  width: 27mm;
+  font-size: 8.6pt;
+  line-height: 1.75;
+  color: #2C7A7B; /* teal-600 */
+  margin: 0;
+}
+
+.runin::after {
+  content: "";
+}
+
+/* Costing: caption, table, note */
+.card p:has(> .tcap) {
+  margin-top: 16pt;
+}
+
+/* Explanation and link */
+.card p:has(> .why) {
+  margin: 14pt 0 8pt;
+}
+
+.readmore {
+  margin-bottom: 0;
+}
+
+/* Explainers: the figure with its caption and source as one group */
+.explainer p:has(> .figcap) {
+  margin-top: 14pt;
+}
+
+.explainer p:has(img.chart) {
+  margin-bottom: 0;
+}
+
+/* Cost tables: room for the six year columns */
+.costs col:nth-child(1) {
+  width: 15% !important;
+}
+
+.costs col:nth-child(2) {
+  width: 31% !important;
+}
+
+.costs col:nth-child(n+3) {
+  width: 9% !important;
+}
+
+.costs table {
+  font-size: 8pt;
+}
+
+/* A measure's heading block stays with its description */
+.card .tags p,
+.card p:has(> .keyfact) {
+  break-after: avoid;
+}
+
 /* ---------- Links ---------- */
 
 a {
@@ -520,52 +663,61 @@ a {
   box-sizing: border-box;
   height: 240mm;
   margin: 0;
-  padding: 58mm 20mm 0 20mm;
+  padding: 44mm 20mm 0 20mm;
   background: #2C7A7B; /* teal-600 */
   color: #FFFFFF; /* white */
   break-after: page;
 }
 
 .cover::before {
-  /* a thin rule above the title */
+  /* a short bar above the title */
   content: "";
   position: absolute;
-  top: 44mm;
+  top: 32mm;
   left: 20mm;
   width: 24mm;
   height: 1.6mm;
   background: #81E6D9; /* teal-200 */
 }
 
+/* Title: two deliberate lines, "Autumn Budget 2026:" then "the policies explained" */
 .cover h1 {
-  font-size: 34pt;
-  line-height: 1.08;
-  letter-spacing: -0.015em;
+  font-size: 40pt;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: #FFFFFF; /* white */
-  margin: 0 0 7mm;
-  max-width: 150mm;
+  margin: 0 0 8mm;
 }
 
+/* Subtitle: regular weight, slightly larger, in pale teal */
 .cover h1 + p {
-  font-size: 13.5pt;
-  line-height: 1.35;
-  color: #FFFFFF; /* white */
-  margin-bottom: 4mm;
-  max-width: 145mm;
+  font-size: 15pt;
+  line-height: 1.4;
+  color: #E6FFFA; /* teal-50 */
+  margin-bottom: 0;
+  max-width: 130mm;
 }
 
 .cover h1 + p strong {
-  color: #FFFFFF; /* white */
+  font-weight: 400;
+  color: #E6FFFA; /* teal-50 */
 }
 
+/* Date line: small caps-style, set apart by a thin divider */
 .cover h1 + p + p {
-  font-size: 10.5pt;
-  color: #E6FFFA; /* teal-50 */
-  margin-bottom: 0;
+  display: inline-block;
+  font-size: 8.5pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #B2F5EA; /* teal-100 */
+  margin: 9mm 0 0;
+  padding-top: 3.5mm;
+  border-top: 0.5pt solid #81E6D9; /* teal-200 */
 }
 
 .cover-links {
-  margin-top: 26mm;
+  margin-top: 22mm;
   padding: 4mm 5mm 1mm 5mm;
   border-left: none;
   background: #234E52; /* teal-800 */
@@ -590,12 +742,18 @@ a {
   font-weight: 700;
 }
 
-/* Nuffield Foundation logo, white on teal: 21.5mm tall as its guide asks
-   for A4, with clear space of more than the height of its N around it */
+/* Nuffield Foundation logo, white on teal: 18mm tall, its guide's minimum, with clear space of more than the height of its N around it */
 .cover img.nuffield {
-  height: 21.5mm;
+  display: block;
+  height: 18mm; /* the Foundation's minimum on A4 */
   width: auto;
-  margin-right: 7mm;
+  margin: 0 0 3mm;
+}
+
+/* The funder line sits under the logo, on the same left edge */
+.cover .funder-text {
+  display: block;
+  font-size: 8pt;
 }
 
 /* Lucide-style line icons before each label */
@@ -617,8 +775,7 @@ a {
   position: absolute;
   bottom: 12mm;
   left: 20mm;
-  display: flex;
-  align-items: center;
+  display: block;
   font-size: 9pt;
   color: #E6FFFA; /* teal-50 */
 }

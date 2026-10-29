@@ -10,7 +10,7 @@ pe-doc:
 ---
 
 ::: {.cover}
-# Autumn Budget 2026: the policies explained
+# Autumn Budget 2026:<br>the policies explained
 
 **What each measure does, what it costs, and how our estimates compare**
 
@@ -86,7 +86,7 @@ Our figures come from our Budget dashboard at [policyengine.org/uk/autumn-budget
 
 In our combined run, the seven measures in the [dashboard](https://www.policyengine.org/uk/autumn-budget-2026) cost £3,110 million in 2026-27 and £615 million in 2027-28, and raise £210 million in 2028-29, when the property income rise outweighs the two tax cuts still in force.
 
-## How to read this
+## How to read this {.section-page}
 
 The day before the Budget, we listed the 20 measures we thought it most likely to change. This briefing says what the Budget actually did with each, and adds the measures it made that our list missed. For every measure:
 
@@ -100,7 +100,7 @@ After the cards for the measures in [our dashboard](https://www.policyengine.org
 
 Our estimates differ from the official costings for four main reasons: timing (we score each tax year's liability; the official costings are on a National Accounts basis, in which the tax people pay through Self Assessment can fall in a later year), coverage (we use household survey data, so we estimate less fully the effects outside households and on incomes the survey records thinly), behaviour (ours are static; most official costings include responses) and scope (the parts of a policy each models).
 
-## In our dashboard
+## In our dashboard {.section-page}
 
 ::: {.card}
 ### Household Energy Payment: £100 for bands A to D in England {#m-energy-payment}
@@ -370,7 +370,7 @@ Table 6.1's total also includes the measure's other lines in the OBR's table: PS
 :::
 :::
 
-## Our explainers
+## Our explainers {.section-page}
 
 We have published six explainers, which together cover the seven measures in [our dashboard](https://www.policyengine.org/uk/autumn-budget-2026): one covers both energy measures. Each of the next six pages quotes an explainer's key points from [policyengine.org](https://www.policyengine.org) and includes one of its charts, using the post's own chart data. The three income decile charts show the dashboard's results. Words in square brackets replace a reference to another part of the post.
 
@@ -476,7 +476,7 @@ Key figures:
 
 :::
 
-## In the Budget, not in our dashboard
+## In the Budget, not in our dashboard {.section-page}
 
 ::: {.card}
 ### Triple lock: a new rule from April 2030 {#m-triple-lock}
@@ -623,7 +623,6 @@ The numbers give each measure's place on our list of 27 October, the day before 
 
 ## Limitations
 
-- The [dashboard](https://www.policyengine.org/uk/autumn-budget-2026) gives no poverty or people-affected figures.
 - Our national figures leave out the savings income tax rise, which the [dashboard's household calculator](https://www.policyengine.org/uk/autumn-budget-2026) includes.
 - We apply the trading allowance to trading income but not to miscellaneous income, which lowers our estimate of its cost.
 - In 2030-31 we don't fully capture how the Carer's Allowance taper interacts with overlapping benefits, such as the State Pension.
