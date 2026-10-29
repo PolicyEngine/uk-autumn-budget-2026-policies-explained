@@ -24,7 +24,7 @@ A PolicyEngine briefing · Published 29 October 2026
 [policyengine.org/uk/research/uk-autumn-budget-2026-briefing](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-briefing)
 :::
 
-[![Nuffield Foundation](assets/nuffield-foundation-white.svg){.nuffield}[Funded by the Nuffield Foundation]{.funder-text}]{.funder}
+[[Funded by]{.funder-text}![Nuffield Foundation](assets/nuffield-foundation-white.svg){.nuffield}]{.funder}
 :::
 
 ::: {.toc}

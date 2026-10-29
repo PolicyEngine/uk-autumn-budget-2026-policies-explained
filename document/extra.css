@@ -12,7 +12,7 @@
 
 @page {
   size: A4;
-  margin: 16mm 25mm 20mm 25mm;
+  margin: 24mm 25mm 20mm 25mm; /* about 11mm clear between the header and the text */
 
   /* A slim header: the logo on the left, the title on the right */
   @top-left {
@@ -21,7 +21,7 @@
     width: 50%;
     vertical-align: bottom;
     padding-bottom: 1.6mm;
-    margin-bottom: 4mm;
+    margin-bottom: 11mm;
   }
   @top-right {
     content: "Autumn Budget 2026: the policies explained";
@@ -31,7 +31,7 @@
     text-align: right;
     vertical-align: bottom;
     padding-bottom: 2mm;
-    margin-bottom: 4mm;
+    margin-bottom: 11mm;
   }
   @bottom-left {
     content: none; /* the footer carries only the page number */
@@ -745,13 +745,15 @@ a {
   display: block;
   height: 18mm; /* the Foundation's minimum on A4 */
   width: auto;
-  margin: 0 0 3mm;
+  margin: 0;
 }
 
-/* The funder line sits under the logo, on the same left edge */
+/* "Funded by" sits above the logo, on the same left edge */
 .cover .funder-text {
   display: block;
   font-size: 8pt;
+  color: #B2F5EA; /* teal-100 */
+  margin-bottom: 2.5mm;
 }
 
 /* Lucide-style line icons before each label */
