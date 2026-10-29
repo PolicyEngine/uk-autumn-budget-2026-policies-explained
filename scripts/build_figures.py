@@ -60,6 +60,11 @@ def signed(attestation):
     return all(isinstance(v, str) and v and "PREVIEW ONLY" not in v for v in (att.get("checker"), att.get("second")))
 
 
+def signoff(attestation):
+    """What follows the combined figure: nothing once both have signed, else a sentence with a leading space."""
+    return "" if signed(attestation) else " The combined figure is provisional and may change."
+
+
 def year_label(y):
     return f"{y}-{str(y + 1)[-2:]}"
 
@@ -285,10 +290,7 @@ def main():
                 "source_label": "its test publication manifest" if a.source == "test" else "its publication manifest",
             }[parts[1]]
         if kind == "signoff":
-            entry = manifest["combined"][parts[1]]
-            if signed(entry.get("attestation")):
-                return ""
-            return " The combined figure is provisional and may change."
+            return signoff(manifest["combined"][parts[1]].get("attestation"))
         if kind == "post_sha":
             return (POSTS / "APP_V2_MAIN_SHA").read_text().strip()
         if kind == "keypoints":
@@ -299,7 +301,7 @@ def main():
             rev = f"revision {manifest['revision']} ({manifest['updated_at'][:16].replace('T', ' ')} UTC)"
             if a.source == "test":
                 lead = f"PolicyEngine figures are first estimates from the Budget dashboard's test publication, {rev}."
-                tail = f" They may change when we publish the dashboard at {DASHBOARD}."
+                tail = " They may change."
             else:
                 lead = f"Our figures come from our Budget dashboard at {DASHBOARD}, as it stood at {rev}."
                 tail = " The dashboard still marks some as provisional, and they may change." if provisional else ""

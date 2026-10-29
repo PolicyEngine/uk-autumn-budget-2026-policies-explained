@@ -41,7 +41,7 @@ Our figures come from our Budget dashboard at [policyengine.org/uk/autumn-budget
 | Carer's Allowance taper | Announced it, from 2030-31, England and Wales | In the dashboard |
 | Property income tax | Rates up 2 points from April 2027 | In the dashboard |
 | Savings income tax | Rates up 2 points from April 2027 | No national estimate |
-| Trading allowance | Raised from £1,000 to £3,000 from April 2027, not on our list | In the dashboard |
+| Trading allowance | Raised it from £1,000 to £3,000 from April 2027, not on our list | In the dashboard |
 | Triple lock | Changed it from April 2030 | Separate post, pre-Budget scenarios |
 | National Living Wage | £13.21 an hour from 1 April 2027 | Not in our model |
 | Bank surcharge | 3% to 6% for 15 months, not 8% | Not in our model |
@@ -210,7 +210,7 @@ Table 6.1's total also includes the measure's other lines in the OBR's table: On
 |:------------------|:--------------------------------------------------------------------------|
 | **What changes** | From 6 April 2027, the income tax rates on savings income rise a further 2 points, on top of Budget 2025's rise, to 24%, 44% and 49% across the UK. |
 | **Who it affects** | Savers with taxable interest above their Personal Allowance, Personal Savings Allowance and starting rate for savings. Interest in ISAs stays tax-free. |
-| **How we model it** | Our national estimates leave this measure out, because the savings income in our data isn't yet good enough for a national figure. The calculator includes it. |
+| **How we model it** | Our national estimates leave this measure out, because the savings income in our data isn't yet good enough for a national figure. The dashboard's household calculator includes it. |
 
 | £ million | 2026-27 | 2027-28 | 2028-29 | 2029-30 | 2030-31 | 2031-32 |
 |:--------------------------|------:|------:|------:|------:|------:|------:|
@@ -247,7 +247,7 @@ Table 6.1's total also includes the measure's other lines in the OBR's table: PS
 
 ## Our explainers
 
-We have published six explainers, which together cover the seven measures in our dashboard: one covers both energy measures. Each of the next six pages quotes an explainer's key points from policyengine.org and redraws one of its charts from the post's own chart data. The three income decile charts show the dashboard's results, and each bar matches the dashboard to the pound. Words in square brackets replace a reference to another part of the post.
+We have published six explainers, which together cover the seven measures in our dashboard: one covers both energy measures. Each of the next six pages quotes an explainer's key points from policyengine.org and redraws one of its charts from the post's own chart data. The three income decile charts show the dashboard's results. Words in square brackets replace a reference to another part of the post.
 
 ::: {.explainer}
 ### [Analysis of the Autumn Budget 2026 energy bill measures](https://www.policyengine.org/uk/research/budget-2026-energy-bills)
@@ -350,7 +350,7 @@ Key figures:
 | **What changes** | The triple lock continues through April 2029. From April 2030 the State Pension rises each year by the highest of 2.5%, inflation, or whatever rise keeps its value relative to earnings where it stands in April 2029. |
 | **Who it affects** | Pensioners, over the long run. The OBR finds it does not affect State Pension costs over its forecast, because 2.5% applies under both rules in 2030-31 and 2031-32. |
 | **Official costing** | Not in the OBR's table of policy decisions or in Table 6.1. The Department for Work and Pensions estimates it cuts State Pension spending in Great Britain by £15 billion in 2039-40 and £50 billion in 2049-50, in cash terms, before any effect on tax or debt interest. |
-| **Our estimate** | Not in the Budget dashboard, whose years end in 2031-32. Our post reports two pre-Budget scenarios for 2039-40, neither a forecast: a UK saving of £0.9 billion on the OBR's March 2026 central path, and £10.3 billion if the triple lock instead raises the pension 0.6 percentage points a year faster than earnings, as the OBR assumes in its long-term projections. For Great Britain, the area DWP covers, the two are £0.8 billion and £10.0 billion. We have withdrawn the average across 50,000 simulated paths we first published, because its model failed a pre-registered test. |
+| **Our estimate** | Not in the Budget dashboard, whose years end in 2031-32. Our post reports two pre-Budget scenarios for 2039-40, neither a forecast: a UK saving of £0.9 billion on the OBR's March 2026 central path, and £10.3 billion if the triple lock instead raises the pension 0.6 percentage points a year faster than earnings, as the OBR assumes in its long-term projections. For Great Britain, the area DWP covers, the two are £0.8 billion and £10.0 billion. We have withdrawn the average across 50,000 simulated paths we first published, because its model failed a test we set before the Budget. |
 | **Read more** | [The adjusted Triple Lock in the Autumn Budget 2026](https://www.policyengine.org/uk/research/uk-triple-lock-budget-2026) |
 :::
 
@@ -455,18 +455,18 @@ The numbers give each measure's place on our list of 27 October, the day before 
 ## Limitations
 
 - The dashboard gives no poverty or people-affected figures.
-- Our national figures leave out the savings income tax rise, which the calculator includes.
-- We apply the trading allowance to trading income but not to miscellaneous income, so our estimate of its cost runs low.
+- Our national figures leave out the savings income tax rise, which the dashboard's household calculator includes.
+- We apply the trading allowance to trading income but not to miscellaneous income, which lowers our estimate of its cost.
 - In 2030-31 we don't fully capture how the Carer's Allowance taper interacts with overlapping benefits, such as the State Pension.
 - Our fuel duty cut leaves out road fuel gases (LPG and natural gas), which the government's costing includes.
 - Our Pension Tax Allowance leaves out some people who reach State Pension age during the tax year.
 - We project household electricity spending with general inflation, not retail energy prices.
-- PolicyEngine UK, our open-source model, doesn't include the Budget's measures, so its users can't run them; the dashboard includes them.
+- PolicyEngine UK, our open-source model, doesn't include the measures our dashboard models, so its users can't run them.
 
 ## Sources and method
 
 - Budget 2026 document: [gov.uk/government/publications/budget-2026-document](https://www.gov.uk/government/publications/budget-2026-document/budget-2026-html). Table 6.1 of policy decisions and the policy costings: [supporting documents for Budget 2026](https://www.gov.uk/government/publications/supporting-documents-for-budget-2026). The OBR's [October 2026 Economic and fiscal outlook](https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/) and its detailed forecast table 1.1, policy.xlsx (sha256 cdcc2a06), the source of every official figure in the costing tables apart from the Table 6.1 totals we give for context. The triple lock estimates are the Department for Work and Pensions' [State Pension uprating analysis](https://www.gov.uk/government/publications/state-pension-uprating-analysis-2026/state-pension-uprating); other official figures in the text come from the Budget documents, among them Table 6.2 for the Your First Home loans, and the OBR's outlook. Fuel duty's path before the Budget, 3p back on 1 January 2027 and 2p more on 1 March, comes from [SI 2026/164](https://www.legislation.gov.uk/uksi/2026/164) and the amending [SI 2026/555](https://www.legislation.gov.uk/uksi/2026/555/made), and HMRC's [Amended Fuel Duty rates: 2026 to 2027](https://www.gov.uk/government/publications/amended-fuel-duty-rates-for-2026-to-2027/amended-fuel-duty-rates-2026-to-2027). Pension Tax Allowance: the Treasury's [explainer](https://www.gov.uk/government/publications/pension-tax-allowance-explainer/pension-tax-allowance-explainer).
 - PolicyEngine estimates: revision 17 of the Autumn Budget dashboard ([its publication manifest](https://www.policyengine.org/uk/autumn-budget-2026/data/manifest.json)), on the policyengine Python package 6.11.1 with PolicyEngine UK 2.151.0 and Microcosm UK 2024-25 data (release a6299504), which we calibrated before the Budget and grow with the OBR's October 2026 forecast. The combined figure is one simulation of the seven measures together. Other PolicyEngine figures in the text quote the dashboard's notes and our posts.
 - The explainer pages quote each post's key points from policyengine.org (policyengine-app-v2 at 85571f7a3) and redraw one of its charts from the post's own chart data.
-- The reasons each estimate differs from the official costing come from the dashboard's notes on its comparison with the official costings, from the OBR's October 2026 Economic and fiscal outlook and from the Budget documents. The notes compare our figures with Table 6.1's totals and include some estimates that the dashboard's published results don't.
-- How we model each measure follows the dashboard's description of it, with four assumptions of our own: households buy the same fuel, carers work the same hours, the electricity cost covers the cut's whole period, and the energy payment leaves out the council funding. Our estimates are static and use survey data; the dashboard withholds any result that rests on fewer than three survey households.
+- The reasons each estimate differs from the official costing come from the dashboard's notes on its comparison with the official costings, from the OBR's October 2026 Economic and fiscal outlook and from the Budget documents. The notes compare our figures with Table 6.1's totals and include some estimates from our model that the dashboard doesn't publish.
+- How we model each measure follows the dashboard's description of it, plus four details the description leaves out: households buy the same fuel, carers work the same hours, our electricity costing covers the cut's whole period, including the months already in force, and our energy payment figure leaves out the £100 million for councils. Our estimates are static and use survey data; the dashboard withholds any result that rests on fewer than three survey households.
