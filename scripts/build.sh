@@ -4,9 +4,10 @@
 #   scripts/build.sh           build on the pinned manifest, sources/manifest-rev17.json
 #   scripts/build.sh --latest  download the live production manifest first and build on that
 #
-# Writes document/proposal.md and document/figures.json (both committed, so a
-# PR's diff shows every printed figure that moved), then the PDF, HTML and DOCX
-# in document/ (not committed; CI uploads the PDF). Posts nothing.
+# Writes document/proposal.md, document/figures.json and document/charts/ (all
+# committed, so a PR's diff shows every printed figure and chart that moved),
+# then the PDF, HTML and DOCX in document/ (not committed; CI uploads the
+# PDF). Posts nothing.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -32,6 +33,8 @@ uv run --frozen python -I scripts/build_figures.py \
   --obr sources/policy-555e7f74.xlsx \
   --template template.md \
   --out document/proposal.md --figures document/figures.json
+
+uv run --frozen python -I scripts/build_charts.py --artifacts "$ART" --out document/charts
 
 uv run --frozen pe-doc build document
 uv run --frozen pe-doc check document

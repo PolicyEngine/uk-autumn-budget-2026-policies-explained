@@ -39,16 +39,26 @@ jobs:
 
       - uses: astral-sh/setup-uv@v10.3.0
 
+      - uses: oven-sh/setup-bun@v2.2.0
+        with:
+          bun-version: 1.3.12
+
       - name: Install
-        run: uv sync --frozen
+        run: |
+          uv sync --frozen
+          cd site && bun install --frozen-lockfile
+
+      - name: Test the build scripts
+        run: uv run --frozen pytest -q
 
       - name: Build and check the PDF
         run: scripts/build.sh
 
-      - name: Generated files match template.md
+      - name: Generated files match template.md and the sources
         run: |
-          git diff --exit-code -- document/proposal.md document/figures.json || {
-            echo "::error::document/proposal.md or document/figures.json is stale. Run scripts/build.sh and commit the result."
+          git status --porcelain -- document/charts | grep . && { echo "::error::document/charts/ has files the build didn't commit"; exit 1; }
+          git diff --exit-code -- document/proposal.md document/figures.json document/charts || {
+            echo "::error::document/proposal.md, figures.json or charts/ is stale. Run scripts/build.sh and commit the result."
             exit 1
           }
 

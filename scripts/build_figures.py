@@ -12,7 +12,8 @@ category names with "+", e.g. Income tax+NICs. <n> is the OBR measure number,
 the same as its Table 6.1 row.
 
 Placeholders in the template:
-  {{costing:<measure_id>:<n>:<lines>}}  table: OBR line(s), Table 6.1 total, the dashboard's estimate
+  {{costing:<measure_id>:<n>:<lines>[:<label>]}}  table: OBR line(s), Table 6.1 total, the dashboard's estimate
+                                  (its row labelled <label>, "PolicyEngine" if none)
   {{official:<n>:<lines>}}        table: OBR line(s) and Table 6.1 total
   {{official:<n>}}                table: OBR measure total only
   {{obr:<n>:<year>}}              one OBR measure total, signed, £m
@@ -28,6 +29,8 @@ Placeholders in the template:
   {{meta:<key>}}                  manifest revision, updated_at, source URL, source label
   {{signoff:<combined key>}}      whether the combined run carries both signatures
   {{status_note}}                 the opening note: provisional or approved, test or production
+  {{keypoints:<post slug>[:<n>]}} a live explainer's key points as published, and n paragraphs after them
+  {{post_sha}}                    the policyengine-app-v2 commit the saved explainers come from
 """
 
 import argparse
@@ -35,13 +38,17 @@ import csv
 import hashlib
 import json
 import re
+import sys
 from pathlib import Path
 
 import openpyxl
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # python -I leaves out the script's folder
+from explainers import POSTS, key_points  # noqa: E402
+
 YEARS = [2026, 2027, 2028, 2029, 2030, 2031]
 MINUS = "−"
-DASHBOARD = "[policyengine.org/uk/budgets/autumn-2026](https://www.policyengine.org/uk/budgets/autumn-2026)"
+DASHBOARD = "[policyengine.org/uk/autumn-budget-2026](https://www.policyengine.org/uk/autumn-budget-2026)"
 # policy.xlsx, the OBR's detailed forecast table 1.1 for October 2026, as checked into dashboard #300 at 555e7f74
 OBR_SHA256 = "cdcc2a06b100241bf3010bd159a4e5d43daef2348a3850797b1e88a308fd45fd"
 
@@ -201,11 +208,12 @@ def main():
         kind = parts[0]
         if kind == "costing":
             key, n, lines = parts[1], int(parts[2]), parts[3]
+            pe_label = parts[4] if len(parts) > 4 else "PolicyEngine"
             pe, line = pe_m(key), obr_line(n, lines)
             note_rows("obr", f"{n}, {lines}", line)
             note_rows("t61", n, t61[n]["values"])
             note_rows("pe", key, pe)
-            return costing_table([(f"Official: {line_label(lines)}", line), ("Table 6.1 total", t61[n]["values"])], pe) + others_note(n, lines)
+            return costing_table([(f"Official: {line_label(lines)}", line), ("Table 6.1 total", t61[n]["values"])], pe, pe_label) + others_note(n, lines)
         if kind == "official" and len(parts) == 3:
             n, lines = int(parts[1]), parts[2]
             line = obr_line(n, lines)
@@ -273,23 +281,27 @@ def main():
                 "revision": str(manifest["revision"]),
                 "updated_at": manifest["updated_at"][:16].replace("T", " ") + " UTC",
                 "url": a.manifest_url,
-                "source_label": "its test publication" if a.source == "test" else "the published dashboard",
+                "source_label": "its test publication manifest" if a.source == "test" else "its publication manifest",
             }[parts[1]]
         if kind == "signoff":
             entry = manifest["combined"][parts[1]]
             if signed(entry.get("attestation")):
-                return "The combined run is signed off."
-            return "The combined run's sign-off is still pending."
+                return "Before we published it, two of us checked that the combined run includes each measure exactly as the dashboard publishes it on its own."
+            return "We are still checking the combined run."
+        if kind == "post_sha":
+            return (POSTS / "APP_V2_MAIN_SHA").read_text().strip()
+        if kind == "keypoints":
+            return key_points(parts[1], int(parts[2]) if len(parts) > 2 else 0)
         if kind == "status_note":
             shown = [k for k, v in manifest["measures"].items() if v.get("status") in ("approved", "provisional")]
             provisional = any(manifest["measures"][k]["status"] == "provisional" for k in shown)
-            rev = f"manifest revision {manifest['revision']} ({manifest['updated_at'][:16].replace('T', ' ')} UTC)"
+            rev = f"revision {manifest['revision']} ({manifest['updated_at'][:16].replace('T', ' ')} UTC)"
             if a.source == "test":
                 lead = f"PolicyEngine figures are first estimates from the Budget dashboard's test publication, {rev}."
-                tail = f" They are still going through our checks and may change when the dashboard is published at {DASHBOARD}."
+                tail = f" They are still going through our checks and may change when we publish the dashboard at {DASHBOARD}."
             else:
-                lead = f"PolicyEngine figures are from the Budget dashboard at {DASHBOARD}, {rev}."
-                tail = " Some are still marked provisional on the dashboard and may change." if provisional else ""
+                lead = f"Our figures come from our Budget dashboard at {DASHBOARD}, as it stood at {rev}."
+                tail = " The dashboard still marks some as provisional, and they may change." if provisional else ""
             flag = "[Provisional]{.flag} " if provisional else ""
             return flag + lead + tail
         raise SystemExit(f"unknown placeholder {match.group(0)}")

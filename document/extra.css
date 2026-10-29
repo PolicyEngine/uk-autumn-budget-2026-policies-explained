@@ -136,3 +136,99 @@
   padding-top: 0.7mm;
   padding-bottom: 0.7mm;
 }
+
+/* A section that would otherwise leave its heading at the foot of a page */
+.new-page {
+  break-before: page;
+}
+
+/* One page per explainer: its key points, then one of its charts */
+.explainer {
+  break-before: page;
+}
+
+.explainer h3 a {
+  color: #101828; /* gray-900 */
+  text-decoration: none;
+}
+
+img.chart {
+  display: block;
+  width: 100%;
+  margin: 4mm 0 0 0;
+}
+
+/* Cover page: the letterhead (pe-doc's wordmark and address line) leads, then
+   the title block, the two links and the funder line. The letterhead appears
+   once, at the top of the first page, so these rules only touch the cover. */
+@page :first {
+  @bottom-center {
+    content: none;
+    border-top: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+}
+
+#letterhead {
+  padding-top: 6mm;
+  padding-bottom: 4mm;
+}
+
+#letterhead img {
+  width: 62mm;
+}
+
+.cover {
+  position: relative;
+  box-sizing: border-box;
+  height: 200mm;
+  padding-top: 48mm;
+  break-after: page;
+}
+
+.cover h1 {
+  font-size: 30pt;
+  line-height: 1.1;
+  margin-bottom: 5mm;
+}
+
+.cover h1 + p {
+  font-size: 12.5pt;
+  line-height: 1.3;
+  margin-bottom: 3mm;
+}
+
+.cover h1 + p + p {
+  font-size: 10.5pt;
+  margin-bottom: 0;
+}
+
+.cover-links {
+  margin-top: 22mm;
+  border-left: 1.5pt solid #319795; /* teal-500 */
+  padding-left: 4mm;
+}
+
+.cover-links p {
+  margin: 0 0 4mm;
+  font-size: 10.5pt;
+}
+
+.cover-links .label {
+  color: #475569; /* gray-600 */
+  font-size: 9pt;
+}
+
+.cover-links a {
+  font-weight: 700;
+}
+
+.cover .funder {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 8.5pt;
+  color: #64748B; /* gray-500 */
+}

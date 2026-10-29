@@ -5,3 +5,5 @@ document/*.pdf
 document/*.html
 document/*.docx
 .DS_Store
+.hypothesis/
+.pytest_cache/

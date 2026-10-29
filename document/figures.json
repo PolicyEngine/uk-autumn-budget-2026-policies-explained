@@ -2972,6 +2972,16 @@
    "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
    "row": "measure 93, Total",
    "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "93, Total",
+   "year": "2031-32",
+   "value": -48.94426684,
+   "printed": "£49",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 93, Total",
+   "column": "2031-32"
   }
  ]
 }
