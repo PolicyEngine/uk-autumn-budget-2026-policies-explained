@@ -53,15 +53,18 @@ def _absolute_links(md, slug):
 OPENING = re.compile(r"Key (results|figures|findings)\b.*:\s*$")
 
 
-def _blocks(text):
-    """The post's top-level Markdown blocks as (kind, first line, end line), end exclusive.
+def _parse(text):
+    """The post's top-level Markdown blocks as (kind, first line, end line), end
+    exclusive, and the set of lines inside code blocks and fences at any depth.
 
     markdown-it follows CommonMark, as the site's renderer does, so a list
     block holds every item whole: wrapped and lazy continuation lines, and
     items set apart by blank lines.
     """
     tokens = MarkdownIt("commonmark").enable("table").parse(text)
-    return [(t.type.removesuffix("_open"), *t.map) for t in tokens if t.level == 0 and t.nesting >= 0 and t.map]
+    blocks = [(t.type.removesuffix("_open"), *t.map) for t in tokens if t.level == 0 and t.nesting >= 0 and t.map]
+    code = {i for t in tokens if t.type in ("code_block", "fence") and t.map for i in range(*t.map)}
+    return blocks, code
 
 
 def key_points(slug, extra_paragraphs=0):
@@ -70,14 +73,15 @@ def key_points(slug, extra_paragraphs=0):
     The build stops unless the post has exactly one opening line, standing as
     a paragraph of its own, with a bullet list straight after it. Markdown
     lets a paragraph start with up to three spaces, so the search ignores
-    indentation, and any indented copy counts as a second opening.
+    indentation; it skips code, where Markdown reads no paragraph at all, and
+    counts every other copy, so a second opening anywhere in the prose stops it.
     """
     text = _text(slug)
     lines = text.split("\n")
-    starts = [i for i, x in enumerate(lines) if OPENING.match(x.strip())]
+    blocks, code = _parse(text)
+    starts = [i for i, x in enumerate(lines) if i not in code and OPENING.match(x.strip())]
     if len(starts) != 1:
         raise SystemExit(f"{slug}: expected one 'Key results/figures/findings ...:' line, found {len(starts)}")
-    blocks = _blocks(text)
     k = next((j for j, (_, a, _b) in enumerate(blocks) if a == starts[0]), None)
     if k is None or blocks[k][0] != "paragraph" or blocks[k][2] - blocks[k][1] != 1:
         raise SystemExit(f"{slug}: the line '{lines[starts[0]]}' isn't a paragraph of its own")

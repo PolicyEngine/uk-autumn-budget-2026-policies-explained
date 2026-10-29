@@ -3,8 +3,9 @@
 Invariants:
 - Every list item comes out whole, however the post wraps or spaces it.
 - Nothing after the list comes out unless the template asks for paragraphs.
-- The build stops if the opening line is missing, repeated (indented or not),
-  inside another paragraph, or not followed straight away by a bullet list.
+- The build stops if the opening line is missing, repeated anywhere outside
+  code (indented or not), inside another paragraph, or not followed straight
+  away by a bullet list. A line in a code block or fence is never an opening.
 """
 
 import pytest
@@ -47,6 +48,22 @@ def test_indented_second_opening_stops_the_build(monkeypatch, indent):
     # Sol review r2: Markdown reads both as openings, so the build must too
     with pytest.raises(SystemExit, match="found 2"):
         quote(monkeypatch, f"Key results:\n\n- first\n\n## Split\n\n{indent}Key figures:\n\n- second\n")
+
+
+@pytest.mark.parametrize("example", [
+    "Example syntax:\n\n    Key figures:\n",  # indented code block (Sol review r3)
+    "```text\nKey figures:\n```\n",  # fenced code
+    "## More\n\n- An item\n\n  ```\n  Key figures:\n  ```\n",  # fence inside a later list's item
+])
+def test_an_opening_inside_code_is_not_an_opening(monkeypatch, example):
+    out = quote(monkeypatch, f"Key results:\n\n- actual\n\n{example}")
+    assert out == "Key results:\n\n- actual"
+
+
+def test_an_opening_inside_a_list_item_still_counts(monkeypatch):
+    # Prose, not code, so it is a second opening
+    with pytest.raises(SystemExit, match="found 2"):
+        quote(monkeypatch, "Key results:\n\n- actual\n\n## More\n\n- item\n\n  Key figures:\n\n  - nested\n")
 
 
 def test_list_straight_after_the_opening_line(monkeypatch):
