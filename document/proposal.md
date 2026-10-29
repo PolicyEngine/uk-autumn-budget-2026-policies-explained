@@ -14,7 +14,7 @@ pe-doc:
 
 **What each measure does, what it costs, and how our estimates compare**
 
-A PolicyEngine briefing on the Budget of 28 October 2026 · 29 October 2026
+A PolicyEngine briefing · Published 29 October 2026
 
 ::: {.cover-links}
 [Explore every measure in our Budget dashboard]{.label}\
