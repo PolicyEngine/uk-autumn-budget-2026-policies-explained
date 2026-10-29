@@ -622,6 +622,10 @@ a {
   padding-left: 9mm;
 }
 
+#sources-and-method + ol > li {
+  padding-left: 2mm;
+}
+
 #sources-and-method + ol li,
 #limitations + ul li {
   font-size: 8.6pt;
