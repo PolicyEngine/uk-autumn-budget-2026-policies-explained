@@ -3,9 +3,16 @@
 Invariants:
 - Every list item comes out whole, however the post wraps or spaces it.
 - Nothing after the list comes out unless the template asks for paragraphs.
-- The build stops if the opening line is missing, repeated anywhere outside
-  code (indented or not), inside another paragraph, or not followed straight
-  away by a bullet list. A line in a code block or fence is never an opening.
+- The build stops if the opening line is missing, repeated anywhere the site
+  shows prose (indented or not, however its whitespace runs, in an image
+  caption, a highlighted block, a footnote or a task item), inside another
+  paragraph, or not followed straight away by a bullet list. A line in code,
+  a comment or a <template> is never an opening.
+
+The expected outcomes here come from what the site's renderer
+(policyengine-app-v2 MarkdownFormatter.tsx at 85571f7a3: react-markdown,
+remark-gfm, rehype-raw, an image caption from the alt text, highlighted-block
+fences rendered as Markdown) and a browser show, written out by hand.
 """
 
 import pytest
@@ -70,7 +77,8 @@ def test_an_opening_inside_code_is_not_an_opening(monkeypatch, example):
     "<code>Key figures:</code>\n",  # inline HTML code that is the whole line
     "<code>\nKey figures:\n</code>\n",  # the same over three lines, an HTML block
     "<div><pre>\nKey figures:\n</pre></div>\n",  # code inside an HTML block
-    "![Key figures:](/chart.png)\n",  # image text
+    "<template>\n\nKey figures:\n\n</template>\n",  # a paragraph a template holds (Sol review r5)
+    "```text\nKey figures:\n&&&\nx\n```\n",  # only highlighted-block fences render as Markdown
 ])
 def test_an_opening_the_page_shows_as_code_or_hides_is_not_an_opening(monkeypatch, example):
     assert quote(monkeypatch, f"Key results:\n\n- actual\n\n{example}") == "Key results:\n\n- actual"
@@ -83,6 +91,16 @@ def test_an_opening_the_page_shows_as_code_or_hides_is_not_an_opening(monkeypatc
     "**Key figures:**\n",  # formatting around it
     "<div>\nKey figures:\n</div>\n",  # an HTML block the page shows as text
     "| Key figures: |\n|---|\n| x |\n",  # a table cell
+    "Key  figures:\n",  # two spaces, which a browser collapses (Sol review r5)
+    "Key\tfigures:\n",  # a tab
+    "Key\nfigures:\n",  # a soft break, which a browser shows as a space
+    "Key&nbsp;figures:\n",  # a no-break space
+    "![Key figures:](/chart.png)\n",  # the site shows alt text as a caption (Sol review r5)
+    "```highlighted-block\nKey figures:\n\n- second\n&&&\nMore detail\n```\n",  # rendered as Markdown (Sol review r5)
+    "```highlighted-block\nOne pane only\n\nKey figures:\n```\n",  # a malformed block renders as one pane
+    "~~Key figures:~~\n",  # GFM strikethrough still shows the words
+    "Text.[^1]\n\n[^1]: Key figures:\n",  # a GFM footnote shows its text
+    "- [ ] Key figures:\n",  # a GFM task item shows a checkbox, then the words
 ])
 def test_a_second_opening_anywhere_in_the_prose_stops_the_build(monkeypatch, second):
     with pytest.raises(SystemExit, match="found 2"):
@@ -113,7 +131,8 @@ def test_extra_paragraph_must_be_prose(monkeypatch, after):
 @pytest.mark.parametrize("text, message", [
     ("No opening here.\n\n- one\n", "found 0"),
     ("Key results:\n\n- one\n\nKey figures for 2028:\n\n- two\n", "found 2"),
-    ("Some words before\nKey results:\n\n- one\n", "paragraph of its own"),
+    ("Some words before\nKey results:\n\n- one\n", "found 0"),  # a browser shows it as one line
+    ("Some words before  \nKey results:\n\n- one\n", "paragraph of its own"),  # a hard break
     ("Key results:\n\nA paragraph first.\n\n- one\n", "no bullet list"),
     ("Key results:\n\n1. numbered\n", "no bullet list"),
     ("Key results:\n", "no bullet list"),
@@ -139,6 +158,9 @@ FRAGMENTS = [
     "<code>Key figures:</code>", "<em>Key figures:</em>", "Inline <code>Key figures:</code>",
     "```\nKey figures:\n```", "~~~\nKey figures:\n~~~", "`\nKey figures:\n`",
     "| Key figures: |\n|---|\n| x |", "![Key figures:](/c.png)", "",
+    "Key  figures:", "Key\tfigures:", "Key\nfigures:", "Key&nbsp;figures:", "~~Key figures:~~",
+    "```highlighted-block\nKey figures:\n&&&\nx\n```", "```highlighted-block\n- Key figures:\n```",
+    "[^1]: Key figures:", "- [x] Key figures:",
 ]
 # Raw HTML split over lines stands in a block of its own: a table or list that
 # absorbed it would leave its tags unbalanced inside a cell or item, where what
@@ -146,6 +168,7 @@ FRAGMENTS = [
 FRAGMENTS += [f"\n{html}\n" for html in [
     "<code>\nKey figures:\n</code>", "<pre>\nKey figures:\n</pre>", "<div>\nKey figures:\n</div>",
     "<div><pre>\nKey figures:\n</pre></div>", "<!--\nKey figures:\n-->",
+    "<template>\n\nKey figures:\n\n</template>",
 ]]
 
 

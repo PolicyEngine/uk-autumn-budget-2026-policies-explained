@@ -51,12 +51,17 @@ def _absolute_links(md, slug):
     return re.sub(r"\]\(#", f"]({post_url(slug)}#", md)
 
 
-OPENING = re.compile(r"Key (results|figures|findings)\b.*:\s*$")
+OPENING = re.compile(r"Key\s+(results|figures|findings)\b.*:\s*$")
+# A browser collapses each run of HTML whitespace, line breaks included, to one space
+WHITESPACE = re.compile(r"[ \t\n\r\f]+")
+# GFM shows a footnote's text without its "[^1]:" label and a task item without its "[ ]"
+GFM_MARKER = re.compile(r"^\s*(\[\^[^\]\s]+\]:|\[[ xX]\])\s+")
 
 
 class _ShownText(HTMLParser):
     """The text a browser shows as prose: everything outside code-like elements
-    and comments, with a line break at each block boundary."""
+    and comments, with whitespace collapsed and a line break at each block
+    boundary. Like the site, it shows an image's alt text as a caption."""
 
     HIDDEN = {"code", "pre", "script", "style", "textarea", "template"}
     BREAKS = {"br", "p", "div", "li", "ul", "ol", "blockquote", "table", "tr", "td", "th",
@@ -70,6 +75,9 @@ class _ShownText(HTMLParser):
         self.hidden += tag in self.HIDDEN
         if tag in self.BREAKS:
             self.parts.append("\n")
+        alt = dict(attrs).get("alt") if tag == "img" else None
+        if alt and not self.hidden:
+            self.parts.append("\n" + WHITESPACE.sub(" ", alt) + "\n")
 
     def handle_endtag(self, tag):
         if tag in self.HIDDEN and self.hidden:
@@ -79,7 +87,11 @@ class _ShownText(HTMLParser):
 
     def handle_data(self, data):
         if not self.hidden:
-            self.parts.append(data)
+            self.parts.append(WHITESPACE.sub(" ", data))
+
+    def lines(self, start=0):
+        """The lines shown since part `start`, without GFM's footnote and task markers."""
+        return [GFM_MARKER.sub("", line) for line in "".join(self.parts[start:]).split("\n")]
 
 
 def shown_lines(html):
@@ -87,12 +99,27 @@ def shown_lines(html):
     parser = _ShownText()
     parser.feed(html)
     parser.close()
-    return "".join(parser.parts).split("\n")
+    return parser.lines()
+
+
+def _highlighted_block(self, tokens, idx, options, env):
+    """The site renders a ```highlighted-block fence as Markdown in two panes
+    split at "&&&" (one pane if the split doesn't give two), not as code."""
+    t = tokens[idx]
+    if t.info.strip() != "highlighted-block":
+        return self.fence_code(tokens, idx, options, env)
+    parts = t.content.split("&&&")
+    return "".join(f"<div>{self.md.render(part)}</div>" for part in (parts if len(parts) == 2 else [t.content]))
 
 
 def _markdown():
-    # CommonMark, as the site's renderer follows, with tables
-    return MarkdownIt("commonmark").enable("table")
+    # The site renders posts with react-markdown and remark-gfm: CommonMark
+    # with GFM's tables and strikethrough, plus its own highlighted-block fence
+    md = MarkdownIt("commonmark").enable(["table", "strikethrough"])
+    md.renderer.md = md
+    md.renderer.fence_code = md.renderer.rules["fence"]
+    md.add_render_rule("fence", _highlighted_block)
+    return md
 
 
 def _parse(text):
@@ -102,22 +129,29 @@ def _parse(text):
     markdown-it follows CommonMark, so a list block holds every item whole:
     wrapped and lazy continuation lines, and items set apart by blank lines.
     Prose is what the page shows outside code: the text of every paragraph,
-    heading and table cell at any depth (inside lists and quotes too), and of
-    HTML blocks, but not code spans, code blocks, fences, <pre>, comments or
-    image text.
+    heading and table cell at any depth (inside lists and quotes too), of
+    HTML blocks, of image captions and of highlighted blocks, but not code
+    spans, code blocks, other fences, <pre>, comments or what <template>
+    holds. One HTML reader runs through the blocks in order, so an element
+    one HTML block opens hides the blocks up to the one that closes it.
     """
     md = _markdown()
     tokens = md.parse(text)
     blocks = [(t.type.removesuffix("_open"), *t.map) for t in tokens if t.level == 0 and t.nesting >= 0 and t.map]
     prose = []
-    for t in tokens:
+    reader = _ShownText()
+    for i, t in enumerate(tokens):
         if t.type == "inline":
             html = md.renderer.renderInline(t.children or [], md.options, {})
         elif t.type == "html_block":
             html = t.content
+        elif t.type == "fence" and t.info.strip() == "highlighted-block":
+            html = md.renderer.rules["fence"](tokens, i, md.options, {})
         else:
             continue
-        prose += [(t.map[0], line) for line in shown_lines(html)]
+        start = len(reader.parts)
+        reader.feed(html + "<p>")  # each token is a block; the tag also flushes held text
+        prose += [(t.map[0], line) for line in reader.lines(start)]
     return blocks, prose
 
 
