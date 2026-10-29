@@ -22,11 +22,14 @@ Invariants:
   a bullet list straight after it. Mentions the page never shows (in a
   comment, an unreferenced footnote, an image without a source) don't count.
 - A table, <details>, a chart and the formatter's layout out of the flow can
-  set two of their pieces side by side in another order than the HTML's, so
-  the count sees any two such pieces side by side, in either order: a table
-  or a chart can show the words wherever its cells or strings sit (property
-  tests). Charts count each string in their JSON, read the way the site's
-  chart and Plotly read it.
+  set their pieces side by side in another order than the HTML's, so the
+  count sees a region's pieces side by side in every order. On small regions
+  it finds every mention that setting the pieces in each order and drawing
+  them every way shows (a property test against brute force), and a table or
+  a chart shows the words, cut into fragments, wherever its cells or strings
+  sit (property tests). Charts count each string in their JSON, read the way
+  the site's chart and Plotly read it; a chart whose JSON Python can't read
+  stops the build.
 - A post whose HTML the page text can't follow (styles, classes outside
   GFM's, the hidden attribute, dir, <template>, forms, media), in any pane,
   stops the build, and so does a bidirectional override.
@@ -358,6 +361,41 @@ def independent_reading(markup):
     return ["".join(t or "" for t in texts), "".join("\n" if t is None else t for t in texts)]
 
 
+@st.composite
+def regions(draw):
+    """Some shown text, the pieces of a region, then more shown text. The
+    region holds the words cut anywhere, in any order, and other pieces."""
+    words = draw(st.sampled_from(["Key figures", "key results", "KEY findings"]))
+    cuts = sorted(draw(st.sets(st.integers(1, len(words) - 1), max_size=3)))
+    region = [words[a:b] for a, b in zip([0, *cuts], [*cuts, len(words)])]
+    region = draw(st.permutations(region + draw(st.lists(st.sampled_from(PIECES), max_size=4 - len(region)))))
+    before = draw(st.lists(st.sampled_from(PIECES), max_size=2))
+    after = draw(st.lists(st.sampled_from(PIECES), max_size=2))
+    return "".join(before), region, "".join(after)
+
+
+def orders(before, region, after):
+    """Every plain text a reader could see if the browser set the region's
+    pieces in any order, each once or not at all, with a line break or nothing
+    between any two."""
+    for n in range(len(region) + 1):
+        for chosen in itertools.permutations(region, n):
+            parts = [before, *chosen, after]
+            for breaks in itertools.product(["", "\n"], repeat=len(parts) - 1):
+                yield "".join(part + gap for part, gap in zip(parts, [*breaks, ""]))
+
+
+@settings(max_examples=300, deadline=None)
+@given(regions())
+def test_the_count_sees_a_regions_pieces_in_every_order(parts):
+    # Differential: the page text of a region against setting its pieces in every order
+    before, region, after = parts
+    shown = [explainers._segment(t, False) for t in (before, *region, after)]
+    text = BOUNDARY.join([shown[0], explainers._anywhere(BOUNDARY.join(shown[1:-1])), shown[-1]])
+    if any(PLAIN.search(plain) for plain in orders(before, region, after)):
+        assert mentions(text) > 0
+
+
 @settings(max_examples=150, deadline=None)
 @given(st.lists(st.tuples(st.sampled_from(FRAGMENTS), st.sampled_from(["\n", "\n\n", " "])), max_size=8))
 def test_page_text_keeps_every_mention_an_independent_reading_finds(parts):
@@ -392,6 +430,11 @@ def test_a_second_opening_in_a_footnote_stops_the_build(monkeypatch, line):
 
 
 R11_CHART = '{"type":"bar","title":"Key\\nfigures","xKey":"group","series":[{"key":"value","name":"Value"}],"data":[{"group":"A","value":1}]}'
+# Three annotations that a reader sees as "Key figures", in the opposite order in the JSON (Sol review r12)
+R12_LABEL = dict(x=0, y=1, xref="paper", yref="paper", xanchor="left", yanchor="top", showarrow=False,
+                 font={"family": "Courier New", "size": 20})
+R12_PLOT = json.dumps({"data": [], "layout": {"annotations": [
+    dict(R12_LABEL, text=text, xshift=shift) for text, shift in [("figures", 48), ("ey ", 12), ("K", 0)]]}})
 
 
 @pytest.mark.parametrize("block", [
@@ -399,16 +442,31 @@ R11_CHART = '{"type":"bar","title":"Key\\nfigures","xKey":"group","series":[{"ke
     '```plotly\n{"data":[{"x":[1],"y":[2],"type":"bar"}],"layout":{"title":{"text":"<b>Key</b> figures"}}}\n```',
     "<table><tbody><tr><td>figures:</td></tr></tbody><caption>Key</caption></table>",
     "<table><tfoot><tr><td>figures:</td></tr></tfoot><tbody><tr><td>Key</td></tr></tbody></table>",
+    f"```plotly\n{R12_PLOT}\n```",
+    f"<details><summary>More</summary>\n\n```plotly\n{R12_PLOT}\n```\n\n</details>",
+    f"Text.[^1]\n\n[^1]: Note.\n\n    ```plotly\n    {R12_PLOT}\n    ```",
+    # JavaScript reads it and the chart ignores "unused"; Python's json reads it too, but nests too deep to walk recursively
+    "```chart\n" + R11_CHART[:-1] + ',"unused":' + "[" * 1000 + "0" + "]" * 1000 + "}\n```",
 ])
 def test_a_second_opening_in_a_chart_or_a_table_stops_the_build(monkeypatch, block):
-    # Sol review r11's reproductions, word for word
-    with pytest.raises(SystemExit, match=r"one place on the page, found [2-9]\b"):
+    # Sol reviews r11's and r12's reproductions, word for word
+    with pytest.raises(SystemExit, match=r"one place on the page, found ([2-9]|[1-9]\d+)\b"):
         quote(monkeypatch, f"Key results:\n\n- actual\n\n{block}\n")
 
 
-def test_a_chart_spec_that_doesnt_parse_counts_as_written():
-    # The site draws nothing for it; counting its text errs on the safe side
-    assert count("```chart\nKey figures, not JSON\n```\n") == 2
+@pytest.mark.parametrize("spec", [
+    "Key figures, not JSON",  # the site draws nothing for it
+    R11_CHART[:-1] + ',"unused":' + "1" * 4301 + "}",  # JavaScript reads it; Python's json stops at 4,300 digits (Sol review r12)
+    R11_CHART[:-1] + ',"unused":' + "[" * 100000 + "0" + "]" * 100000 + "}",  # Bun reads it; Python's json stops short
+])
+def test_a_chart_whose_json_python_cant_read_stops_the_build(monkeypatch, spec):
+    with pytest.raises(SystemExit, match="JSON Python can't read"):
+        quote(monkeypatch, f"Key results:\n\n- actual\n\n```chart\n{spec}\n```\n")
+
+
+def test_chart_pieces_reads_json_however_deep_it_nests():
+    spec = '{"title":"Key","more":' + "[" * 5000 + '"figures"' + "]" * 5000 + "}"
+    assert explainers.chart_pieces("chart", spec) == ["Key", "figures"]
 
 
 @pytest.mark.parametrize("kind, string, pieces", [
@@ -420,57 +478,86 @@ def test_chart_pieces(kind, string, pieces):
     assert explainers.chart_pieces(kind, json.dumps({"title": string, "n": 1})) == pieces
 
 
-CELLS = ["Key", "figures", "other", "x"]
+PHRASE = "Key figures"
+FILLER = ["other", "x"]  # no fragment of the words
+
+
+def spellable(strings):
+    """Whether the strings spell "Key figures", side by side in some order, each as often as needed."""
+    target = PHRASE.replace(" ", "").lower()
+    pieces = {s.replace(" ", "").lower() for s in strings} - {""}
+    reach = {0}
+    for i in range(len(target)):
+        if i in reach:
+            reach |= {i + len(p) for p in pieces if target.startswith(p, i)}
+    return len(target) in reach
+
+
+@st.composite
+def fragments(draw):
+    """What a table's cells or a chart's strings hold, as a function that gives
+    the next one: "Key figures" cut anywhere, sometimes every piece first in
+    any order, then any of the pieces or filler. It records what it gives."""
+    cuts = sorted(draw(st.sets(st.integers(1, len(PHRASE) - 1), max_size=5)))
+    pieces = [p for a, b in zip([0, *cuts], [*cuts, len(PHRASE)]) if (p := PHRASE[a:b]).strip()]
+    first = list(draw(st.permutations(pieces))) if draw(st.booleans()) else []
+    used = []
+
+    def give():
+        used.append(first.pop() if first else draw(st.sampled_from(pieces + FILLER)))
+        return used[-1]
+
+    return give, used
 
 
 @st.composite
 def tables(draw):
-    """A table with its sections in any order and cells that span rows, one word to a cell."""
+    """A table with its sections in any order and cells that span rows."""
+    cell, used = draw(fragments())
     parts = []
     for section in draw(st.lists(st.sampled_from(["caption", "thead", "tbody", "tfoot"]), min_size=1, max_size=4)):
         if section == "caption":
-            parts.append(f"<caption>{draw(st.sampled_from(CELLS))}</caption>")
+            parts.append(f"<caption>{cell()}</caption>")
             continue
-        rows = draw(st.lists(st.lists(st.tuples(st.sampled_from(CELLS), st.integers(1, 3)), min_size=1, max_size=3),
-                             min_size=1, max_size=3))
-        cells = ("".join(f'<td rowspan="{n}">{word}</td>' for word, n in row) for row in rows)
+        rows = draw(st.lists(st.lists(st.integers(1, 3), min_size=1, max_size=3), min_size=1, max_size=3))
+        cells = ("".join(f'<td rowspan="{n}">{cell()}</td>' for n in row) for row in rows)
         parts.append(f"<{section}>" + "".join(f"<tr>{c}</tr>" for c in cells) + f"</{section}>")
-    return "<table>" + "".join(parts) + "</table>"
+    return "<table>" + "".join(parts) + "</table>", used
 
 
 @settings(max_examples=100, deadline=None)
 @given(tables())
 def test_a_table_can_show_the_words_wherever_its_cells_sit(table):
-    assert (count(table + "\n") > 0) == ({"Key", "figures"} <= set(re.findall(r">(\w+)<", table)))
+    markup, cells = table
+    assert (count(markup + "\n") > 0) == spellable(cells)
 
 
 @st.composite
 def charts(draw):
-    """A chart with its strings in any order and, for Plotly, wrapped in its markup."""
-    words = []
-
-    def word():
-        words.append(draw(st.sampled_from(CELLS)))
-        return words[-1]
-
+    """A chart with its strings in any order and, for Plotly, wrapped in its markup.
+    The chart's other strings ("bar", "n", "v") hold no fragment of the words."""
+    word, used = draw(fragments())
     if draw(st.booleans()):
-        spec = {"type": "bar", "title": word(), "subtitle": word(), "xKey": "g", "series": [{"key": "v", "name": word()}],
-                "data": [{"g": word(), "v": 1}, {"g": word(), "v": 2}], "source": word()}
+        spec = {"type": "bar", "title": word(), "subtitle": word(), "xKey": "n", "series": [{"key": "v", "name": word()}],
+                "data": [{"n": word(), "v": 1}, {"n": word(), "v": 2}], "source": word()}
         kind = "chart"
     else:
-        markup = draw(st.lists(st.sampled_from(["{}", "<b>{}</b>", "{}<br>", "<i>{}</i>", "&#32;{}"]), min_size=2, max_size=2))
-        spec = {"data": [{"x": [word(), word()], "y": [1, 2], "type": "bar", "name": markup[0].format(word())}],
-                "layout": {"title": {"text": markup[1].format(word())}}}
+        # An entity for the first letter, since one that adds a space would part a word
+        wraps = ["{}", "<b>{}</b>", "{}<br>", "<i>{}</i>", "&#{};{}"]
+        markup = [lambda w, f=f: f.format(ord(w[0]), w[1:]) if f.startswith("&") else f.format(w)
+                  for f in draw(st.lists(st.sampled_from(wraps), min_size=2, max_size=2))]
+        spec = {"data": [{"x": [word(), word()], "y": [1, 2], "type": "bar", "name": markup[0](word())}],
+                "layout": {"title": {"text": markup[1](word())}}}
         kind = "plotly"
     keys = draw(st.permutations(list(spec)))
-    return kind, {k: spec[k] for k in keys}, set(words)
+    return kind, {k: spec[k] for k in keys}, used
 
 
 @settings(max_examples=100, deadline=None)
 @given(charts())
 def test_a_chart_can_show_the_words_wherever_it_places_its_strings(chart):
     kind, spec, words = chart
-    assert (count(f"```{kind}\n{json.dumps(spec)}\n```\n") > 0) == ({"Key", "figures"} <= words)
+    assert (count(f"```{kind}\n{json.dumps(spec)}\n```\n") > 0) == spellable(words)
 
 
 def test_a_post_the_renderer_cant_finish_stops_the_build(monkeypatch):

@@ -187,8 +187,10 @@ def visible(text):
 # spans rows sits beside later cells), <details> (its summary shows first), a
 # chart (it places its strings itself), and what the formatter lays out in a
 # row or takes out of the flow (a highlighted block's two panes). The page
-# text gives each such region's text twice, every segment as MAYBE, so the
-# count sees any two of its pieces side by side, in either order.
+# text gives each such region's text COPIES times, every segment as MAYBE. A
+# mention draws on at most one segment for each letter of the words, so the
+# count sees a region's pieces side by side in every order: the first piece
+# from the first copy, the next from the second, and so on.
 BOUNDARY, SHOWN, END, MAYBE, MAYBE_END = "\x00", "\x01", "\x02", "\x03", "\x04"
 TEXT_ATTRIBUTES = {"alt", "title", "aria-label", "value", "placeholder", "label"}
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
@@ -218,29 +220,35 @@ def _segment(text, maybe):
 
 
 def _anywhere(region):
-    """A region's page text, twice, with every segment one the browser may or may not draw."""
+    """A region's page text, COPIES times over, with every segment one the browser may or may not draw."""
     region = region.translate(_AS_MAYBE)
-    return region + BOUNDARY + region
+    return BOUNDARY.join([region] * COPIES)
 
 
 def _strings(value):
-    if isinstance(value, str):
-        yield value
-    elif isinstance(value, (dict, list)):
-        for item in value.values() if isinstance(value, dict) else value:
-            yield from _strings(item)
+    """Every string in some parsed JSON, however deep it nests."""
+    stack = [value]
+    while stack:
+        value = stack.pop()
+        if isinstance(value, str):
+            yield value
+        elif isinstance(value, (dict, list)):
+            stack += reversed(list(value.values()) if isinstance(value, dict) else value)
 
 
 def chart_pieces(kind, spec):
     """The text a chart could show: each string in its JSON (a title, a series
     name, a category), which the site parses before it draws. Plotly reads tags,
     placeholders and entities in a string, so a Plotly string comes apart at its
-    tags and placeholders, each piece as written and with entities decoded. A
-    spec that doesn't parse counts as written, though the site draws nothing."""
+    tags and placeholders, each piece as written and with entities decoded.
+
+    JavaScript reads some JSON that Python's json can't (deeper nesting, an
+    integer over 4,300 digits), so a spec Python can't read stops the build."""
     try:
-        strings = list(_strings(json.loads(spec)))
-    except (ValueError, RecursionError):
-        strings = [spec]
+        parsed = json.loads(spec)
+    except (ValueError, RecursionError) as error:
+        raise SystemExit(f"a ```{kind} block whose JSON Python can't read ({error}), so the build can't read the chart")
+    strings = list(_strings(parsed))
     if kind == "plotly":
         strings = [q for s in strings for p in PLOTLY_MARKUP.split(s) for q in dict.fromkeys([p, html.unescape(p)])]
     return [s for s in strings if s.strip()]
@@ -308,6 +316,8 @@ def page_text(page, header=()):
 _SKIP = rf"{MAYBE}[^{MAYBE_END}]*{MAYBE_END}"
 _HOP = rf"[{END}{MAYBE_END}](?:{BOUNDARY}|{_SKIP})*?[{SHOWN}{MAYBE}]"
 WORDS = ("results", "figures", "findings")
+# The most segments a mention can draw on: one for each letter of "key" and the longest word
+COPIES = len("key") + max(map(len, WORDS))
 
 
 def _spelled(word):
