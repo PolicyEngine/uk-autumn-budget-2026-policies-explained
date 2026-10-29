@@ -19,6 +19,7 @@ def test_readme_lists_every_saved_file():
     names = {name for name, _ in listed()}
     saved = {p.name for p in SOURCES.iterdir() if p.is_file() and p.name != "README.md"}
     saved |= {p.name for p in (SOURCES / "posts").glob("*.md")}
+    saved |= {f"posts/{p.name}" for p in (SOURCES / "posts").glob("*.json")}
     assert names == saved
 
 

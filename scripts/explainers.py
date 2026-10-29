@@ -5,19 +5,27 @@ key_points() returns a post's key points word for word: the line that opens
 them ("Key figures for 2027-28:") and the bullet list after it, with relative
 links turned absolute so they work in a PDF. chart_specs() returns the post's
 ```chart blocks, the JSON that policyengine-app-v2 draws.
+
+To find the key points, the build renders the post with the site's own code
+(site/render.tsx) and reads the page that results; see key_points().
 """
 
+import atexit
 import json
 import re
+import select
+import shutil
+import subprocess
+import tempfile
 import unicodedata
-from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 
 import regex
-from markdown_it import MarkdownIt
 
-POSTS = Path(__file__).resolve().parent.parent / "sources" / "posts"
+ROOT = Path(__file__).resolve().parent.parent
+POSTS = ROOT / "sources" / "posts"
+RENDERER = ROOT / "site"
 SITE = "https://www.policyengine.org"
 
 
@@ -30,6 +38,14 @@ def _text(slug):
     if not path.exists():
         raise SystemExit(f"no saved post {path}")
     return path.read_text()
+
+
+def _header(slug):
+    """The text the article page shows above the post: its title and description."""
+    meta = json.loads((POSTS / "meta.json").read_text())
+    if slug not in meta:
+        raise SystemExit(f"no title or description for {slug} in {POSTS / 'meta.json'}")
+    return list(meta[slug].values())
 
 
 # Words in a post that point elsewhere in the post ("below") have nothing to
@@ -54,184 +70,287 @@ def _absolute_links(md, slug):
     return re.sub(r"\]\(#", f"]({post_url(slug)}#", md)
 
 
-OPENING = re.compile(r"Key\s+(results|figures|findings)\b.*:\s*$")
-# A browser collapses each run of HTML whitespace, line breaks included, to one space
-WHITESPACE = re.compile(r"[ \t\n\r\f]+")
+# micromark, inside react-markdown, slows quadratically on some input (a run of
+# unclosed comments: 4,000 take 1.4 seconds, 40,000 over five minutes), and the
+# site would too. A call that takes longer than this stops the build instead.
+RENDER_SECONDS = 120
+
+
+class _Renderer:
+    """One `bun site/render.tsx --serve`, restarted if it stops."""
+
+    def __init__(self):
+        if not shutil.which("bun"):
+            raise SystemExit("the build renders posts with bun; install it (site/README.md)")
+        self.dir = Path(tempfile.mkdtemp())
+        self.proc = subprocess.Popen(["bun", "render.tsx", "--serve"], cwd=RENDERER,
+                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+        atexit.register(self.close)
+
+    def __call__(self, posts, display=None):
+        source, result = self.dir / "in.json", self.dir / "out.json"
+        source.write_text(json.dumps({"posts": posts, "displayCategory": display}))
+        self.proc.stdin.write(f"{source}\t{result}\n")
+        self.proc.stdin.flush()
+        if not select.select([self.proc.stdout], [], [], RENDER_SECONDS)[0]:
+            self.proc.kill()
+            self.proc.wait()
+            raise SystemExit(f"site/render.tsx took over {RENDER_SECONDS} seconds to render, so the build stops")
+        if self.proc.stdout.readline() != "done\n":
+            raise SystemExit(f"site/render.tsx stopped (exit {self.proc.poll()})")
+        return json.loads(result.read_text())
+
+    def close(self):
+        self.proc.stdin.close()
+        self.proc.wait()
+        shutil.rmtree(self.dir, ignore_errors=True)
+
+
+_renderer = None
+_rendered = {}
+
+
+def render(posts, display=None):
+    """For each Markdown string, what site/render.tsx gives: html (or error),
+    blocks, contents and elements. `display` renders for a "mobile" or
+    "tablet" screen instead of the desktop layout."""
+    global _renderer
+    todo = [p for p in dict.fromkeys(posts) if (display, p) not in _rendered]
+    if todo:
+        if _renderer is None or _renderer.proc.poll() is not None:
+            _renderer = _Renderer()
+        _rendered.update(((display, p), r) for p, r in zip(todo, _renderer(todo, display)))
+    return [_rendered[display, p] for p in posts]
+
+
+# The post's own HTML may use these tags and properties (hast names) and no
+# others, nor may Markdown produce others. Styles, classes, the hidden
+# attribute, dir, <bdo>, <template>, <style>, forms and media can hide, move
+# or draw text in ways the page text below doesn't follow, so a post that
+# uses them stops the build.
+TAGS = {"a", "abbr", "b", "blockquote", "br", "caption", "cite", "code", "dd", "del", "details", "div", "dl",
+        "dt", "em", "figcaption", "figure", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "i", "img", "input",
+        "ins", "kbd", "li", "mark", "ol", "p", "pre", "q", "s", "section", "small", "span", "strong", "sub",
+        "summary", "sup", "table", "tbody", "td", "tfoot", "th", "thead", "tr", "u", "ul"}
+PROPERTIES = {
+    "*": {"id", "title", "className"},
+    "a": {"href", "dataFootnoteRef", "dataFootnoteBackref", "ariaDescribedBy", "ariaLabel"},
+    "img": {"src", "alt"},
+    "ol": {"start"},
+    "td": {"align", "colSpan", "rowSpan"},
+    "th": {"align", "colSpan", "rowSpan"},
+    "input": {"type", "checked", "disabled"},  # GFM's task list checkboxes
+    "section": {"dataFootnotes"},
+    "details": {"open"},
+}
+# GFM's own classes; a fence's language becomes language-<word> on <code>
+CLASSES = {"contains-task-list", "task-list-item", "footnotes", "sr-only", "data-footnote-backref"}
+
+
+def _unreadable(elements):
+    """The first element whose tag, properties or classes the page text can't follow, if any."""
+    for e in elements:
+        extra = set(e["props"]) - PROPERTIES["*"] - PROPERTIES.get(e["tag"], set())
+        classes = [c for c in e["classes"] if c not in CLASSES and not c.startswith("language-")]
+        if e["tag"] not in TAGS or extra or classes:
+            return f"<{e['tag']}> with {sorted(extra) + classes}" if extra or classes else f"<{e['tag']}>"
+    return None
+
+
+# Characters that make a browser draw letters in another order
+BIDI = re.compile("[\u202a-\u202e\u2066-\u2069]")
 # Characters a browser draws as nothing, such as a soft hyphen or a zero-width space
 IGNORABLE = regex.compile(r"\p{Default_Ignorable_Code_Point}")
+# Control characters other than whitespace, which a browser doesn't draw as letters
+CONTROL = regex.compile(r"(?![\t\n\v\f\r\x1c-\x1f\x85])\p{Cc}")
 
 
 def visible(text):
     """Text as a reader sees its letters: NFKC folds compatibility forms
-    ("Ｋｅｙ" to "Key", "ﬁ" to "fi"), and invisible characters go."""
-    return IGNORABLE.sub("", unicodedata.normalize("NFKC", text))
+    ("Ｋｅｙ" to "Key", "ﬁ" to "fi"), and invisible and control characters go."""
+    return CONTROL.sub("", IGNORABLE.sub("", unicodedata.normalize("NFKC", text)))
 
 
-# Markup that can sit inside or between the opening's words while the page
-# still shows the words: a comment, an HTML tag, a link's destination or
-# reference, a hard line break (which an image's alt text drops), or a
-# Markdown emphasis, strikethrough, code, escape or bracket mark
-_MARK = r"(?:<!--.*?-->|<[^<>]*>|\]\((?:[^()]|\([^()]*\))*\)|\]\[[^\[\]]*\]|(?: {2,}|\\)\n|[*_~`\\\[\]])"
+# The page text is a string of segments, one per text node or attribute value
+# a browser can show as text, with a boundary mark wherever a tag sits. A
+# shown segment sits between SHOWN and END; one the browser may or may not
+# draw, between MAYBE and MAYBE_END: those attribute values (an image's alt
+# text shows if the image fails, a title on hover, an aria-label to a screen
+# reader), and all text inside <details> (closed, it hides all but its
+# summary), inside an element with class sr-only, or inside one the formatter
+# styles as invisible (its heading anchors).
+BOUNDARY, SHOWN, END, MAYBE, MAYBE_END = "\x00", "\x01", "\x02", "\x03", "\x04"
+TEXT_ATTRIBUTES = {"alt", "title", "aria-label", "value", "placeholder", "label"}
+VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
+HIDING_STYLE = re.compile(r"opacity:0(?![.\d])|display:none|visibility:hidden")
+
+
+def _may_hide(tag, attrs):
+    """Whether a browser may not draw the text inside this element."""
+    return (tag == "details" or "sr-only" in (attrs.get("class") or "").split()
+            or bool(HIDING_STYLE.search(attrs.get("style") or "")))
+
+
+def _segment(text, maybe):
+    if BIDI.search(text):
+        raise SystemExit(f"text with a bidirectional override, which reorders the letters a reader sees: {text[:80]!r}")
+    text = visible(text)
+    return (MAYBE + text + MAYBE_END if maybe else SHOWN + text + END) if text else ""
+
+
+class _PageText(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts, self.text, self.maybe = [], [], [False]
+
+    def flush(self):
+        self.parts.append(_segment("".join(self.text), self.maybe[-1]))
+        self.text = []
+
+    def handle_starttag(self, tag, attrs):
+        self.flush()
+        self.parts.append(BOUNDARY)
+        self.parts += [_segment(value, True) + BOUNDARY for name, value in attrs if name in TEXT_ATTRIBUTES and value]
+        if tag not in VOID:
+            self.maybe.append(self.maybe[-1] or _may_hide(tag, dict(attrs)))
+
+    def handle_endtag(self, tag):
+        self.flush()
+        self.parts.append(BOUNDARY)
+        if tag not in VOID and len(self.maybe) > 1:
+            self.maybe.pop()
+
+    def handle_data(self, data):
+        self.text.append(data)
+
+
+def page_text(page, header=()):
+    """The page text (see above) of a rendered post, after the article page's
+    header and its contents sidebar, each a shown segment of its own."""
+    parser = _PageText()
+    parser.feed(page["html"])
+    parser.close()
+    parser.flush()
+    return BOUNDARY.join([_segment(t, False) for t in [*header, *page["contents"]]] + ["".join(parser.parts)])
+
+
+# The opening's words in the page text, in any case. Inside a word or between
+# the two, a match may HOP out of one segment and into a later one, across
+# boundaries and segments the browser may not draw; between the two it also
+# takes any whitespace. Each boundary may show as a line break or as nothing,
+# and each MAYBE segment as its text or as nothing, so this counts every place
+# a reader could see the words, under every way of drawing the page: no
+# letter or digit of the same segment may touch them.
+_SKIP = rf"{MAYBE}[^{MAYBE_END}]*{MAYBE_END}"
+_HOP = rf"[{END}{MAYBE_END}](?:{BOUNDARY}|{_SKIP})*?[{SHOWN}{MAYBE}]"
+WORDS = ("results", "figures", "findings")
 
 
 def _spelled(word):
-    return f"{_MARK}*+".join(word)
+    return f"(?:{_HOP})?".join(word)
 
 
-# The opening's words anywhere in a post's source, in any case, with any run of
-# that markup inside a word or between the two. No letter or digit may touch
-# them, but an underscore may, since "_Key figures:_" shows in italics
 MENTION = regex.compile(
-    rf"(?<![^\W_]){_spelled('key')}(?:\s|{_MARK})++(?:{'|'.join(_spelled(w) for w in ('results', 'figures', 'findings'))})(?![^\W_])",
-    regex.I | regex.S,
-)
+    rf"(?<![^\W_]){_spelled('key')}(?:\s|{_HOP})+(?:{'|'.join(_spelled(w) for w in WORDS)})(?![^\W_])", regex.I)
 
 
-def source_mentions(text):
-    """How often the post's source mentions the opening's words, shown or not.
-
-    HTML entities are decoded and the text made visible() first, and the
-    words may hold or sit among markup (_MARK), so "K*ey* figures",
-    "&#75;ey figures", "K&shy;ey figures" and "Key [figures](/x)" each count.
-    Mentions in code, comments, attributes, captions, footnotes and
-    highlighted blocks count too, and so does each of two that overlap: the
-    build quotes only from a post that mentions the words once, so it never
-    has to work out whether the site shows them.
-
-    This guards against accidents in posts we write and save ourselves. It
-    doesn't try to see through deliberate disguise, such as a look-alike
-    letter from another script or text that a stylesheet or script adds.
-    """
-    return len(MENTION.findall(visible(unescape(text)), overlapped=True))
+def mentions(text):
+    """How many places in some page text could show the opening's words."""
+    try:
+        return len(MENTION.findall(text, overlapped=True, timeout=10))
+    except TimeoutError:
+        raise SystemExit("the page took over 10 seconds to read, so the build can't count the opening's words")
 
 
-class _ShownText(HTMLParser):
-    """The text a browser shows as prose: everything outside code-like elements
-    and comments, with whitespace collapsed and a line break at each block
-    boundary. Like the site, it shows an image's alt text as a caption when the
-    image has a source."""
+OPENING = re.compile(r"Key\s+(results|figures|findings)\b.*:\s*$")
+# A browser draws each run of HTML whitespace, line breaks included, as one space
+WHITESPACE = re.compile(r"[ \t\n\r\f]+")
 
-    HIDDEN = {"code", "pre", "script", "style", "textarea", "template"}
-    BREAKS = {"br", "p", "div", "li", "ul", "ol", "dl", "dt", "dd", "blockquote", "table", "tr", "td", "th",
-              "caption", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "section", "article", "aside", "nav",
-              "header", "footer", "main", "address", "figure", "figcaption", "fieldset", "legend",
-              "details", "summary", "dialog", "hgroup", "menu", "search"}
+
+class _ShownLines(HTMLParser):
+    """The lines a browser shows for some HTML: shown text only, with a line
+    break at each tag that isn't phrasing content or that the formatter styles
+    as a block."""
+
+    PHRASING = {"a", "abbr", "b", "cite", "code", "del", "em", "i", "img", "input", "ins", "kbd", "mark", "q",
+                "s", "small", "span", "strong", "sub", "sup", "u"}
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
-        self.hidden, self.parts = 0, []
+        self.parts, self.maybe = [], [False]
 
     def handle_starttag(self, tag, attrs):
-        self.hidden += tag in self.HIDDEN
-        if tag in self.BREAKS:
-            self.parts.append("\n")
         attrs = dict(attrs)
-        if tag == "img" and attrs.get("src") and attrs.get("alt") and not self.hidden:
-            self.parts.append("\n" + WHITESPACE.sub(" ", attrs["alt"]) + "\n")
+        if tag not in self.PHRASING or re.search(r"display:(?!inline)", attrs.get("style") or ""):
+            self.parts.append("\n")
+        if tag not in VOID:
+            self.maybe.append(self.maybe[-1] or _may_hide(tag, attrs))
 
     def handle_endtag(self, tag):
-        if tag in self.HIDDEN and self.hidden:
-            self.hidden -= 1
-        if tag in self.BREAKS:
-            self.parts.append("\n")
+        self.parts.append("\n" if tag not in self.PHRASING else "")
+        if tag not in VOID and len(self.maybe) > 1:
+            self.maybe.pop()
 
     def handle_data(self, data):
-        if not self.hidden:
+        if not self.maybe[-1]:
             self.parts.append(WHITESPACE.sub(" ", data))
 
 
 def shown_lines(html):
-    """The lines of prose a browser shows for some HTML (see _ShownText), made visible()."""
-    parser = _ShownText()
+    parser = _ShownLines()
     parser.feed(html)
     parser.close()
-    return visible("".join(parser.parts)).split("\n")
-
-
-def _highlighted_block(self, tokens, idx, options, env):
-    """The site renders a fence whose language is highlighted-block as Markdown
-    in two panes split at "&&&" (one pane if the split doesn't give two)."""
-    t = tokens[idx]
-    if t.info.split()[:1] != ["highlighted-block"]:
-        return self.fence_code(tokens, idx, options, env)
-    parts = t.content.split("&&&")
-    return "".join(f"<div>{self.md.render(part)}</div>" for part in (parts if len(parts) == 2 else [t.content]))
-
-
-def _markdown():
-    # The site renders posts with react-markdown and remark-gfm: CommonMark
-    # with GFM's tables and strikethrough, plus its own highlighted-block fence
-    md = MarkdownIt("commonmark").enable(["table", "strikethrough"])
-    md.renderer.md = md
-    md.renderer.fence_code = md.renderer.rules["fence"]
-    md.add_render_rule("fence", _highlighted_block)
-    return md
-
-
-def _parse(text):
-    """The post's top-level Markdown blocks as (kind, first line, end line), end
-    exclusive, and (first line of its block, text) for each line of prose.
-
-    markdown-it follows CommonMark, so a list block holds every item whole:
-    wrapped and lazy continuation lines, and items set apart by blank lines.
-    Prose is a model of what the page shows outside code, block by block:
-    the text of every paragraph, heading and table cell at any depth (inside
-    lists and quotes too), of HTML blocks, of image captions and of
-    highlighted blocks, but not code spans, code blocks, other fences, <pre>,
-    comments or what a <template> in the same block holds.
-    """
-    md = _markdown()
-    tokens = md.parse(text)
-    blocks = [(t.type.removesuffix("_open"), *t.map) for t in tokens if t.level == 0 and t.nesting >= 0 and t.map]
-    prose = []
-    for i, t in enumerate(tokens):
-        if t.type == "inline":
-            html = md.renderer.renderInline(t.children or [], md.options, {})
-        elif t.type == "html_block":
-            html = t.content
-        elif t.type == "fence" and t.info.split()[:1] == ["highlighted-block"]:
-            html = md.renderer.rules["fence"](tokens, i, md.options, {})
-        else:
-            continue
-        prose += [(t.map[0], line) for line in shown_lines(html)]
-    return blocks, prose
+    lines = (" ".join(visible(line).split()) for line in "".join(parser.parts).split("\n"))
+    return [line for line in lines if line]
 
 
 def key_points(slug, extra_paragraphs=0):
     """The opening line, the bullet list, and `extra_paragraphs` paragraphs after them.
 
-    The build stops unless two counts both come to one: the opening's words
-    anywhere in the post's source (source_mentions), and opening lines in the
-    model of what the page shows (_parse), which also finds the line. That
-    line must stand as a top-level paragraph of its own with a bullet list
-    straight after it.
+    The build renders the post with the site's own code and stops unless:
+    - the post uses only the HTML in TAGS, PROPERTIES and CLASSES;
+    - its page, header and contents sidebar included, could show the opening's
+      words in exactly one place (mentions());
+    - exactly one top-level block holds them, so that blanking that block's
+      lines leaves none on the page;
+    - that block is a one-line paragraph that shows as "Key results/figures/
+      findings ...:" on its own, with a bullet list straight after it.
     """
     text = _text(slug)
     lines = text.split("\n")
-    mentions = source_mentions(text)
-    if mentions != 1:
-        raise SystemExit(f"{slug}: expected the words 'Key results/figures/findings' once in the source, found {mentions}")
-    blocks, prose = _parse(text)
-    starts = [first for first, line in prose if OPENING.match(line.strip())]
-    if len(starts) != 1:
-        raise SystemExit(f"{slug}: expected one 'Key results/figures/findings ...:' line, found {len(starts)}")
-    k = next((j for j, (_, a, _b) in enumerate(blocks) if a == starts[0]), None)
-    if k is None or blocks[k][0] != "paragraph" or blocks[k][2] - blocks[k][1] != 1:
-        raise SystemExit(f"{slug}: the line '{lines[starts[0]]}' isn't a paragraph of its own")
-    if k + 1 == len(blocks) or blocks[k + 1][0] != "bullet_list":
-        raise SystemExit(f"{slug}: no bullet list straight after '{lines[starts[0]]}'")
+    header = _header(slug)
+    page = render([text])[0]
+    if "error" in page:
+        raise SystemExit(f"{slug}: the site's formatter can't render the post: {page['error']}")
+    if problem := _unreadable(page["elements"]):
+        raise SystemExit(f"{slug}: the post uses {problem}, which can hide or move text, so the build can't read the page")
+    found = mentions(page_text(page, header))
+    if found != 1:
+        raise SystemExit(f"{slug}: expected the words 'Key results/figures/findings' in one place on the page, found {found}")
+    blocks = page["blocks"]
+    blanked = render(["\n".join("" if b["start"] <= n <= b["end"] else line for n, line in enumerate(lines, 1))
+                      for b in blocks])
+    holders = [j for j, p in enumerate(blanked) if "error" in p or mentions(page_text(p, header)) == 0]
+    if len(holders) != 1 or "error" in blanked[holders[0]]:
+        raise SystemExit(f"{slug}: expected one block of the post to hold the words, found {len(holders)}")
+    k = holders[0]
+    first, last = blocks[k]["start"], blocks[k]["end"]
+    if blocks[k]["type"] != "paragraph" or first != last:
+        raise SystemExit(f"{slug}: the words sit in a {blocks[k]['type']} on lines {first}-{last}, not a paragraph of their own")
+    line = lines[first - 1].strip()
+    shown = shown_lines(render([line])[0].get("html", ""))
+    if len(shown) != 1 or not OPENING.match(shown[0]):
+        raise SystemExit(f"{slug}: line {first} shows {shown}, not one line that opens 'Key results/figures/findings ...:'")
+    if k + 1 == len(blocks) or blocks[k + 1]["type"] != "list" or blocks[k + 1]["ordered"]:
+        raise SystemExit(f"{slug}: no bullet list straight after '{line}'")
 
     def block_lines(j):
-        _, a, b = blocks[j]
-        part = lines[a:b]
-        while part and not part[-1].strip():
-            part.pop()
-        return part
+        return lines[blocks[j]["start"] - 1:blocks[j]["end"]]
 
-    out = [lines[starts[0]].strip(), "", *block_lines(k + 1)]
+    out = [line, "", *block_lines(k + 1)]
     for j in range(k + 2, k + 2 + extra_paragraphs):
         # A paragraph that opens with a link or image is a caption or a chart's source, not prose
-        if j >= len(blocks) or blocks[j][0] != "paragraph" or lines[blocks[j][1]].lstrip().startswith(("_[", "[", "!")):
+        if j >= len(blocks) or blocks[j]["type"] != "paragraph" or lines[blocks[j]["start"] - 1].lstrip().startswith(("_[", "[", "!")):
             raise SystemExit(f"{slug}: no plain paragraph {j - k - 1} after the key points")
         out += ["", *block_lines(j)]
     return adapt(_absolute_links("\n".join(out), slug), slug)

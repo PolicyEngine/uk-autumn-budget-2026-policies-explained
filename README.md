@@ -4,7 +4,7 @@ PolicyEngine's post-Budget briefing. It takes the 20 measures on Vahid's pre-Bud
 
 The PDF opens with a cover for outside readers: it links the dashboard and our [post-Budget briefing](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-briefing) and credits the Nuffield Foundation, which funds our UK Budget work. `template.md` defines the cover in a fenced div because `pe-doc` has no cover feature. `document/extra.css` lays out the cover and enlarges `pe-doc`'s letterhead wordmark on the first page.
 
-`scripts/build.sh` builds the PDF from [`template.md`](template.md). [`scripts/build_figures.py`](scripts/build_figures.py) fills in the costing tables and gaps: our estimates from the artifacts the dashboard publishes, the official ones from the OBR's and the Treasury's workbooks. [`document/figures.json`](document/figures.json) traces each of those figures to its file, row and column. Each explainer page quotes its post's key points word for word from [`sources/posts/`](sources/posts), and [`scripts/build_charts.py`](scripts/build_charts.py) redraws one chart from each post's chart data, checking every income decile bar against the dashboard. We type the other numbers in the text (rates, thresholds, figures we quote from our posts or official documents) into the template and cite them there.
+`scripts/build.sh` builds the PDF from [`template.md`](template.md). [`scripts/build_figures.py`](scripts/build_figures.py) fills in the costing tables and gaps: our estimates from the artifacts the dashboard publishes, the official ones from the OBR's and the Treasury's workbooks. [`document/figures.json`](document/figures.json) traces each of those figures to its file, row and column. Each explainer page quotes its post's key points word for word from [`sources/posts/`](sources/posts). The build finds them by rendering each post with the site's own code ([`site/`](site)) and reading the page that results. [`scripts/build_charts.py`](scripts/build_charts.py) redraws one chart from each post's chart data, checking every income decile bar against the dashboard. We type the other numbers in the text (rates, thresholds, figures we quote from our posts or official documents) into the template and cite them there.
 
 ## What has gone out
 
@@ -17,9 +17,10 @@ The PDF opens with a cover for outside readers: it links the dashboard and our [
 
 ## Build
 
-You need [uv](https://docs.astral.sh/uv/), pandoc 3, and read access to [PolicyEngine/document-templates](https://github.com/PolicyEngine/document-templates), which every PolicyEngine org member has. `uv sync` installs `pe-doc` from there, and `uv.lock` pins it to the commit that built the PDFs we posted.
+You need [uv](https://docs.astral.sh/uv/), [Bun](https://bun.sh) 1.3.12, pandoc 3, and read access to [PolicyEngine/document-templates](https://github.com/PolicyEngine/document-templates), which every PolicyEngine org member has. `uv sync` installs `pe-doc` from there, and `uv.lock` pins it to the commit that built the PDFs we posted.
 
 ```bash
+(cd site && bun install --frozen-lockfile)
 scripts/build.sh
 ```
 

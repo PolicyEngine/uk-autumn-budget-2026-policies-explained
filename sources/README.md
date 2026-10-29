@@ -14,6 +14,7 @@ We saved here everything the briefing's figures and claims rest on, on 28 Octobe
 | `whats-improving-note.md` | The "What we're improving" section, which the briefing quotes word for word | The Budget coordinator's note | `bbf13048d3b848cc` |
 | `pr1466-state.json` | The savings explainer's PR state when we built: open, so the PDF doesn't link it | [policyengine-app-v2#1466](https://github.com/PolicyEngine/policyengine-app-v2/pull/1466) | `8f558929c85345c8` |
 | `posts/*.md` | The live explainers the cards cite and link | policyengine-app-v2 `main` at the commit in `posts/APP_V2_MAIN_SHA` | see below |
+| `posts/meta.json` | Each post's title and description, which the article page shows above the post; the key points check counts them as page text | `app/src/data/posts/posts.json` in policyengine-app-v2 at the same commit (blob `93845310`), only the fields the page shows as text | `1ec57ecdc9dcf72b` |
 
 | Post | sha256 |
 |:--|:--|

@@ -21,6 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CHARTS = "scripts/build_charts.py"
 EXPLAINERS = "scripts/explainers.py"
+RENDER = "site/render.tsx"
 
 # (what the mutation breaks, file, [(text, replacement), ...]); each text must occur once
 MUTATIONS = [
@@ -29,50 +30,68 @@ MUTATIONS = [
     ("No font filter", CHARTS,
      [('manager.ttflist = [f for f in manager.ttflist if f.name.casefold() != "inter"]', "manager.ttflist = list(manager.ttflist)")]),
     ("A case-sensitive font filter", CHARTS, [('f.name.casefold() != "inter"', 'f.name != "Inter"')]),
-    # The source count
-    ("No source count", EXPLAINERS, [("    if mentions != 1:\n", "    if False:\n")]),
-    ("Source count without entity decoding", EXPLAINERS, [("visible(unescape(text))", "visible(text)")]),
-    ("Source count without visible()", EXPLAINERS, [("MENTION.findall(visible(unescape(text))", "MENTION.findall(unescape(text)")]),
+    # What the build reads
+    ("No HTML allowlist", EXPLAINERS, [('if problem := _unreadable(page["elements"]):', "if problem := None:")]),
+    ("The allowlist ignores tags", EXPLAINERS, [('if e["tag"] not in TAGS or extra or classes:', "if extra or classes:")]),
+    ("The allowlist ignores properties", EXPLAINERS,
+     [('extra = set(e["props"]) - PROPERTIES["*"] - PROPERTIES.get(e["tag"], set())', "extra = set()")]),
+    ("The allowlist ignores classes", EXPLAINERS,
+     [('classes = [c for c in e["classes"] if c not in CLASSES and not c.startswith("language-")]', "classes = []")]),
+    ("Nested panes left out of the allowlist", RENDER, [("elements: seen.flatMap(elements) }", "elements: elements(markdown) }")]),
+    ("No contents sidebar", RENDER, [("return { html, blocks, contents: contents(markdown),", "return { html, blocks, contents: [],")]),
+    ("No bidirectional override check", EXPLAINERS, [("    if BIDI.search(text):\n", "    if False:\n")]),
+    ("Page text without visible()", EXPLAINERS, [("    text = visible(text)\n", "    pass\n")]),
     ("visible() keeping invisible characters", EXPLAINERS,
-     [('return IGNORABLE.sub("", unicodedata.normalize("NFKC", text))', 'return unicodedata.normalize("NFKC", text)')]),
+     [('return CONTROL.sub("", IGNORABLE.sub("", unicodedata.normalize("NFKC", text)))', 'return CONTROL.sub("", unicodedata.normalize("NFKC", text))')]),
     ("visible() without NFKC", EXPLAINERS,
-     [('return IGNORABLE.sub("", unicodedata.normalize("NFKC", text))', 'return IGNORABLE.sub("", text)')]),
-    ("No comments among the marks", EXPLAINERS, [("(?:<!--.*?-->|<[^<>]*>|", "(?:<[^<>]*>|")]),
-    ("No tags among the marks", EXPLAINERS, [("<!--.*?-->|<[^<>]*>|", "<!--.*?-->|")]),
-    ("No link destinations among the marks", EXPLAINERS, [(r"|\]\((?:[^()]|\([^()]*\))*\)", "")]),
-    ("Link destinations without parentheses inside", EXPLAINERS, [(r"\]\((?:[^()]|\([^()]*\))*\)", r"\]\([^()]*\)")]),
-    ("No reference links among the marks", EXPLAINERS, [(r"|\]\[[^\[\]]*\]", "")]),
-    ("No Markdown marks among the marks", EXPLAINERS, [(r"|[*_~`\\\[\]])", ")")]),
-    ("Marks only between the two words, not inside one", EXPLAINERS, [('return f"{_MARK}*+".join(word)', "return word")]),
-    ("Backtracking marks instead of possessive ones", EXPLAINERS,
-     [('return f"{_MARK}*+".join(word)', 'return f"{_MARK}*".join(word)'), ("(?:\\s|{_MARK})++", "(?:\\s|{_MARK})+")]),
-    ("Case-sensitive source count (regex.I removed)", EXPLAINERS, [("    regex.I | regex.S,\n", "    regex.S,\n")]),
+     [('return CONTROL.sub("", IGNORABLE.sub("", unicodedata.normalize("NFKC", text)))', 'return CONTROL.sub("", IGNORABLE.sub("", text))')]),
+    ("visible() keeping control characters", EXPLAINERS,
+     [('return CONTROL.sub("", IGNORABLE.sub("", unicodedata.normalize("NFKC", text)))', 'return IGNORABLE.sub("", unicodedata.normalize("NFKC", text))')]),
+    # The page text
+    ("No attribute values", EXPLAINERS, [("if name in TEXT_ATTRIBUTES and value]", "if False]")]),
+    ("Every attribute value", EXPLAINERS, [("if name in TEXT_ATTRIBUTES and value]", "if value]")]),
+    ("Attribute values always shown", EXPLAINERS, [("[_segment(value, True) + BOUNDARY", "[_segment(value, False) + BOUNDARY")]),
+    ("Text a browser may hide left out", EXPLAINERS,
+     [("    def handle_data(self, data):\n        self.text.append(data)", "    def handle_data(self, data):\n        self.text += [] if self.maybe[-1] else [data]")]),
+    ("<details> text always shown", EXPLAINERS, [('return (tag == "details" or ', 'return (tag == "nothing" or ')]),
+    ("sr-only text always shown", EXPLAINERS, [('"sr-only" in (attrs.get("class") or "").split()', "False")]),
+    ("Text the formatter styles invisible always shown", EXPLAINERS,
+     [('bool(HIDING_STYLE.search(attrs.get("style") or ""))', "False")]),
+    ("No page header", EXPLAINERS, [('[*header, *page["contents"]]', '[*page["contents"]]')]),
+    ("No contents sidebar in the page text", EXPLAINERS, [('[*header, *page["contents"]]', "[*header]")]),
+    ("An empty page header", EXPLAINERS, [("    return list(meta[slug].values())", "    return []")]),
+    # The count
+    ("No page count", EXPLAINERS, [("    if found != 1:\n", "    if False:\n")]),
+    ("No hop inside a word", EXPLAINERS, [('return f"(?:{_HOP})?".join(word)', "return word")]),
+    ("Hops can't skip what a browser may hide", EXPLAINERS, [("(?:{BOUNDARY}|{_SKIP})*?", "(?:{BOUNDARY})*?")]),
+    ("No whitespace between the words", EXPLAINERS, [("(?:\\s|{_HOP})+", "(?:{_HOP})+")]),
+    ("A case-sensitive count", EXPLAINERS, [('(?![^\\W_])", regex.I)', '(?![^\\W_])")')]),
     ("A word boundary where only letters and digits may not touch", EXPLAINERS, [('rf"(?<![^\\W_]){_spelled', 'rf"\\b{_spelled')]),
     ("Nothing stops a letter touching the first word", EXPLAINERS, [('rf"(?<![^\\W_]){_spelled', 'rf"{_spelled')]),
-    ("Nothing stops a letter touching the second word", EXPLAINERS, [("))})(?![^\\W_])\",", "))})\",")]),
+    ("Nothing stops a letter touching the second word", EXPLAINERS, [('(?![^\\W_])", regex.I)', '", regex.I)')]),
     ("Overlapping mentions counted once", EXPLAINERS, [("overlapped=True", "overlapped=False")]),
-    # The page model
-    ("No page-model count", EXPLAINERS, [("    if len(starts) != 1:\n", "    if False:\n")]),
-    ("Page model without visible()", EXPLAINERS,
-     [('return visible("".join(parser.parts)).split("\\n")', 'return "".join(parser.parts).split("\\n")')]),
-    ("Inline text unrendered", EXPLAINERS,
-     [("html = md.renderer.renderInline(t.children or [], md.options, {})", "html = t.content")]),
-    ("HTML blocks ignored", EXPLAINERS, [('elif t.type == "html_block":', "elif False:")]),
-    ("Code and <pre> read as prose", EXPLAINERS,
-     [('HIDDEN = {"code", "pre", "script", "style", "textarea", "template"}', 'HIDDEN = {"script", "style", "textarea", "template"}')]),
-    ("No whitespace collapse", EXPLAINERS, [('self.parts.append(WHITESPACE.sub(" ", data))', "self.parts.append(data)")]),
-    ("No image caption", EXPLAINERS, [('if tag == "img" and attrs.get("src") and attrs.get("alt") and not self.hidden:', "if False:")]),
-    ("A caption for an image with no source", EXPLAINERS,
-     [('if tag == "img" and attrs.get("src") and attrs.get("alt") and not self.hidden:', 'if tag == "img" and attrs.get("alt") and not self.hidden:')]),
-    ("Highlighted blocks read as code", EXPLAINERS,
-     [('elif t.type == "fence" and t.info.split()[:1] == ["highlighted-block"]:', "elif False:")]),
-    ("Language from the whole info string", EXPLAINERS,
-     [('elif t.type == "fence" and t.info.split()[:1] == ["highlighted-block"]:', 'elif t.type == "fence" and t.info == "highlighted-block":')]),
-    ("No strikethrough", EXPLAINERS, [('.enable(["table", "strikethrough"])', '.enable(["table"])')]),
-    ("No line breaks at dl, dt, dd, figure and figcaption", EXPLAINERS,
-     [('"ol", "dl", "dt", "dd", ', '"ol", '), ('"address", "figure", "figcaption", ', '"address", ')]),
-    ("An opening pattern that needs a single space", EXPLAINERS,
-     [('OPENING = re.compile(r"Key\\s+(results', 'OPENING = re.compile(r"Key (results')]),
+    ("No time limit on the renderer", EXPLAINERS,
+     [("if not select.select([self.proc.stdout], [], [], RENDER_SECONDS)[0]:", "if False:")]),
+    ("A stopped renderer never restarts", EXPLAINERS,
+     [("if _renderer is None or _renderer.proc.poll() is not None:", "if _renderer is None:")]),
+    # Finding the opening
+    ("Blanking keeps the block", EXPLAINERS, [('"" if b["start"] <= n <= b["end"] else line', "line")]),
+    ("Any number of blocks may hold the words", EXPLAINERS,
+     [('if len(holders) != 1 or "error" in blanked[holders[0]]:', "if not holders:")]),
+    ("A multi-line paragraph counts as one of its own", EXPLAINERS,
+     [('if blocks[k]["type"] != "paragraph" or first != last:', 'if blocks[k]["type"] != "paragraph":')]),
+    ("Any one-line block counts as a paragraph", EXPLAINERS,
+     [('if blocks[k]["type"] != "paragraph" or first != last:', "if first != last:")]),
+    ("No check of the line the page shows", EXPLAINERS,
+     [("if len(shown) != 1 or not OPENING.match(shown[0]):", "if not shown:")]),
+    ("An opening that needn't end in a colon", EXPLAINERS, [('\\b.*:\\s*$")', '\\b.*$")')]),
+    ("An ordered list counts as a bullet list", EXPLAINERS, [(' or blocks[k + 1]["ordered"]:', ":")]),
+    ("Shown lines show text a browser may hide", EXPLAINERS,
+     [("        if not self.maybe[-1]:\n            self.parts.append(WHITESPACE", "        if True:\n            self.parts.append(WHITESPACE")]),
+    ("Shown lines break at every tag", EXPLAINERS, [("if tag not in self.PHRASING or re.search", "if True or re.search")]),
+    ("Shown lines keep line breaks in text", EXPLAINERS, [('self.parts.append(WHITESPACE.sub(" ", data))', "self.parts.append(data)")]),
+    ("Relative links left relative", EXPLAINERS,
+     [('return adapt(_absolute_links("\\n".join(out), slug), slug)', 'return adapt("\\n".join(out), slug)')]),
 ]
 
 
@@ -80,7 +99,9 @@ def failures(swaps=(), path=None, timeout=300):
     """Tests that fail in a copy of the repo with the swaps applied, or a reason they didn't run."""
     with tempfile.TemporaryDirectory() as tmp:
         copy = Path(tmp) / "repo"
-        shutil.copytree(ROOT, copy, ignore=shutil.ignore_patterns(".venv", ".git", "__pycache__", ".hypothesis", "*.pdf"))
+        shutil.copytree(ROOT, copy, ignore=shutil.ignore_patterns(".venv", ".git", "__pycache__", ".hypothesis", "*.pdf",
+                                                                   "node_modules"))
+        (copy / "site" / "node_modules").symlink_to(ROOT / "site" / "node_modules")
         if swaps:
             file = copy / path
             text = file.read_text()
@@ -105,7 +126,7 @@ def main():
     if baseline != 0:
         sys.exit(f"the unmutated tests don't all pass: {baseline}")
     with ThreadPoolExecutor(4) as pool:
-        results = list(pool.map(lambda m: failures(m[2], m[1], timeout=120), MUTATIONS))
+        results = list(pool.map(lambda m: failures(m[2], m[1], timeout=300), MUTATIONS))
     print("| Mutation | Tests that fail |\n|:--|--:|")
     for (label, _, _), result in zip(MUTATIONS, results):
         print(f"| {label} | {result} |")
