@@ -47,7 +47,7 @@ from explainers import POSTS, key_points  # noqa: E402
 
 YEARS = [2026, 2027, 2028, 2029, 2030, 2031]
 MINUS = "−"
-DASHBOARD = "[policyengine.org/uk/budgets/autumn-2026](https://www.policyengine.org/uk/budgets/autumn-2026)"
+DASHBOARD = "[policyengine.org/uk/autumn-budget-2026](https://www.policyengine.org/uk/autumn-budget-2026)"
 # policy.xlsx, the OBR's detailed forecast table 1.1 for October 2026, as checked into dashboard #300 at 555e7f74
 OBR_SHA256 = "cdcc2a06b100241bf3010bd159a4e5d43daef2348a3850797b1e88a308fd45fd"
 
@@ -284,8 +284,8 @@ def main():
         if kind == "signoff":
             entry = manifest["combined"][parts[1]]
             if signed(entry.get("attestation")):
-                return "The combined run has passed sign-off."
-            return "The combined run's sign-off is still pending."
+                return "Two of us checked the combined run before we published it."
+            return "We are still checking the combined run."
         if kind == "post_sha":
             return (POSTS / "APP_V2_MAIN_SHA").read_text().strip()
         if kind == "keypoints":
@@ -293,12 +293,12 @@ def main():
         if kind == "status_note":
             shown = [k for k, v in manifest["measures"].items() if v.get("status") in ("approved", "provisional")]
             provisional = any(manifest["measures"][k]["status"] == "provisional" for k in shown)
-            rev = f"manifest revision {manifest['revision']} ({manifest['updated_at'][:16].replace('T', ' ')} UTC)"
+            rev = f"revision {manifest['revision']} ({manifest['updated_at'][:16].replace('T', ' ')} UTC)"
             if a.source == "test":
                 lead = f"PolicyEngine figures are first estimates from the Budget dashboard's test publication, {rev}."
                 tail = f" They are still going through our checks and may change when we publish the dashboard at {DASHBOARD}."
             else:
-                lead = f"PolicyEngine figures are from the Budget dashboard at {DASHBOARD}, {rev}."
+                lead = f"Our figures come from our Budget dashboard at {DASHBOARD}, as it stood at {rev}."
                 tail = " The dashboard still marks some as provisional, and they may change." if provisional else ""
             flag = "[Provisional]{.flag} " if provisional else ""
             return flag + lead + tail

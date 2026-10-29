@@ -1,6 +1,8 @@
 # Autumn Budget 2026: the policies explained
 
-PolicyEngine's post-Budget briefing. It takes the 20 measures on Vahid's pre-Budget list and says what the Budget of 28 October 2026 did with each, adds the measures the list missed, and for the seven measures in the [Budget dashboard](https://www.policyengine.org/uk/budgets/autumn-2026) sets our estimate beside the matching line of the OBR's costing.
+PolicyEngine's post-Budget briefing. It takes the 20 measures on Vahid's pre-Budget list and says what the Budget of 28 October 2026 did with each, adds the measures the list missed, and for the seven measures in the [Budget dashboard](https://www.policyengine.org/uk/autumn-budget-2026) sets our estimate beside the matching line of the OBR's costing.
+
+The PDF opens with a cover for outside readers: it links the dashboard and our [post-Budget briefing](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-briefing) and credits the Nuffield Foundation, which funds our UK Budget work. The cover is a fenced div in `template.md`, laid out by `document/extra.css`, because `pe-doc` has no cover of its own; the wordmark is `pe-doc`'s letterhead, enlarged on the first page.
 
 `scripts/build.sh` builds the PDF from [`template.md`](template.md). [`scripts/build_figures.py`](scripts/build_figures.py) fills in the costing tables and gaps: our estimates from the artifacts the dashboard publishes, the official ones from the OBR's and the Treasury's workbooks. [`document/figures.json`](document/figures.json) traces each of those figures to its file, row and column. Each explainer page quotes its post's key points word for word from [`sources/posts/`](sources/posts), and [`scripts/build_charts.py`](scripts/build_charts.py) redraws one chart from each post's chart data, checking every income decile bar against the dashboard. We type the other numbers in the text (rates, thresholds, figures we quote from our posts or official documents) into the template and cite them there.
 
@@ -45,6 +47,7 @@ PRs from forks can't build, because CI reads the private template repo with an o
   - A gap over 25% needs a reason we have verified; otherwise state the gap without one.
 - No claim about how a model works unless the dashboard notes, a post or the code supports it. Label inferences.
 - No link to a post that hasn't merged. No small cells or single-record values. No poverty or people-affected figures until the dashboard publishes them, apart from any inside an explainer's key points, which we quote word for word (Max, 29 Oct: keep the energy post's 19.7 million households verbatim).
+- Write for readers outside PolicyEngine: no notes to the team, no internal status, and no odds from the pre-Budget list, which the list gave without a source.
 - Sentence case and no emoji. Active voice: name who acts, with no passives, including reduced ones ("certified by", "not modelled"). Write "exceeds", not "is above". Use whole pounds in tables, with pence only where a formula spells them out or for a statutory rate.
 
 ## Sources

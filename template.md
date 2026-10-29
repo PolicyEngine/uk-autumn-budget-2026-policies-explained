@@ -1,7 +1,6 @@
 ---
 kind: proposal
-client: "PolicyEngine core team"
-status: "draft (2026-10-28): for Max"
+status: "v3 (2026-10-29): with a cover, for webinar registrants"
 title: "Autumn Budget 2026: the policies explained"
 pe-doc:
   source_notes: true
@@ -10,11 +9,23 @@ pe-doc:
   pdf_name: "PolicyEngine - Autumn Budget 2026 policies explained"
 ---
 
+::: {.cover}
 # Autumn Budget 2026: the policies explained
 
-**What the Budget did with the 20 measures on our list, the ones it added, and what each costs**
+**What each measure does, what it costs, and how our estimates compare**
 
-A PolicyEngine briefing · after the Budget of 28 October 2026 · October 2026
+A PolicyEngine briefing on the Budget of 28 October 2026 · 29 October 2026
+
+::: {.cover-links}
+[Explore every measure in our Budget dashboard]{.label}\
+[policyengine.org/uk/autumn-budget-2026](https://www.policyengine.org/uk/autumn-budget-2026)
+
+[Read our briefing on what the Budget means for households]{.label}\
+[policyengine.org/uk/research/uk-autumn-budget-2026-briefing](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-briefing)
+:::
+
+[Funded by the Nuffield Foundation]{.funder}
+:::
 
 {{status_note}}
 
@@ -35,14 +46,14 @@ A PolicyEngine briefing · after the Budget of 28 October 2026 · October 2026
 | National Living Wage | £13.21 an hour from 1 April 2027 | Not in our model |
 | Bank surcharge | 3% to 6% for 15 months, not 8% | Not in our model |
 | Seven smaller measures | Student loans, Universal Credit, mileage and more | Not in our model |
-| 12 of our 20, among them the Warm Home Discount top-up | Not in the Budget | — |
+| 12 of the 20 on our pre-Budget list, among them the Warm Home Discount top-up | Not in the Budget | — |
 :::
 
 In our combined run, the seven measures in the dashboard cost {{peabs:combined--f91fe847275730cb:2026}} million in 2026-27 and {{peabs:combined--f91fe847275730cb:2027}} million in 2027-28, and raise {{peabs:combined--f91fe847275730cb:2028}} million in 2028-29, when the property income rise outweighs the two tax cuts still in force. {{signoff:combined--f91fe847275730cb}}
 
 ## How to read this
 
-The day before the Budget we circulated 20 measures most likely to come up. This version says what the Budget actually did with each, and adds the measures it made that the list missed. For every measure:
+The day before the Budget, we listed the 20 measures we thought it most likely to change. This briefing says what the Budget actually did with each, and adds the measures it made that our list missed. For every measure:
 
 - **What changes**, and when, from the Budget documents.
 - **Who it affects**, using the government's own reach figures where it gives them.
@@ -59,7 +70,7 @@ Our estimates differ from the official costings for four main reasons: timing (w
 ::: {.card}
 ### Household Energy Payment: £100 for bands A to D in England
 
-[New]{.badge .new} [Replaces our list's no. 5, "Warm Home Discount top-up", odds 66%, which did not happen]{.prev}
+[New]{.badge .new} [Replaces our list's no. 5, "Warm Home Discount top-up", which did not happen]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -76,7 +87,7 @@ Our estimates differ from the official costings for four main reasons: timing (w
 ::: {.card}
 ### Zero VAT on household electricity runs to 1 July 2027
 
-[In the Budget, in a different form]{.badge .changed} [Our list: no. 8, odds 21%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: no. 8]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -93,7 +104,7 @@ Our estimates differ from the official costings for four main reasons: timing (w
 ::: {.card}
 ### Fuel duty: the 5p cut runs to July 2027
 
-[In the Budget, in a different form]{.badge .changed} [Our list: no. 1, "Fuel duty freeze", odds 93%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: no. 1, "Fuel duty freeze"]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -110,7 +121,7 @@ Our estimates differ from the official costings for four main reasons: timing (w
 ::: {.card}
 ### Pension Tax Allowance
 
-[In the Budget, in a different form]{.badge .changed} [Our list: no. 3, "State Pension tax protection", odds 90%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: no. 3, "State Pension tax protection"]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -127,7 +138,7 @@ Our estimates differ from the official costings for four main reasons: timing (w
 ::: {.card}
 ### Carer's Allowance: a taper above the earnings limit
 
-[In the Budget]{.badge .announced} [Our list: no. 2, odds 92%]{.prev}
+[In the Budget]{.badge .announced} [Our list: no. 2]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -144,7 +155,7 @@ Our estimates differ from the official costings for four main reasons: timing (w
 ::: {.card}
 ### Property income: tax rates up 2 points
 
-[In the Budget, in a different form]{.badge .changed} [Our list: part of no. 14, "Unearned income tax", odds 14%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: part of no. 14, "Unearned income tax"]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -161,7 +172,7 @@ Our estimates differ from the official costings for four main reasons: timing (w
 ::: {.card}
 ### Savings income: tax rates up 2 points
 
-[In the Budget, in a different form]{.badge .changed} [Our list: part of no. 14, "Unearned income tax", odds 14%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: part of no. 14, "Unearned income tax"]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -250,7 +261,7 @@ This post covers the Household Energy Payment and the three more months of zero 
 ::: {.card}
 ### Triple lock: a new rule from April 2030
 
-[In the Budget]{.badge .announced} [Our list: no. 4, "Triple lock replaced", odds 80%]{.prev}
+[In the Budget]{.badge .announced} [Our list: no. 4, "Triple lock replaced"]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -264,7 +275,7 @@ This post covers the Household Energy Payment and the three more months of zero 
 ::: {.card}
 ### National Living Wage: £13.21 an hour
 
-[In the Budget]{.badge .announced} [Our list: no. 19, odds 90%]{.prev}
+[In the Budget]{.badge .announced} [Our list: no. 19]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -277,7 +288,7 @@ This post covers the Household Energy Payment and the three more months of zero 
 ::: {.card}
 ### Bank surcharge: 3% to 6% for 15 months
 
-[In the Budget, in a different form]{.badge .changed} [Our list: no. 20, "Bank tax increase", odds 82%]{.prev}
+[In the Budget, in a different form]{.badge .changed} [Our list: no. 20, "Bank tax increase"]{.prev}
 
 |  |  |
 |:------------------|:--------------------------------------------------------------------------|
@@ -290,7 +301,7 @@ This post covers the Household Energy Payment and the three more months of zero 
 
 ### Seven smaller measures
 
-The Budget made these changes for households that the dashboard does not model. We posted a one-paragraph explainer on each, with a worked example, to the team on Budget day.
+The Budget made these changes for households that the dashboard does not model.
 
 ::: {.costs}
 | Measure (number) | What changes | 2026-27 | 2027-28 | 2028-29 | 2029-30 | 2030-31 | 2031-32 |
@@ -341,21 +352,21 @@ Official costings, £ million: each measure's total in the OBR's detailed foreca
 
 | Our list | What happened |
 |:-----------------------------------|:----------------------------------------------------------------|
-| 5. Warm Home Discount top-up (66%) | Not in the Budget. The £100 Household Energy Payment came instead. |
-| 6. Working-age benefits below CPI (58%) | No new cut. The policy costings' uprating table keeps the plans the government announced before: the Universal Credit standard allowance rising above inflation to CPI + 4.8% by April 2029, and the lower health element staying at its 2026-27 rate until 2029-30. |
-| 7. Threshold freeze extended (30%) | No extension. The freeze on the personal allowance and basic rate limit still ends after 2030-31, when they start rising with CPI. |
-| 9. £2 bus fare cap beyond 2027 (21%) | No extension. The Budget costs the £2 cap for 2027 only (above). |
-| 10. Employer National Insurance threshold (19%) | Not in the Budget. |
-| 11. Local Housing Allowance (16%) | Not in the Budget. |
-| 12. Plan 2 threshold unfrozen (15%) | The freeze continues. The Budget caps interest on Plan 2 and Plan 3 loans at 6% for a year instead (above). |
-| 13. High-value council tax threshold lowered (15%) | No cut to the threshold. The Budget confirms a deferral scheme, discounts and exemptions for the High Value Council Tax Surcharge, costing {{obrabs:93:2028}} million in 2028-29 (measure 93), and a 100% surcharge premium on properties that stand empty and unoccupied for 12 months or more. |
-| 14. Dividend tax rates up (part of 14%) | Dividend rates stay the same; only savings and property rates rise (above). |
-| 15. VAT on domestic gas (13%) | Not in the Budget. |
-| 16. Capital Gains Tax rates up (11%) | Main rates stay at 18% and 24%. The Budget adds Founders' Relief and halves the Business Asset Disposal Relief limit (above). |
-| 17. Personal allowance raised (10%) | No rise; its freeze runs to 2030-31 as before. The Pension Tax Allowance helps pensioners instead (above). |
-| 18. VAT on road fuel (about 10%) | No cut; the Budget extends the fuel duty cut instead (above). |
+| 5. Warm Home Discount top-up | Not in the Budget. The £100 Household Energy Payment came instead. |
+| 6. Working-age benefits below CPI | No new cut. The policy costings' uprating table keeps the plans the government announced before: the Universal Credit standard allowance rising above inflation to CPI + 4.8% by April 2029, and the lower health element staying at its 2026-27 rate until 2029-30. |
+| 7. Threshold freeze extended | No extension. The freeze on the personal allowance and basic rate limit still ends after 2030-31, when they start rising with CPI. |
+| 9. £2 bus fare cap beyond 2027 | No extension. The Budget costs the £2 cap for 2027 only (above). |
+| 10. Employer National Insurance threshold | Not in the Budget. |
+| 11. Local Housing Allowance | Not in the Budget. |
+| 12. Plan 2 threshold unfrozen | The freeze continues. The Budget caps interest on Plan 2 and Plan 3 loans at 6% for a year instead (above). |
+| 13. High-value council tax threshold lowered | No cut to the threshold. The Budget confirms a deferral scheme, discounts and exemptions for the High Value Council Tax Surcharge, costing {{obrabs:93:2028}} million in 2028-29 (measure 93), and a 100% surcharge premium on properties that stand empty and unoccupied for 12 months or more. |
+| 14. Unearned income tax: dividend rates up | Dividend rates stay the same; only savings and property rates rise (above). |
+| 15. VAT on domestic gas | Not in the Budget. |
+| 16. Capital Gains Tax rates up | Main rates stay at 18% and 24%. The Budget adds Founders' Relief and halves the Business Asset Disposal Relief limit (above). |
+| 17. Personal allowance raised | No rise; its freeze runs to 2030-31 as before. The Pension Tax Allowance helps pensioners instead (above). |
+| 18. VAT on road fuel | No cut; the Budget extends the fuel duty cut instead (above). |
 
-Odds are those on our pre-Budget list of 27 October.
+The numbers give each measure's place on our list of 27 October, the day before the Budget.
 
 ## What we're improving
 
