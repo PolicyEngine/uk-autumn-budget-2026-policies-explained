@@ -445,8 +445,6 @@ R12_PLOT = json.dumps({"data": [], "layout": {"annotations": [
     f"```plotly\n{R12_PLOT}\n```",
     f"<details><summary>More</summary>\n\n```plotly\n{R12_PLOT}\n```\n\n</details>",
     f"Text.[^1]\n\n[^1]: Note.\n\n    ```plotly\n    {R12_PLOT}\n    ```",
-    # JavaScript reads it and the chart ignores "unused"; Python's json reads it too, but nests too deep to walk recursively
-    "```chart\n" + R11_CHART[:-1] + ',"unused":' + "[" * 1000 + "0" + "]" * 1000 + "}\n```",
 ])
 def test_a_second_opening_in_a_chart_or_a_table_stops_the_build(monkeypatch, block):
     # Sol reviews r11's and r12's reproductions, word for word
@@ -464,9 +462,19 @@ def test_a_chart_whose_json_python_cant_read_stops_the_build(monkeypatch, spec):
         quote(monkeypatch, f"Key results:\n\n- actual\n\n```chart\n{spec}\n```\n")
 
 
-def test_chart_pieces_reads_json_however_deep_it_nests():
-    spec = '{"title":"Key","more":' + "[" * 5000 + '"figures"' + "]" * 5000 + "}"
-    assert explainers.chart_pieces("chart", spec) == ["Key", "figures"]
+def test_a_title_beside_deep_nesting_stops_the_build(monkeypatch):
+    # Sol review r12's reproduction, word for word: JavaScript reads it and the chart ignores "unused". Python
+    # 3.14's json reads it too, and the build counts the title; 3.11's stops at its recursion limit
+    spec = R11_CHART[:-1] + ',"unused":' + "[" * 1000 + "0" + "]" * 1000 + "}"
+    with pytest.raises(SystemExit, match=r"one place on the page, found ([2-9]|[1-9]\d+)\b|JSON Python can't read"):
+        quote(monkeypatch, f"Key results:\n\n- actual\n\n```chart\n{spec}\n```\n")
+
+
+def test_the_walk_over_a_charts_json_reaches_any_depth():
+    value = "figures"
+    for _ in range(100_000):
+        value = [value]
+    assert list(explainers._strings({"title": "Key", "more": value})) == ["Key", "figures"]
 
 
 @pytest.mark.parametrize("kind, string, pieces", [
