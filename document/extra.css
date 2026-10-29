@@ -1,10 +1,10 @@
 /*
  * Document-specific CSS, loaded after the PolicyEngine template.
  *
- * Layout: an A4 report in the house style of PolicyEngine's Budget-day
- * report. A full-bleed teal cover under the letterhead, a contents page,
- * running headers and footers with page numbers, one callout card per
- * measure, numbered figures, and a teal back page with contact and links.
+ * Layout: an A4 report. A teal cover under the letterhead, a contents page,
+ * numbered sections, numbered tables and figures with captions, running
+ * headers and footers with page numbers, and a teal back page with contact
+ * and links. Inside the report, teal marks only headings and links.
  * PolicyEngine ui-kit colors only; type is pe-doc's vendored Inter.
  */
 
@@ -12,7 +12,7 @@
 
 @page {
   size: A4;
-  margin: 22mm 20mm 20mm 20mm;
+  margin: 22mm 22mm 20mm 22mm;
 
   @top-left {
     content: "Autumn Budget 2026: the policies explained";
@@ -69,42 +69,315 @@
   @bottom-right { content: none; border-top: none; }
 }
 
-/* ---------- Type ---------- */
+/* ---------- Type and section numbers ---------- */
 
 body {
-  font-size: 9.6pt;
+  font-size: 9.5pt;
   line-height: 1.5;
+  counter-reset: sec table figure;
+}
+
+p {
+  margin: 0 0 2.6mm;
 }
 
 h2 {
-  font-size: 15pt;
-  line-height: 1.2;
+  font-size: 14pt;
+  line-height: 1.25;
   color: #234E52; /* teal-800 */
-  margin: 7mm 0 3mm;
-  padding-bottom: 1.6mm;
-  border-bottom: 1.2pt solid #319795; /* teal-500 */
+  margin: 8mm 0 3mm;
+  padding: 0;
+  border: none;
+  counter-increment: sec;
+  counter-reset: sub;
   break-after: avoid;
+}
+
+h2::before {
+  content: counter(sec);
+  display: inline-block;
+  min-width: 9mm;
 }
 
 h3 {
-  font-size: 11.5pt;
-  line-height: 1.25;
-  color: #101828; /* gray-900 */
-  margin: 5mm 0 2mm;
+  font-size: 11pt;
+  line-height: 1.3;
+  color: #234E52; /* teal-800 */
+  margin: 7mm 0 1.5mm;
+  counter-increment: sub;
   break-after: avoid;
 }
 
+h3::before {
+  content: counter(sec) "." counter(sub);
+  display: inline-block;
+  min-width: 9mm;
+}
+
+h3 a {
+  color: #234E52; /* teal-800 */
+  text-decoration: none;
+}
+
 h2 + p,
-h3 + p {
+h3 + p,
+h3 + p + p {
   break-before: avoid;
 }
 
-ul {
-  padding-left: 4.5mm;
+ul,
+ol {
+  padding-left: 5mm;
+  margin: 0 0 3mm;
+}
+
+li {
+  margin-bottom: 1.2mm;
 }
 
 li::marker {
-  color: #319795; /* teal-500 */
+  color: #475569; /* gray-600 */
+}
+
+/* ---------- Tables: numbered captions, light rules ---------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 0.9pt solid #1E293B; /* gray-800 */
+  border-bottom: 0.9pt solid #1E293B; /* gray-800 */
+  margin: 1.5mm 0 1.5mm;
+  font-size: 8.5pt;
+  line-height: 1.38;
+}
+
+/* The caption above each table: a paragraph kept with its table */
+.tcap {
+  display: block;
+  counter-increment: table;
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #1E293B; /* gray-800 */
+}
+
+.tcap::before {
+  content: "Table " counter(table) ": ";
+}
+
+p:has(> .tcap) {
+  margin: 3mm 0 1.2mm;
+  break-after: avoid;
+}
+
+th {
+  font-weight: 700;
+  color: #1E293B; /* gray-800 */
+  border-bottom: 0.5pt solid #1E293B; /* gray-800 */
+  padding: 1.2mm 1.5mm;
+  background: none;
+}
+
+td {
+  border-bottom: none;
+  padding: 0.9mm 1.5mm;
+}
+
+/* The cost tables: numbers right-aligned, our row in bold */
+.card table {
+  break-inside: avoid;
+}
+
+.card table th:not(:first-child),
+.card table td:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.card table tr:has(.ours) td {
+  font-weight: 700;
+  color: #101828; /* gray-900 */
+}
+
+.ours {
+  font-weight: 700;
+}
+
+/* A table's note: the paragraph straight after it */
+.card table + p:not(:has(.why)),
+.costs + p {
+  font-size: 7.8pt;
+  line-height: 1.4;
+  color: #475569; /* gray-600 */
+  margin-top: 1mm;
+}
+
+.costs table {
+  table-layout: fixed;
+}
+
+.costs table th,
+.costs table td {
+  padding-left: 2pt;
+  padding-right: 2pt;
+}
+
+.costs table td {
+  border-bottom: 0.3pt solid #E2E8F0; /* gray-200 */
+}
+
+.glance table td,
+#on-our-list-not-in-the-budget + table td {
+  border-bottom: 0.3pt solid #E2E8F0; /* gray-200 */
+}
+
+tr {
+  break-inside: avoid;
+}
+
+/* ---------- Measure sections ---------- */
+
+.card {
+  margin: 0 0 4mm;
+}
+
+/* Standfirst: the measure's key fact */
+.keyfact {
+  display: block;
+  font-style: italic;
+  font-size: 10pt;
+  color: #334155; /* gray-700 */
+}
+
+.card p:has(> .keyfact) {
+  margin-bottom: 1mm;
+  break-after: avoid;
+}
+
+/* Status: how the Budget treated the measure, and its place on our list */
+.tags p {
+  font-size: 8.5pt;
+  color: #475569; /* gray-600 */
+  margin-bottom: 2.6mm;
+}
+
+.tags p::before {
+  content: "Status: ";
+  font-weight: 700;
+  color: #1E293B; /* gray-800 */
+}
+
+.badge::after {
+  content: ";";
+}
+
+/* Run-in labels: What changes, Who it affects, How we model it */
+.runin {
+  font-weight: 700;
+  color: #101828; /* gray-900 */
+  margin-right: 1.5mm;
+}
+
+.runin::after {
+  content: ".";
+}
+
+/* Why ours differs: a run-in label on a paragraph with a thin rule */
+.card p:has(> .why) {
+  margin-top: 3mm;
+  padding-left: 3.5mm;
+  border-left: 0.8pt solid #94A3B8; /* gray-400 */
+}
+
+.why {
+  font-weight: 700;
+  color: #101828; /* gray-900 */
+  margin-right: 1.5mm;
+}
+
+.why::after {
+  content: ".";
+}
+
+/* Read more: a plain sentence with the link */
+.readmore p {
+  margin: 0;
+}
+
+.readmore .label::after {
+  content: ":";
+}
+
+.flag {
+  font-weight: 700;
+  color: #c2410c; /* text-warning */
+  margin-right: 4pt;
+}
+
+/* ---------- Figures ---------- */
+
+/* The caption above each chart */
+.figcap {
+  display: block;
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #1E293B; /* gray-800 */
+  counter-increment: figure;
+}
+
+.figcap::before {
+  content: "Figure " counter(figure) ": ";
+}
+
+.explainer p:has(> .figcap) {
+  margin: 5mm 0 1.5mm;
+  break-after: avoid;
+}
+
+.explainer p:has(img.chart) {
+  margin: 0 0 3mm;
+  break-inside: avoid;
+}
+
+.explainer p:has(img.chart) a {
+  text-decoration: none;
+}
+
+img.chart {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+/* ---------- Links ---------- */
+
+a {
+  color: #2C7A7B; /* teal-600 */
+  text-decoration: underline;
+  text-decoration-color: #81E6D9; /* teal-200 */
+}
+
+.toc a,
+.cover a,
+.back a {
+  text-decoration: none;
+}
+
+/* Sources: a numbered list of references; long link text wraps */
+#sources-and-method + ol {
+  padding-left: 9mm;
+}
+
+#sources-and-method + ol li,
+#limitations + ul li {
+  font-size: 8.6pt;
+  line-height: 1.4;
+  margin-bottom: 1.4mm;
+  overflow-wrap: anywhere;
+}
+
+#sources-and-method + ol li::marker {
+  content: "[" counter(list-item) "]  ";
+  font-weight: 700;
 }
 
 /* ---------- Cover ---------- */
@@ -213,17 +486,15 @@ li::marker {
 
 .toc {
   break-after: page;
-  padding-top: 6mm;
+  padding-top: 2mm;
 }
 
 .toc .toc-title {
   display: block;
-  font-size: 22pt;
+  font-size: 20pt;
   font-weight: 700;
   color: #234E52; /* teal-800 */
-  padding-bottom: 3mm;
   margin-bottom: 6mm;
-  border-bottom: 1.2pt solid #319795; /* teal-500 */
 }
 
 .toc ul {
@@ -234,9 +505,8 @@ li::marker {
 
 .toc li {
   margin: 0;
-  padding: 2.4mm 0;
-  border-bottom: 0.5pt solid #E2E8F0; /* gray-200 */
-  font-size: 10.5pt;
+  padding: 1.6mm 0 0;
+  font-size: 9.5pt;
 }
 
 .toc li::marker {
@@ -244,13 +514,12 @@ li::marker {
 }
 
 .toc li ul {
-  margin-top: 1.6mm;
+  margin: 0.6mm 0 1mm;
 }
 
 .toc li li {
-  padding: 1.2mm 0 1.2mm 6mm;
-  border-bottom: none;
-  font-size: 9.5pt;
+  padding: 0.5mm 0 0.5mm 9mm;
+  font-size: 8.6pt;
 }
 
 .toc a {
@@ -263,467 +532,39 @@ li::marker {
 
 .toc li li > a {
   font-weight: 400;
-  color: #475569; /* gray-600 */
+  color: #334155; /* gray-700 */
+}
+
+.toc > ul {
+  counter-reset: tsec;
+}
+
+.toc > ul > li {
+  counter-increment: tsec;
+  counter-reset: tsub;
+}
+
+.toc li li {
+  counter-increment: tsub;
+}
+
+/* The contents lists every section and subsection in order, so its own
+   counters give the same numbers as the headings. */
+.toc li > a::before {
+  content: counter(tsec);
+  display: inline-block;
+  min-width: 9mm;
+}
+
+.toc li li > a::before {
+  content: counter(tsec) "." counter(tsub);
+  min-width: 10mm;
 }
 
 .toc a::after {
   content: leader(".") target-counter(attr(href url), page);
-  color: #319795; /* teal-500 */
-  font-weight: 700;
-}
-
-/* ---------- Measure cards ---------- */
-
-.flag {
-  display: inline-block;
-  font-weight: 700;
-  font-size: 8pt;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #c2410c; /* text-warning */
-  border: 0.6pt solid #c2410c; /* text-warning */
-  border-radius: 3pt;
-  padding: 0 4pt;
-  margin-right: 4pt;
-}
-
-.card {
-  border: 0.6pt solid #CBD5E1; /* gray-300 */
-  border-radius: 6pt;
-  padding: 0 5mm 3mm 5mm;
-  margin: 0 0 5mm 0;
-  font-size: 8.6pt;
-  line-height: 1.4;
-  break-inside: avoid;
-}
-
-/* Each measure in the dashboard opens a page; the first follows its section heading. */
-.card.solo {
-  break-before: page;
-}
-
-/* A section heading that opens a page keeps its first card with it */
-h2.new-page + .card.solo {
-  break-before: auto;
-}
-
-/* The explainers' introduction shares a page with the first explainer */
-#our-explainers + p + .explainer {
-  break-before: auto;
-}
-
-.card table tr,
-.card p:has(> .why) {
-  break-inside: avoid;
-}
-
-/* Header band: the measure, its key fact and its tags */
-.card h3 {
-  margin: 0 -5mm 0 -5mm;
-  padding: 4.5mm 5mm 1mm 5mm;
-  font-size: 15pt;
-  line-height: 1.2;
-  color: #FFFFFF; /* white */
-  background: #2C7A7B; /* teal-600 */
-  border-radius: 6pt 6pt 0 0;
-}
-
-.card p:has(> .keyfact) {
-  margin: 0 -5mm 0 -5mm;
-  padding: 0 5mm 2mm 5mm;
-  background: #2C7A7B; /* teal-600 */
-}
-
-.keyfact {
-  font-size: 9.5pt;
-  font-weight: 700;
-  color: #E6FFFA; /* teal-50 */
-}
-
-.card .tags {
-  margin: 0 -5mm 0 -5mm;
-  padding: 0 5mm 4mm 5mm;
-  background: #2C7A7B; /* teal-600 */
-}
-
-.card .tags p {
-  margin: 0;
-}
-
-.badge {
-  display: inline-block;
-  font-size: 7pt;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  border-radius: 8pt;
-  padding: 1pt 6pt;
-  margin-right: 3pt;
-}
-
-.badge.announced {
-  color: #234E52; /* teal-800 */
-  background: #FFFFFF; /* white */
-}
-
-.badge.changed {
-  color: #234E52; /* teal-800 */
-  background: #B2F5EA; /* teal-100 */
-}
-
-.badge.new {
-  color: #FFFFFF; /* white */
-  background: #026AA2; /* blue-700 */
-}
-
-.prev {
-  display: inline-block;
-  font-size: 7.5pt;
-  color: #FFFFFF; /* white */
-  border: 0.6pt solid #81E6D9; /* teal-200 */
-  border-radius: 8pt;
-  padding: 0.4pt 6pt;
-}
-
-/* Key-figure tiles */
-.tiles {
-  display: flex;
-  gap: 3mm;
-  margin: 4mm 0 3mm;
-  break-inside: avoid;
-}
-
-.tile {
-  flex: 1 1 0;
-  background: #E6FFFA; /* teal-50 */
-  border-radius: 4pt;
-  padding: 2.6mm 3mm 2.4mm;
-}
-
-.tile b {
-  display: block;
-  font-size: 15pt;
-  line-height: 1.1;
-  color: #234E52; /* teal-800 */
-  margin-bottom: 1mm;
-}
-
-.tile span {
-  display: block;
-  font-size: 7.4pt;
-  line-height: 1.3;
   color: #475569; /* gray-600 */
 }
-
-/* Text rows: what changes, who it affects, how we model it */
-.card table:not(:has(thead)) {
-  margin: 1mm 0 3mm;
-  font-size: 8.6pt;
-}
-
-.card table:not(:has(thead)) td {
-  border-bottom: 0.4pt solid #E2E8F0; /* gray-200 */
-  padding: 1.8mm 0 1.8mm 0;
-  vertical-align: top;
-}
-
-.card table:not(:has(thead)) td:first-child {
-  width: 30mm;
-  padding-right: 4mm;
-}
-
-.card table:not(:has(thead)) td:first-child strong {
-  font-size: 7.4pt;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #285E61; /* teal-700 */
-}
-
-/* Official against ours, as a bar pair */
-.bars {
-  margin: 3mm 0 2mm;
-  padding: 3mm 3.5mm 2.5mm;
-  border: 0.6pt solid #E2E8F0; /* gray-200 */
-  border-radius: 4pt;
-  break-inside: avoid;
-}
-
-.bar-head {
-  font-size: 7.4pt;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #475569; /* gray-600 */
-  margin-bottom: 2mm;
-}
-
-.bar-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.6mm;
-  font-size: 8pt;
-}
-
-.bar-label {
-  flex: 0 0 56mm;
-  padding-right: 2mm;
-  font-size: 7.6pt;
-  color: #1E293B; /* gray-800 */
-}
-
-.bar-track {
-  flex: 1 1 auto;
-  height: 4.2mm;
-}
-
-.bar {
-  display: block;
-  height: 4.2mm;
-  border-radius: 0 2pt 2pt 0;
-}
-
-.bar-row.official .bar {
-  background: #94A3B8; /* gray-400 */
-}
-
-.bar-row.ours .bar {
-  background: #2C7A7B; /* teal-600 */
-}
-
-.bar-value {
-  flex: 0 0 16mm;
-  text-align: right;
-  font-weight: 700;
-  color: #101828; /* gray-900 */
-}
-
-.bar-gap {
-  font-size: 7.8pt;
-  font-weight: 700;
-  color: #285E61; /* teal-700 */
-  text-align: right;
-}
-
-/* The full cost table */
-.card table:has(thead) {
-  margin: 2mm 0 1.5mm;
-  font-size: 7.8pt;
-  break-inside: avoid;
-}
-
-.card table:has(thead) th {
-  font-size: 7.4pt;
-  color: #475569; /* gray-600 */
-  border-bottom: 0.8pt solid #319795; /* teal-500 */
-  padding: 0.8mm 1.5mm;
-}
-
-.card table:has(thead) td {
-  border-bottom: 0.4pt solid #E2E8F0; /* gray-200 */
-  padding: 0.8mm 1.5mm;
-  font-variant-numeric: tabular-nums;
-}
-
-.card table:has(thead) th:not(:first-child),
-.card table:has(thead) td:not(:first-child) {
-  text-align: right;
-}
-
-.card table tr:has(.ours) td {
-  background: #E6FFFA; /* teal-50 */
-  font-weight: 700;
-  color: #234E52; /* teal-800 */
-}
-
-.zero {
-  color: #94A3B8; /* gray-400 */
-  font-weight: 400;
-}
-
-/* Why ours differs: a callout */
-.card p:has(> .why) {
-  margin: 3mm 0 0;
-  padding: 3mm 4mm 3mm 4mm;
-  background: #FFFBEB; /* amber-50 */
-  border-left: 2.4pt solid #D97706; /* amber-600 */
-  border-radius: 0 4pt 4pt 0;
-}
-
-.why {
-  display: block;
-  font-weight: 700;
-  font-size: 7.6pt;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #92400E; /* amber-800 */
-  margin-bottom: 1mm;
-}
-
-.why::before {
-  content: "i";
-  display: inline-block;
-  width: 3.6mm;
-  height: 3.6mm;
-  line-height: 3.6mm;
-  margin-right: 1.6mm;
-  border-radius: 50%;
-  background: #D97706; /* amber-600 */
-  color: #FFFFFF; /* white */
-  font-size: 7pt;
-  text-align: center;
-  text-transform: none;
-}
-
-/* Read more: a link button at the foot of the card */
-.readmore {
-  margin-top: 3.5mm;
-}
-
-.readmore p {
-  display: inline-block;
-  margin: 0;
-  padding: 1.6mm 4mm;
-  border: 0.8pt solid #2C7A7B; /* teal-600 */
-  border-radius: 10pt;
-  font-size: 8pt;
-}
-
-.readmore .label {
-  color: #475569; /* gray-600 */
-  margin-right: 1.5mm;
-}
-
-.readmore a {
-  font-weight: 700;
-  color: #2C7A7B; /* teal-600 */
-  text-decoration: none;
-}
-
-.costs table {
-  table-layout: fixed;
-  width: 100%;
-  font-size: 8.2pt;
-}
-
-.costs table th,
-.costs table td {
-  padding-left: 2pt;
-  padding-right: 2pt;
-}
-
-.costs table th {
-  background: #F8FAFC; /* gray-50 */
-}
-
-.glance table {
-  font-size: 8.8pt;
-}
-
-.glance table th {
-  background: #F8FAFC; /* gray-50 */
-}
-
-.glance table td,
-.glance table th {
-  padding-top: 0.9mm;
-  padding-bottom: 0.9mm;
-}
-
-/* A section that would otherwise leave its heading at the foot of a page */
-.new-page {
-  break-before: page;
-}
-
-/* ---------- Explainers and figures ---------- */
-
-body {
-  counter-reset: figure;
-}
-
-/* One page per explainer: its key points, then one of its charts */
-.explainer {
-  break-before: page;
-}
-
-.explainer h3 {
-  font-size: 13pt;
-  margin-top: 0;
-  padding-bottom: 2mm;
-  border-bottom: 0.8pt solid #CBD5E1; /* gray-300 */
-}
-
-.explainer h3 a {
-  color: #234E52; /* teal-800 */
-  text-decoration: none;
-}
-
-/* Each chart sits on the page under a numbered label and a thin teal rule.
-   The chart's own title and source line are drawn inside the SVG, which
-   links to the post it comes from. */
-.explainer p:has(img.chart) {
-  counter-increment: figure;
-  margin: 6mm 0 0;
-  padding-top: 2mm;
-  border-top: 0.8pt solid #319795; /* teal-500 */
-  break-inside: avoid;
-}
-
-.explainer p:has(img.chart)::before {
-  content: "Figure " counter(figure);
-  display: block;
-  font-size: 7.5pt;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #285E61; /* teal-700 */
-  margin-bottom: 2mm;
-}
-
-.explainer p:has(img.chart) a {
-  text-decoration: none;
-}
-
-img.chart {
-  display: block;
-  width: 100%;
-  margin: 0;
-}
-
-/* ---------- Links ---------- */
-
-/* Teal, with a thin underline so links show in print */
-a {
-  color: #2C7A7B; /* teal-600 */
-  text-decoration: underline;
-  text-decoration-color: #81E6D9; /* teal-200 */
-}
-
-.toc a,
-.cover a,
-.back a,
-h3 a {
-  text-decoration: none;
-}
-
-#on-our-list-not-in-the-budget + table td {
-  padding-top: 1.1mm;
-  padding-bottom: 1.1mm;
-  font-size: 8.8pt;
-}
-
-/* Long link text on the sources page wraps instead of running off the page */
-#sources-and-method ~ ul a,
-#sources-and-method ~ ul {
-  overflow-wrap: anywhere;
-}
-
-#sources-and-method ~ ul li,
-#limitations + ul li {
-  margin-bottom: 0.6mm;
-  font-size: 8.4pt;
-  line-height: 1.36;
-}
-
 
 /* ---------- Back page ---------- */
 

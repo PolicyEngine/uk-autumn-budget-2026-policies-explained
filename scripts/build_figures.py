@@ -22,9 +22,6 @@ Placeholders in the template:
   {{lineabs:<n>:<lines>:<year>}}  one OBR line value as £ without sign, £m
   {{gap:<measure_id>:<n>:<lines>:<year>}}     |ours − OBR line| as £ without sign, £m, from the printed whole £m
   {{gappct:<measure_id>:<n>:<lines>:<year>}}  |ours ÷ OBR line − 1| as a whole per cent, from the printed whole £m
-  {{bar:<measure_id>:<n>:<lines>:<year>:<gap>[:<label>]}}  an HTML bar pair, the OBR line(s) against ours (its bar
-                                  labelled <label>, "PolicyEngine" if none) for one year, with the gap as "pct",
-                                  "gbp" or "none"; the same whole £m the card's table prints
   {{t61:<row>:<year>}}            one Table 6.1 value, signed, £m
   {{t61abs:<row>:<year>}}         one Table 6.1 value as £ without sign, £m
   {{t62sum:<row>}}                a Table 6.2 row summed over the six years, as £ without sign, £m
@@ -139,35 +136,15 @@ def load_dashboard(manifest_path, art_dir):
     return m, out
 
 
-def cell(v):
-    """A table cell: the whole £m, with zero marked so the layout can mute it."""
-    printed = fmt(v)
-    return "[0]{.zero}" if printed == "0" else printed
-
-
 def costing_table(official_rows, pe=None, pe_label="PolicyEngine"):
     head = "| £ million | " + " | ".join(year_label(y) for y in YEARS) + " |"
     sep = "|:--------------------------|" + "|".join(["------:"] * len(YEARS)) + "|"
     lines = [head, sep]
     for label, vals in official_rows:
-        lines.append(f"| {label} | " + " | ".join(cell(vals[y]) for y in YEARS) + " |")
+        lines.append(f"| {label} | " + " | ".join(fmt(vals[y]) for y in YEARS) + " |")
     if pe is not None:
-        lines.append(f"| [{pe_label}]{{.ours}} | " + " | ".join(cell(pe[y]) for y in YEARS) + " |")
+        lines.append(f"| [{pe_label}]{{.ours}} | " + " | ".join(fmt(pe[y]) for y in YEARS) + " |")
     return "\n".join(lines)
-
-
-def bar_pair(year, official_label, official, pe_label, pe, gap):
-    """Two horizontal bars on one scale, official above ours, as one line of raw HTML."""
-    top = max(abs(official), abs(pe)) or 1
-    rows = "".join(
-        f'<div class="bar-row {cls}"><span class="bar-label">{label}</span>'
-        f'<span class="bar-track"><span class="bar" style="width: {abs(v) / top * 100:.1f}%"></span></span>'
-        f'<span class="bar-value">{fmt(v)}</span></div>'
-        for cls, label, v in (("official", official_label, official), ("ours", pe_label, pe))
-    )
-    tail = f'<div class="bar-gap">Gap: {gap}</div>' if gap else ""
-    return f'<div class="bars"><div class="bar-head">{year_label(year)}, £ million</div>{rows}{tail}</div>'
-
 
 
 def main():
@@ -243,15 +220,6 @@ def main():
             note_rows("t61", n, t61[n]["values"])
             note_rows("pe", key, pe)
             return costing_table([(f"Official: {line_label(lines)}", line), ("Table 6.1 total", t61[n]["values"])], pe, pe_label) + others_note(n, lines)
-        if kind == "bar":
-            key, n, lines, y, gap_kind = parts[1], int(parts[2]), parts[3], int(parts[4]), parts[5]
-            pe_label = parts[6] if len(parts) > 6 else "PolicyEngine"
-            ours, theirs = round(pe_m(key)[y]), round(obr_line(n, lines)[y])
-            note("obr", f"{n}, {lines}", y, obr_line(n, lines)[y], fmt(theirs))
-            note("pe", key, y, pe_m(key)[y], fmt(ours))
-            gap = {"pct": f"{round(abs(ours / theirs - 1) * 100)}%" if theirs else "",
-                   "gbp": f"£{abs(ours - theirs):,} million", "none": ""}[gap_kind]
-            return bar_pair(y, f"Official: {line_label(lines)}", theirs, pe_label, ours, gap)
         if kind == "official" and len(parts) == 3:
             n, lines = int(parts[1]), parts[2]
             line = obr_line(n, lines)
