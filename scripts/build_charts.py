@@ -2,10 +2,10 @@
 
 Each chart is the explainer's own published chart: the JSON spec in its
 ```chart block (sources/posts/), drawn here with matplotlib in the
-PolicyEngine palette and Inter, with text as outlines so it looks the same on
-every machine. Where a chart shows the dashboard's results (the income decile
-charts), every bar is checked against the dashboard artifact the build uses,
-and the build stops if one differs by more than the post's rounding.
+PolicyEngine palette and pe-doc's Inter, with text as outlines so it looks the
+same on every machine. Where a chart shows the dashboard's results (the income
+decile charts), the build checks every bar against the dashboard artifact it
+uses, and stops if one differs by more than the post's data rounds.
 
 document/charts/charts.json records each chart's post, block and checks.
 
@@ -18,6 +18,7 @@ import hashlib
 import json
 import sys
 import textwrap
+from decimal import Decimal
 from pathlib import Path
 
 import matplotlib
@@ -32,20 +33,25 @@ import pe_doc  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # python -I leaves out the script's folder
 from explainers import POSTS, adapt, chart_specs  # noqa: E402
 
-# (output name, post slug, chart block index, dashboard checks)
+# (output name, post slug, chart block index, data decimals, dashboard checks)
 # A check is (series key, artifact key, year): the series' value for each
-# decile must match that artifact's winners_losers.csv avg_change.
+# decile must match that artifact's winners_losers.csv avg_change to the
+# precision the post's data carries. Data decimals gives that precision: the
+# post rounds its values to that many places, or None if it keeps them unrounded.
 CHARTS = [
-    ("energy-bills-deciles", "budget-2026-energy-bills", 0,
+    ("energy-bills-deciles", "budget-2026-energy-bills", 0, 0,
      [("payment", "household_energy_payment_2026", 2026), ("vat", "domestic_electricity_zero_vat", 2026)]),
-    ("fuel-duty-deciles", "fuel-duty-cut-extension", 2,
+    ("fuel-duty-deciles", "fuel-duty-cut-extension", 2, 3,
      [("y2026", "fuel_duty_rise_deferral", 2026), ("y2027", "fuel_duty_rise_deferral", 2027)]),
-    ("pension-tax-allowance-income-tax", "pension-tax-allowance", 1, []),
-    ("carers-allowance-by-pay", "carers-allowance-taper", 0, []),
-    ("property-income-deciles", "uk-autumn-budget-2026-property-income-tax", 0,
+    ("pension-tax-allowance-income-tax", "pension-tax-allowance", 1, None, []),
+    ("carers-allowance-by-pay", "carers-allowance-taper", 0, None, []),
+    ("property-income-deciles", "uk-autumn-budget-2026-property-income-tax", 0, None,
      [("y2027", "property_income_rates_up", 2027), ("y2031", "property_income_rates_up", 2031)]),
-    ("trading-allowance-receipts", "uk-autumn-budget-2026-trading-allowance", 0, []),
+    ("trading-allowance-receipts", "uk-autumn-budget-2026-trading-allowance", 0, None, []),
 ]
+
+# Room for binary floating point when two decimal strings name the same number
+EPSILON = 1e-9
 
 # The posts name colours by role; these are the PolicyEngine ui-kit values
 COLOURS = {
@@ -65,9 +71,20 @@ SOURCE_ADAPTATIONS = {
 
 
 def setup_fonts():
+    """Draw with pe-doc's own Inter files, whatever fonts the machine has."""
     fonts = Path(pe_doc.__file__).parent / "template" / "fonts"
-    for name in ("Inter-Regular.ttf", "Inter-Bold.ttf"):
-        font_manager.fontManager.addfont(str(fonts / name))
+    files = {"normal": fonts / "Inter-Regular.ttf", "bold": fonts / "Inter-Bold.ttf"}
+    # An installed Inter would tie with the bundled one on family name, and
+    # matplotlib keeps the first of equal matches; drop it, so glyphs and
+    # layout come out the same on every machine
+    manager = font_manager.fontManager
+    manager.ttflist = [f for f in manager.ttflist if f.name != "Inter"]
+    for path in files.values():
+        manager.addfont(str(path))  # also clears matplotlib's font lookup cache
+    for weight, path in files.items():
+        found = font_manager.findfont(font_manager.FontProperties(family="Inter", weight=weight), fallback_to_default=False)
+        if Path(found).resolve() != path.resolve():
+            raise SystemExit(f"Inter {weight} resolves to {found}, not pe-doc's {path}")
     plt.rcParams.update({
         "font.family": "Inter",
         "font.size": 8,
@@ -97,10 +114,19 @@ def decile_label(d):
     return str(d).rstrip("stndrdth") or str(d)
 
 
-def check_deciles(spec, checks, artifacts):
-    """Every bar of each checked series against the artifact; returns what was checked."""
+def decimals_of(value):
+    """Decimal places a number carries, trailing zeros aside (72.0 has none, 6.920 two)."""
+    return max(0, -Decimal(str(value)).normalize().as_tuple().exponent)
+
+
+def tolerance(decimals):
+    """How far a posted value may sit from the artifact's: half its last digit, or none if unrounded."""
+    return (0.5 * 10 ** -decimals if decimals is not None else 0) + EPSILON
+
+
+def check_deciles(spec, checks, artifacts, decimals):
+    """Check every bar of each checked series against the artifact; return what the check covered."""
     done = []
-    tol = 0.5 + 1e-9 if spec.get("format", {}).get("decimals", 0) == 0 else 0.005
     for series, key, year in checks:
         rows = {r["decile"]: r["avg_change"] for r in csv.DictReader(open(Path(artifacts) / key / "winners_losers.csv")) if int(r["year"]) == year}
         for point in spec["data"]:
@@ -108,10 +134,13 @@ def check_deciles(spec, checks, artifacts):
             posted, art = point[series], rows.get(d)
             if art in (None, ""):
                 raise SystemExit(f"{key} {year} decile {d}: the artifact withholds it, the post shows {posted}")
-            # Posts that print whole pounds round their data; others carry it unrounded
-            if abs(float(posted) - float(art)) > max(tol, 0.0015 * abs(float(art))):
-                raise SystemExit(f"{key} {year} decile {d}: post {posted} vs artifact {float(art):.3f}")
-        done.append({"series": series, "artifact": f"{key}/winners_losers.csv", "year": year, "deciles": len(spec["data"])})
+            # A post that carries more places than CHARTS says would loosen the check
+            if decimals is not None and decimals_of(posted) > decimals:
+                raise SystemExit(f"{key} {year} decile {d}: post {posted} has more than the {decimals} decimals CHARTS gives")
+            if abs(float(posted) - float(art)) > tolerance(decimals):
+                raise SystemExit(f"{key} {year} decile {d}: post {posted} vs artifact {art}")
+        done.append({"series": series, "artifact": f"{key}/winners_losers.csv", "year": year, "deciles": len(spec["data"]),
+                     "precision": "unrounded" if decimals is None else f"{decimals} decimals"})
     return done
 
 
@@ -192,9 +221,9 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     sha = (POSTS / "APP_V2_MAIN_SHA").read_text().strip()
     record = []
-    for name, slug, index, checks in CHARTS:
+    for name, slug, index, decimals, checks in CHARTS:
         spec = chart_specs(slug)[index]
-        checked = check_deciles(spec, checks, a.artifacts)
+        checked = check_deciles(spec, checks, a.artifacts, decimals)
         draw(spec, out / f"{name}.svg", slug)
         record.append({
             "chart": f"{name}.svg", "post": f"{slug}.md", "app_v2_main": sha, "block": index, "title": spec["title"],

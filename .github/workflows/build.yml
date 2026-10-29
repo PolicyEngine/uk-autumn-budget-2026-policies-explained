@@ -42,6 +42,9 @@ jobs:
       - name: Install
         run: uv sync --frozen
 
+      - name: Test the build scripts
+        run: uv run --frozen pytest -q
+
       - name: Build and check the PDF
         run: scripts/build.sh
 

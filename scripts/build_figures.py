@@ -284,7 +284,7 @@ def main():
         if kind == "signoff":
             entry = manifest["combined"][parts[1]]
             if signed(entry.get("attestation")):
-                return "The combined run is signed off."
+                return "The combined run has passed sign-off."
             return "The combined run's sign-off is still pending."
         if kind == "post_sha":
             return (POSTS / "APP_V2_MAIN_SHA").read_text().strip()
@@ -296,10 +296,10 @@ def main():
             rev = f"manifest revision {manifest['revision']} ({manifest['updated_at'][:16].replace('T', ' ')} UTC)"
             if a.source == "test":
                 lead = f"PolicyEngine figures are first estimates from the Budget dashboard's test publication, {rev}."
-                tail = f" They are still going through our checks and may change when the dashboard is published at {DASHBOARD}."
+                tail = f" They are still going through our checks and may change when we publish the dashboard at {DASHBOARD}."
             else:
                 lead = f"PolicyEngine figures are from the Budget dashboard at {DASHBOARD}, {rev}."
-                tail = " Some are still marked provisional on the dashboard and may change." if provisional else ""
+                tail = " The dashboard still marks some as provisional, and they may change." if provisional else ""
             flag = "[Provisional]{.flag} " if provisional else ""
             return flag + lead + tail
         raise SystemExit(f"unknown placeholder {match.group(0)}")

@@ -11,13 +11,15 @@
     "series": "payment",
     "artifact": "household_energy_payment_2026/winners_losers.csv",
     "year": 2026,
-    "deciles": 10
+    "deciles": 10,
+    "precision": "0 decimals"
    },
    {
     "series": "vat",
     "artifact": "domestic_electricity_zero_vat/winners_losers.csv",
     "year": 2026,
-    "deciles": 10
+    "deciles": 10,
+    "precision": "0 decimals"
    }
   ]
  },
@@ -33,13 +35,15 @@
     "series": "y2026",
     "artifact": "fuel_duty_rise_deferral/winners_losers.csv",
     "year": 2026,
-    "deciles": 10
+    "deciles": 10,
+    "precision": "3 decimals"
    },
    {
     "series": "y2027",
     "artifact": "fuel_duty_rise_deferral/winners_losers.csv",
     "year": 2027,
-    "deciles": 10
+    "deciles": 10,
+    "precision": "3 decimals"
    }
   ]
  },
@@ -73,13 +77,15 @@
     "series": "y2027",
     "artifact": "property_income_rates_up/winners_losers.csv",
     "year": 2027,
-    "deciles": 10
+    "deciles": 10,
+    "precision": "unrounded"
    },
    {
     "series": "y2031",
     "artifact": "property_income_rates_up/winners_losers.csv",
     "year": 2031,
-    "deciles": 10
+    "deciles": 10,
+    "precision": "unrounded"
    }
   ]
  },
