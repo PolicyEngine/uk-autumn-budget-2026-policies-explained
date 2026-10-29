@@ -12,20 +12,28 @@
 
 @page {
   size: A4;
-  margin: 22mm 22mm 20mm 22mm;
+  margin: 16mm 22mm 20mm 22mm;
 
+  /* A slim header: the logo on the left, the title on the right, a hairline under both */
   @top-left {
-    content: "Autumn Budget 2026: the policies explained";
-    font: 7.5pt "Inter", sans-serif;
-    color: #64748B; /* gray-500 */
+    content: url("assets/policyengine-teal.png");
+    image-resolution: 1170dpi; /* about 4.5mm tall */
+    width: 50%;
     vertical-align: bottom;
-    padding-bottom: 3mm;
+    padding-bottom: 1.6mm;
+    margin-bottom: 4mm;
+    border-bottom: 0.4pt solid #CBD5E1; /* gray-300 */
   }
   @top-right {
-    content: url("assets/policyengine-teal.png");
-    image-resolution: 640dpi; /* about 40mm wide */
+    content: "Autumn Budget 2026: the policies explained";
+    font: 7pt "Inter", sans-serif;
+    color: #64748B; /* gray-500 */
+    width: 50%;
+    text-align: right;
     vertical-align: bottom;
-    padding-bottom: 2.4mm;
+    padding-bottom: 2mm;
+    margin-bottom: 4mm;
+    border-bottom: 0.4pt solid #CBD5E1; /* gray-300 */
   }
   @bottom-left {
     content: "PolicyEngine  |  policyengine.org";
@@ -612,6 +620,14 @@ a {
 .back img.back-logo {
   width: 70mm;
   margin-bottom: 8mm;
+}
+
+.back svg.icon {
+  display: inline-block;
+  width: 3.4mm;
+  height: 3.4mm;
+  vertical-align: -0.6mm;
+  margin-right: 2mm;
 }
 
 .back .label {

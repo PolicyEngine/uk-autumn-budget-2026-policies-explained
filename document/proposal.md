@@ -643,15 +643,15 @@ The numbers give each measure's place on our list of 27 October, the day before 
 ::: {.back}
 ![PolicyEngine](assets/policyengine-white.png){.back-logo}\
 
-[Contact]{.label}\
+[<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#81E6D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Contact]{.label}\
 [hello@policyengine.org](mailto:hello@policyengine.org)
 
-[Autumn Budget 2026 dashboard]{.label}\
+[<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#81E6D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>Autumn Budget 2026 dashboard]{.label}\
 [policyengine.org/uk/autumn-budget-2026](https://www.policyengine.org/uk/autumn-budget-2026)
 
-[Post-Budget briefing]{.label}\
+[<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#81E6D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Post-Budget briefing]{.label}\
 [policyengine.org/uk/research/uk-autumn-budget-2026-briefing](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-briefing)
 
-[PolicyEngine]{.label}\
+[<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#81E6D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>PolicyEngine]{.label}\
 [policyengine.org](https://www.policyengine.org)
 :::
