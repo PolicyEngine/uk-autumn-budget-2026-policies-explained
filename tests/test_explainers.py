@@ -21,6 +21,12 @@ Invariants:
   one-line paragraph that shows as "Key results/figures/findings ...:", with
   a bullet list straight after it. Mentions the page never shows (in a
   comment, an unreferenced footnote, an image without a source) don't count.
+- A table, <details>, a chart and the formatter's layout out of the flow can
+  set two of their pieces side by side in another order than the HTML's, so
+  the count sees any two such pieces side by side, in either order: a table
+  or a chart can show the words wherever its cells or strings sit (property
+  tests). Charts count each string in their JSON, read the way the site's
+  chart and Plotly read it.
 - A post whose HTML the page text can't follow (styles, classes outside
   GFM's, the hidden attribute, dir, <template>, forms, media), in any pane,
   stops the build, and so does a bidirectional override.
@@ -30,6 +36,7 @@ Invariants:
 
 import html
 import itertools
+import json
 import re
 import time
 
@@ -135,12 +142,22 @@ SHOWN_SECOND = [
     '<span title="a &gt; b">K</span>ey figures:\n',  # an attribute holding ">" (Sol review r10)
     "K[ey](</x y>) figures:\n", "K[ey](/x\\)) figures:\n",  # link destinations (Sol review r10)
     "K<!-- Key figures -->ey figures:\n",  # the comment hides one; the page shows the other
+    # Layout that can set two pieces side by side in another order than the HTML's (Sol review r11)
+    '<table><tr><td>x</td><td rowspan="2">figures:</td></tr><tr><td>Key</td></tr></table>\n',  # a cell spanning rows
+    "<table><thead><tr><td>figures:</td></tr></thead><caption>Key</caption></table>\n",
+    "<details><p>figures:</p><summary>Key</summary></details>\n",  # the summary shows first
+    "```highlighted-block\nKey\n\nMore words.\n&&&\nfigures: here\n```\n",  # its panes sit side by side
+    '```chart\n{"type":"bar","subtitle":"figures:","title":"Key","xKey":"g","series":[{"key":"v","name":"V"}],'
+    '"data":[{"g":"A","v":1}]}\n```\n',  # the title shows above the subtitle
+    '```plotly\n{"data":[{"x":["figures:"],"y":[2],"type":"bar","texttemplate":"Key %{x}"}]}\n```\n',  # Plotly fills %{x}
+    '```plotly\n{"data":[],"layout":{"title":{"text":"&#75;ey figures:"}}}\n```\n',  # Plotly decodes the entity
+    '```plotly\n{"data":[],"layout":{"title":{"text":"Key<br>figures:"}}}\n```\n',
 ]
 
 
 @pytest.mark.parametrize("second", SHOWN_SECOND)
 def test_a_second_mention_the_page_shows_stops_the_build(monkeypatch, second):
-    with pytest.raises(SystemExit, match=r"one place on the page, found [2-9]"):
+    with pytest.raises(SystemExit, match=r"one place on the page, found ([2-9]|[1-9]\d+)\b"):
         quote(monkeypatch, f"Key results:\n\n- actual\n\n## More\n\n{second}")
 
 
@@ -149,6 +166,8 @@ def test_a_second_mention_the_page_shows_stops_the_build(monkeypatch, second):
     '<img alt="Key figures:">\n',  # an image without a source, which the formatter drops (Sol review r7)
     '<img src="" alt="Key figures:">\n',
     "[^9]: Key figures:\n",  # a footnote nothing references, which GFM drops (Sol review r7)
+    '```chart\n{"type":"bar","title":"Key","subtitle":"figure","xKey":"key"}\n```\n',  # a chart without the words
+    "| Key | figure |\n|---|---|\n| other | y |\n",  # a table without them
     '[link](/x "Key figures:")\n',  # the formatter's links drop their title
     "K<!-- x -->ey<!-- y -->\n",  # half the words
 ])
@@ -370,6 +389,88 @@ def test_a_second_opening_in_a_footnote_stops_the_build(monkeypatch, line):
     post = f"Key results:\n\n- actual\n\n## More\n\nText.[^1]\n\n[^1]: First paragraph\n\n    {line}\n\n    More prose.\n"
     with pytest.raises(SystemExit, match="one place on the page, found 2"):
         quote(monkeypatch, post)
+
+
+R11_CHART = '{"type":"bar","title":"Key\\nfigures","xKey":"group","series":[{"key":"value","name":"Value"}],"data":[{"group":"A","value":1}]}'
+
+
+@pytest.mark.parametrize("block", [
+    f"```chart\n{R11_CHART}\n```",
+    '```plotly\n{"data":[{"x":[1],"y":[2],"type":"bar"}],"layout":{"title":{"text":"<b>Key</b> figures"}}}\n```',
+    "<table><tbody><tr><td>figures:</td></tr></tbody><caption>Key</caption></table>",
+    "<table><tfoot><tr><td>figures:</td></tr></tfoot><tbody><tr><td>Key</td></tr></tbody></table>",
+])
+def test_a_second_opening_in_a_chart_or_a_table_stops_the_build(monkeypatch, block):
+    # Sol review r11's reproductions, word for word
+    with pytest.raises(SystemExit, match=r"one place on the page, found [2-9]\b"):
+        quote(monkeypatch, f"Key results:\n\n- actual\n\n{block}\n")
+
+
+def test_a_chart_spec_that_doesnt_parse_counts_as_written():
+    # The site draws nothing for it; counting its text errs on the safe side
+    assert count("```chart\nKey figures, not JSON\n```\n") == 2
+
+
+@pytest.mark.parametrize("kind, string, pieces", [
+    ("chart", "<b>Key</b> figures", ["<b>Key</b> figures"]),  # the site's own charts show a string as written
+    ("plotly", "<b>K</b>ey&amp; %{x:.1f} more", ["<b>", "K", "</b>", "ey&amp; ", "ey& ", "%{x:.1f}", " more"]),
+    ("plotly", "%{Key figures}", ["%{Key figures}"]),  # Plotly fills no placeholder with a space in it
+])
+def test_chart_pieces(kind, string, pieces):
+    assert explainers.chart_pieces(kind, json.dumps({"title": string, "n": 1})) == pieces
+
+
+CELLS = ["Key", "figures", "other", "x"]
+
+
+@st.composite
+def tables(draw):
+    """A table with its sections in any order and cells that span rows, one word to a cell."""
+    parts = []
+    for section in draw(st.lists(st.sampled_from(["caption", "thead", "tbody", "tfoot"]), min_size=1, max_size=4)):
+        if section == "caption":
+            parts.append(f"<caption>{draw(st.sampled_from(CELLS))}</caption>")
+            continue
+        rows = draw(st.lists(st.lists(st.tuples(st.sampled_from(CELLS), st.integers(1, 3)), min_size=1, max_size=3),
+                             min_size=1, max_size=3))
+        cells = ("".join(f'<td rowspan="{n}">{word}</td>' for word, n in row) for row in rows)
+        parts.append(f"<{section}>" + "".join(f"<tr>{c}</tr>" for c in cells) + f"</{section}>")
+    return "<table>" + "".join(parts) + "</table>"
+
+
+@settings(max_examples=100, deadline=None)
+@given(tables())
+def test_a_table_can_show_the_words_wherever_its_cells_sit(table):
+    assert (count(table + "\n") > 0) == ({"Key", "figures"} <= set(re.findall(r">(\w+)<", table)))
+
+
+@st.composite
+def charts(draw):
+    """A chart with its strings in any order and, for Plotly, wrapped in its markup."""
+    words = []
+
+    def word():
+        words.append(draw(st.sampled_from(CELLS)))
+        return words[-1]
+
+    if draw(st.booleans()):
+        spec = {"type": "bar", "title": word(), "subtitle": word(), "xKey": "g", "series": [{"key": "v", "name": word()}],
+                "data": [{"g": word(), "v": 1}, {"g": word(), "v": 2}], "source": word()}
+        kind = "chart"
+    else:
+        markup = draw(st.lists(st.sampled_from(["{}", "<b>{}</b>", "{}<br>", "<i>{}</i>", "&#32;{}"]), min_size=2, max_size=2))
+        spec = {"data": [{"x": [word(), word()], "y": [1, 2], "type": "bar", "name": markup[0].format(word())}],
+                "layout": {"title": {"text": markup[1].format(word())}}}
+        kind = "plotly"
+    keys = draw(st.permutations(list(spec)))
+    return kind, {k: spec[k] for k in keys}, set(words)
+
+
+@settings(max_examples=100, deadline=None)
+@given(charts())
+def test_a_chart_can_show_the_words_wherever_it_places_its_strings(chart):
+    kind, spec, words = chart
+    assert (count(f"```{kind}\n{json.dumps(spec)}\n```\n") > 0) == ({"Key", "figures"} <= words)
 
 
 def test_a_post_the_renderer_cant_finish_stops_the_build(monkeypatch):

@@ -28,8 +28,8 @@ bun render.tsx in.json out.json
 
 | File | Stands in for | What it does |
 |:--|:--|:--|
-| `vendor/components/blog/LazyBlogChart.tsx` | The site's charts (Recharts, through Next.js) | Shows the chart's JSON as text, so the page text holds every title, label and note a chart could show |
-| `vendor/components/blog/LazyPlot.tsx` | Plotly | Shows its props as JSON text, for the same reason |
+| `vendor/components/blog/LazyBlogChart.tsx` | The site's charts (BlogChart: Recharts, through Next.js) | Hands on the chart's JSON as written, in `<pre data-chart="chart">`; the build reads every string in it as text the chart could show |
+| `vendor/components/blog/LazyPlot.tsx` | Plotly | Hands on its props as JSON, in `<pre data-chart="plotly">`; the build reads their strings the way Plotly does |
 | `vendor/designTokens/index.ts` | The design tokens | Reads every token as "0"; tokens set colours, fonts and spacing, never text |
 | `record-markdown.tsx` | react-markdown, as the formatter imports it | Passes every prop to the real react-markdown and notes each Markdown string, so the build can check the HTML in a highlighted block's panes, which the formatter renders with a formatter of their own |
 

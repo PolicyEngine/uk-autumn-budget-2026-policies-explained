@@ -11,6 +11,7 @@ To find the key points, the build renders the post with the site's own code
 """
 
 import atexit
+import html
 import json
 import re
 import select
@@ -179,10 +180,28 @@ def visible(text):
 # reader), and all text inside <details> (closed, it hides all but its
 # summary), inside an element with class sr-only, or inside one the formatter
 # styles as invisible (its heading anchors).
+#
+# Some layout sets two pieces of text side by side in the opposite order to
+# the HTML's, or with other text between them in the HTML: a table (a caption
+# shows on top and a footer at the bottom wherever they sit, and a cell that
+# spans rows sits beside later cells), <details> (its summary shows first), a
+# chart (it places its strings itself), and what the formatter lays out in a
+# row or takes out of the flow (a highlighted block's two panes). The page
+# text gives each such region's text twice, every segment as MAYBE, so the
+# count sees any two of its pieces side by side, in either order.
 BOUNDARY, SHOWN, END, MAYBE, MAYBE_END = "\x00", "\x01", "\x02", "\x03", "\x04"
 TEXT_ATTRIBUTES = {"alt", "title", "aria-label", "value", "placeholder", "label"}
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 HIDING_STYLE = re.compile(r"opacity:0(?![.\d])|display:none|visibility:hidden")
+FREE_TAGS = {"table", "details"}
+FREE_STYLE = re.compile(r"display:(?:inline-)?(?:flex|grid)|position:(?:absolute|fixed|sticky)|float:(?!none)|"
+                        r"columns?(?:-count)?:|order:|direction:|writing-mode:|transform:")
+_AS_MAYBE = str.maketrans({SHOWN: MAYBE, END: MAYBE_END})
+# What Plotly reads in a string (plotly.js 3.4.0, the site's version): tags
+# (SPLIT_TAGS in src/lib/svg_text_utils.js) and template placeholders it fills
+# from the data (TEMPLATE_STRING_REGEX in src/lib/index.js). It decodes
+# entities in the text between them.
+PLOTLY_MARKUP = re.compile(r"(<[^<>]*>|%\{[^\s%{}:]*(?:[:|][^}]*)?\})")
 
 
 def _may_hide(tag, attrs):
@@ -198,10 +217,41 @@ def _segment(text, maybe):
     return (MAYBE + text + MAYBE_END if maybe else SHOWN + text + END) if text else ""
 
 
+def _anywhere(region):
+    """A region's page text, twice, with every segment one the browser may or may not draw."""
+    region = region.translate(_AS_MAYBE)
+    return region + BOUNDARY + region
+
+
+def _strings(value):
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, (dict, list)):
+        for item in value.values() if isinstance(value, dict) else value:
+            yield from _strings(item)
+
+
+def chart_pieces(kind, spec):
+    """The text a chart could show: each string in its JSON (a title, a series
+    name, a category), which the site parses before it draws. Plotly reads tags,
+    placeholders and entities in a string, so a Plotly string comes apart at its
+    tags and placeholders, each piece as written and with entities decoded. A
+    spec that doesn't parse counts as written, though the site draws nothing."""
+    try:
+        strings = list(_strings(json.loads(spec)))
+    except (ValueError, RecursionError):
+        strings = [spec]
+    if kind == "plotly":
+        strings = [q for s in strings for p in PLOTLY_MARKUP.split(s) for q in dict.fromkeys([p, html.unescape(p)])]
+    return [s for s in strings if s.strip()]
+
+
 class _PageText(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.parts, self.text, self.maybe = [], [], [False]
+        self.regions = [None]  # for each open element, where its page text starts if it's a region
+        self.chart = None  # a chart's kind and its JSON, while reading it
 
     def flush(self):
         self.parts.append(_segment("".join(self.text), self.maybe[-1]))
@@ -209,19 +259,33 @@ class _PageText(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         self.flush()
+        start = len(self.parts)
         self.parts.append(BOUNDARY)
         self.parts += [_segment(value, True) + BOUNDARY for name, value in attrs if name in TEXT_ATTRIBUTES and value]
         if tag not in VOID:
-            self.maybe.append(self.maybe[-1] or _may_hide(tag, dict(attrs)))
+            attrs = dict(attrs)
+            self.maybe.append(self.maybe[-1] or _may_hide(tag, attrs))
+            if tag == "pre" and attrs.get("data-chart"):
+                self.chart = (attrs["data-chart"], [])
+            region = tag in FREE_TAGS or self.chart is not None or FREE_STYLE.search(attrs.get("style") or "")
+            self.regions.append(start if region else None)
 
     def handle_endtag(self, tag):
+        if self.chart is not None:
+            kind, spec = self.chart
+            self.chart = None
+            self.parts.append(BOUNDARY.join(_segment(p, False) for p in chart_pieces(kind, "".join(spec))))
         self.flush()
         self.parts.append(BOUNDARY)
         if tag not in VOID and len(self.maybe) > 1:
             self.maybe.pop()
+            start = self.regions.pop()
+            # The outermost region takes in any inside it
+            if start is not None and not any(s is not None for s in self.regions):
+                self.parts[start:] = [_anywhere("".join(self.parts[start:]))]
 
     def handle_data(self, data):
-        self.text.append(data)
+        (self.chart[1] if self.chart is not None else self.text).append(data)
 
 
 def page_text(page, header=()):

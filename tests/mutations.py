@@ -22,6 +22,8 @@ ROOT = Path(__file__).resolve().parent.parent
 CHARTS = "scripts/build_charts.py"
 EXPLAINERS = "scripts/explainers.py"
 RENDER = "site/render.tsx"
+CHART = "site/vendor/components/blog/LazyBlogChart.tsx"
+PLOT = "site/vendor/components/blog/LazyPlot.tsx"
 
 # (what the mutation breaks, file, [(text, replacement), ...]); each text must occur once
 MUTATIONS = [
@@ -52,11 +54,25 @@ MUTATIONS = [
     ("Every attribute value", EXPLAINERS, [("if name in TEXT_ATTRIBUTES and value]", "if value]")]),
     ("Attribute values always shown", EXPLAINERS, [("[_segment(value, True) + BOUNDARY", "[_segment(value, False) + BOUNDARY")]),
     ("Text a browser may hide left out", EXPLAINERS,
-     [("    def handle_data(self, data):\n        self.text.append(data)", "    def handle_data(self, data):\n        self.text += [] if self.maybe[-1] else [data]")]),
+     [("else self.text).append(data)", "else self.text).extend([] if self.maybe[-1] else [data])")]),
     ("<details> text always shown", EXPLAINERS, [('return (tag == "details" or ', 'return (tag == "nothing" or ')]),
     ("sr-only text always shown", EXPLAINERS, [('"sr-only" in (attrs.get("class") or "").split()', "False")]),
     ("Text the formatter styles invisible always shown", EXPLAINERS,
      [('bool(HIDING_STYLE.search(attrs.get("style") or ""))', "False")]),
+    # Layout that can set text side by side in another order (Sol review r11)
+    ("A table keeps the HTML's order", EXPLAINERS, [('FREE_TAGS = {"table", "details"}', 'FREE_TAGS = {"details"}')]),
+    ("<details> keeps the HTML's order", EXPLAINERS, [('FREE_TAGS = {"table", "details"}', 'FREE_TAGS = {"table"}')]),
+    ("The formatter's layout keeps the HTML's order", EXPLAINERS,
+     [(' or FREE_STYLE.search(attrs.get("style") or "")', "")]),
+    ("A chart keeps its JSON's order", EXPLAINERS, [("region = tag in FREE_TAGS or self.chart is not None or ", "region = tag in FREE_TAGS or ")]),
+    ("A region's text once", EXPLAINERS, [("    return region + BOUNDARY + region\n", "    return region\n")]),
+    ("A region's text stays shown", EXPLAINERS, [("    region = region.translate(_AS_MAYBE)\n", "    pass\n")]),
+    ("A chart's JSON read as written", EXPLAINERS, [("        strings = list(_strings(json.loads(spec)))\n", "        strings = [spec]\n")]),
+    ("Plotly strings kept whole", EXPLAINERS, [("for p in PLOTLY_MARKUP.split(s) ", "for p in [s] ")]),
+    ("Plotly entities left encoded", EXPLAINERS, [("dict.fromkeys([p, html.unescape(p)])", "dict.fromkeys([p])")]),
+    ("Plotly placeholders kept in their string", EXPLAINERS, [("|%\\{[^\\s%{}:]*(?:[:|][^}]*)?\\})", ")")]),
+    ("The chart stand-in hides its JSON", CHART, [('<pre data-chart="chart">', "<pre>")]),
+    ("The Plotly stand-in hides its props", PLOT, [('<pre data-chart="plotly">', "<pre>")]),
     ("No page header", EXPLAINERS, [('[*header, *page["contents"]]', '[*page["contents"]]')]),
     ("No contents sidebar in the page text", EXPLAINERS, [('[*header, *page["contents"]]', "[*header]")]),
     ("An empty page header", EXPLAINERS, [("    return list(meta[slug].values())", "    return []")]),
