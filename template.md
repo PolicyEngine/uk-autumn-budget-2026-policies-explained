@@ -377,7 +377,7 @@ The numbers give each measure's place on our list of 27 October, the day before 
 - Our fuel duty cut leaves out road fuel gases (LPG and natural gas), which the government's costing includes.
 - Our Pension Tax Allowance leaves out some people who reach State Pension age during the tax year.
 - We project household electricity spending with general inflation, not retail energy prices.
-- PolicyEngine UK, our open-source model, doesn't include the Budget's measures, so its users can't run them; the dashboard does.
+- PolicyEngine UK, our open-source model, doesn't include the Budget's measures, so its users can't run them; the dashboard includes them.
 
 ## Sources and method
 
