@@ -49,7 +49,7 @@ Our figures come from our Budget dashboard at [policyengine.org/uk/autumn-budget
 | 12 of the 20 on our pre-Budget list, among them the Warm Home Discount top-up | Not in the Budget | — |
 :::
 
-In our combined run, the seven measures in the dashboard cost £3,110 million in 2026-27 and £615 million in 2027-28, and raise £210 million in 2028-29, when the property income rise outweighs the two tax cuts still in force. Two of us checked the combined run before we published it.
+In our combined run, the seven measures in the dashboard cost £3,110 million in 2026-27 and £615 million in 2027-28, and raise £210 million in 2028-29, when the property income rise outweighs the two tax cuts still in force. Before we published it, two of us checked that the combined run includes each measure exactly as the dashboard publishes it on its own.
 
 ## How to read this
 

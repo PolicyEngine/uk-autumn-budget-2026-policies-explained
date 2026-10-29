@@ -284,7 +284,7 @@ def main():
         if kind == "signoff":
             entry = manifest["combined"][parts[1]]
             if signed(entry.get("attestation")):
-                return "Two of us checked the combined run before we published it."
+                return "Before we published it, two of us checked that the combined run includes each measure exactly as the dashboard publishes it on its own."
             return "We are still checking the combined run."
         if kind == "post_sha":
             return (POSTS / "APP_V2_MAIN_SHA").read_text().strip()
