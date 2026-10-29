@@ -451,22 +451,47 @@ a {
 }
 
 .cover-links {
-  margin-top: 30mm;
-  padding: 5mm 6mm 1mm 6mm;
+  margin-top: 26mm;
+  padding: 4mm 5mm 1mm 5mm;
   border-left: none;
   background: #234E52; /* teal-800 */
   border-radius: 4pt;
-  max-width: 150mm;
+  max-width: 120mm;
 }
 
 .cover-links p {
-  margin: 0 0 4mm;
-  font-size: 10.5pt;
+  margin: 0 0 3mm;
+  font-size: 10pt;
+  line-height: 1.45;
+}
+
+/* The link sits under its label, in line with the label text */
+.cover-links a {
+  margin-left: 5.2mm;
 }
 
 .cover-links .label {
   color: #E6FFFA; /* teal-50 */
   font-size: 9pt;
+  font-weight: 700;
+}
+
+/* Nuffield Foundation logo, white on teal: 21.5mm tall as its guide asks
+   for A4, with clear space of more than the height of its N around it */
+.cover img.nuffield {
+  height: 21.5mm;
+  width: auto;
+  margin-right: 7mm;
+}
+
+/* Lucide-style line icons before each label */
+.cover-links svg.icon {
+  display: inline-block;
+  width: 3.4mm;
+  height: 3.4mm;
+  color: #81E6D9; /* teal-200 */
+  vertical-align: -0.6mm;
+  margin-right: 1.8mm;
 }
 
 .cover-links a {
@@ -476,8 +501,10 @@ a {
 
 .cover .funder {
   position: absolute;
-  bottom: 10mm;
+  bottom: 12mm;
   left: 20mm;
+  display: flex;
+  align-items: center;
   font-size: 9pt;
   color: #E6FFFA; /* teal-50 */
 }

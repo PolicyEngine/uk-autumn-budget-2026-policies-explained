@@ -17,14 +17,14 @@ pe-doc:
 A PolicyEngine briefing · Published 29 October 2026
 
 ::: {.cover-links}
-[Explore every measure in our Budget dashboard]{.label}\
+[<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#81E6D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>Budget dashboard]{.label}\
 [policyengine.org/uk/autumn-budget-2026](https://www.policyengine.org/uk/autumn-budget-2026)
 
-[Read our briefing on what the Budget means for households]{.label}\
+[<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#81E6D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Household briefing]{.label}\
 [policyengine.org/uk/research/uk-autumn-budget-2026-briefing](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-briefing)
 :::
 
-[Funded by the Nuffield Foundation]{.funder}
+[![Nuffield Foundation](assets/nuffield-foundation-white.svg){.nuffield}[Funded by the Nuffield Foundation]{.funder-text}]{.funder}
 :::
 
 ::: {.toc}
