@@ -44,6 +44,26 @@
    "column": "2026-27"
   },
   {
+   "kind": "pe",
+   "key": "household_energy_payment_2026",
+   "year": "2026-27",
+   "value": -1968.5071950228078,
+   "printed": "−1,969",
+   "file": "artifacts/household_energy_payment_2026/101a07dc7238a10e/budgetary_impact.csv",
+   "row": "year=2026",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "obr",
+   "key": "1, PSCE in RDEL",
+   "year": "2026-27",
+   "value": -2627.162870111888,
+   "printed": "−2,627",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 1, PSCE in RDEL",
+   "column": "2026-27"
+  },
+  {
    "kind": "obr",
    "key": "1, PSCE in RDEL",
    "year": "2027-28",
@@ -232,6 +252,26 @@
    "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
    "row": "measure 1, PSCE in RDEL",
    "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "2, VAT",
+   "year": "2026-27",
+   "value": -733.9477925232627,
+   "printed": "−734",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 2, VAT",
+   "column": "2026-27"
+  },
+  {
+   "kind": "pe",
+   "key": "domestic_electricity_zero_vat",
+   "year": "2026-27",
+   "value": -839.8907961023904,
+   "printed": "−840",
+   "file": "artifacts/domestic_electricity_zero_vat/2d9c65726915303e/budgetary_impact.csv",
+   "row": "year=2026",
+   "column": "value (£bn)"
   },
   {
    "kind": "obr",
@@ -464,6 +504,26 @@
    "column": "2026-27"
   },
   {
+   "kind": "pe",
+   "key": "fuel_duty_rise_deferral",
+   "year": "2026-27",
+   "value": -301.3976629217685,
+   "printed": "−301",
+   "file": "artifacts/fuel_duty_rise_deferral/e077f8d4b70440c8/budgetary_impact.csv",
+   "row": "year=2026",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "obr",
+   "key": "3, Fuel Duty",
+   "year": "2026-27",
+   "value": -573.8323354125157,
+   "printed": "−574",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 3, Fuel Duty",
+   "column": "2026-27"
+  },
+  {
    "kind": "obr",
    "key": "3, Fuel Duty",
    "year": "2027-28",
@@ -652,6 +712,26 @@
    "file": "computed",
    "row": "gap fuel_duty_rise_deferral vs OBR 3, Fuel Duty",
    "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "52, Income tax",
+   "year": "2027-28",
+   "value": -44.06,
+   "printed": "−44",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 52, Income tax",
+   "column": "2027-28"
+  },
+  {
+   "kind": "pe",
+   "key": "state_pension_income_tax_protection",
+   "year": "2027-28",
+   "value": -29.629875989708307,
+   "printed": "−30",
+   "file": "artifacts/state_pension_income_tax_protection/1bfeed3c27a3c9b9/budgetary_impact.csv",
+   "row": "year=2027",
+   "column": "value (£bn)"
   },
   {
    "kind": "obr",
@@ -862,6 +942,26 @@
    "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
    "row": "measure 52, Income tax",
    "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "7, Welfare inside cap",
+   "year": "2030-31",
+   "value": -33.17067837376652,
+   "printed": "−33",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 7, Welfare inside cap",
+   "column": "2030-31"
+  },
+  {
+   "kind": "pe",
+   "key": "carers_allowance_earnings_taper",
+   "year": "2030-31",
+   "value": -23.79284926553212,
+   "printed": "−24",
+   "file": "artifacts/carers_allowance_earnings_taper/9458905cefca3e88/budgetary_impact.csv",
+   "row": "year=2030",
+   "column": "value (£bn)"
   },
   {
    "kind": "obr",
@@ -1121,6 +1221,26 @@
    "printed": "£48",
    "file": "artifacts/carers_allowance_earnings_taper/9458905cefca3e88/budgetary_impact.csv",
    "row": "year=2031",
+   "column": "value (£bn)"
+  },
+  {
+   "kind": "obr",
+   "key": "61, Income tax",
+   "year": "2029-30",
+   "value": 394.2895549353098,
+   "printed": "+394",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 61, Income tax",
+   "column": "2029-30"
+  },
+  {
+   "kind": "pe",
+   "key": "property_income_rates_up",
+   "year": "2029-30",
+   "value": 429.4018583620151,
+   "printed": "+429",
+   "file": "artifacts/property_income_rates_up/7bf77b35e33233e0/budgetary_impact.csv",
+   "row": "year=2029",
    "column": "value (£bn)"
   },
   {
@@ -1442,6 +1562,26 @@
    "file": "Table_6.1_and_6.2_Budget_2026_Policy_Decisions.xlsx",
    "row": "Table 6.1 row 62",
    "column": "2031-32"
+  },
+  {
+   "kind": "obr",
+   "key": "15, Income tax+NICs",
+   "year": "2028-29",
+   "value": -221.33919815904076,
+   "printed": "−221",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 15, Income tax+NICs",
+   "column": "2028-29"
+  },
+  {
+   "kind": "pe",
+   "key": "trading_allowance_raise",
+   "year": "2028-29",
+   "value": -118.29155030737965,
+   "printed": "−118",
+   "file": "artifacts/trading_allowance_raise/eddde823a65b7be4/budgetary_impact.csv",
+   "row": "year=2028",
+   "column": "value (£bn)"
   },
   {
    "kind": "obr",
