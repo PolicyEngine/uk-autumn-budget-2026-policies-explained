@@ -9,9 +9,11 @@ Invariants:
 """
 
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 import explainers
-from explainers import key_points
+from explainers import OPENING, _markdown, _parse, key_points, shown_lines
 
 POSTS = [
     ("budget-2026-energy-bills", 0),
@@ -60,10 +62,37 @@ def test_an_opening_inside_code_is_not_an_opening(monkeypatch, example):
     assert out == "Key results:\n\n- actual"
 
 
-def test_an_opening_inside_a_list_item_still_counts(monkeypatch):
-    # Prose, not code, so it is a second opening
+@pytest.mark.parametrize("example", [
+    "Example: `\nKey figures:\n`\n",  # inline code over three lines (Sol review r4)
+    "<pre>\nKey figures:\n</pre>\n",  # raw HTML code
+    "<!--\nKey figures:\n-->\n",  # HTML comment, which the page doesn't show
+    "Inline <code>Key figures:</code>\n",  # inline HTML code
+    "<code>Key figures:</code>\n",  # inline HTML code that is the whole line
+    "<code>\nKey figures:\n</code>\n",  # the same over three lines, an HTML block
+    "<div><pre>\nKey figures:\n</pre></div>\n",  # code inside an HTML block
+    "![Key figures:](/chart.png)\n",  # image text
+])
+def test_an_opening_the_page_shows_as_code_or_hides_is_not_an_opening(monkeypatch, example):
+    assert quote(monkeypatch, f"Key results:\n\n- actual\n\n{example}") == "Key results:\n\n- actual"
+
+
+@pytest.mark.parametrize("second", [
+    "- item\n\n  Key figures:\n\n  - nested\n",  # a paragraph inside a list item
+    "- Key figures:\n",  # a list item itself (Sol review r4)
+    "> Key figures:\n",  # a quote (Sol review r4)
+    "**Key figures:**\n",  # formatting around it
+    "<div>\nKey figures:\n</div>\n",  # an HTML block the page shows as text
+    "| Key figures: |\n|---|\n| x |\n",  # a table cell
+])
+def test_a_second_opening_anywhere_in_the_prose_stops_the_build(monkeypatch, second):
     with pytest.raises(SystemExit, match="found 2"):
-        quote(monkeypatch, "Key results:\n\n- actual\n\n## More\n\n- item\n\n  Key figures:\n\n  - nested\n")
+        quote(monkeypatch, f"Key results:\n\n- actual\n\n## More\n\n{second}")
+
+
+@pytest.mark.parametrize("text", ["- Key results:\n\n  - one\n", "> Key results:\n>\n> - one\n"])
+def test_a_sole_opening_inside_a_container_stops_the_build(monkeypatch, text):
+    with pytest.raises(SystemExit, match="paragraph of its own"):
+        quote(monkeypatch, text)
 
 
 def test_list_straight_after_the_opening_line(monkeypatch):
@@ -100,3 +129,35 @@ def test_saved_posts_quote_a_whole_list(slug, extra):
     lines = out.split("\n")
     assert explainers.OPENING.match(lines[0]) and lines[1] == "" and lines[2].startswith("- ")
     assert "](/" not in out and "](#" not in out  # every link absolute
+
+
+# Fragments a post might hold, each an opening or a near miss in some context
+FRAGMENTS = [
+    "Key results:", "Key figures for 2027-28:", "Key findings: and more", "Some prose.", "## A heading",
+    "- one", "- Key figures:", "  - Key figures:", "1. Key figures:", "  continued", "> Key figures:",
+    "   Key figures:", "    Key figures:", "**Key figures:**", "[Key figures:](/x)", "<span>Key figures:</span>",
+    "<code>Key figures:</code>", "<em>Key figures:</em>", "Inline <code>Key figures:</code>",
+    "```\nKey figures:\n```", "~~~\nKey figures:\n~~~", "`\nKey figures:\n`",
+    "| Key figures: |\n|---|\n| x |", "![Key figures:](/c.png)", "",
+]
+# Raw HTML split over lines stands in a block of its own: a table or list that
+# absorbed it would leave its tags unbalanced inside a cell or item, where what
+# shows depends on browsers' repair rules, and posts don't do that
+FRAGMENTS += [f"\n{html}\n" for html in [
+    "<code>\nKey figures:\n</code>", "<pre>\nKey figures:\n</pre>", "<div>\nKey figures:\n</div>",
+    "<div><pre>\nKey figures:\n</pre></div>", "<!--\nKey figures:\n-->",
+]]
+
+
+def rendered_openings(text):
+    """Reference count: render the whole post to HTML, then read what the page shows."""
+    return sum(bool(OPENING.match(line.strip())) for line in shown_lines(_markdown().render(text)))
+
+
+@given(st.lists(st.tuples(st.sampled_from(FRAGMENTS), st.sampled_from(["\n", "\n\n"])), max_size=8))
+def test_opening_count_matches_the_rendered_page(parts):
+    # Differential: the block-by-block count key_points uses agrees with
+    # rendering the whole post and counting what a browser shows
+    text = "".join(f + sep for f, sep in parts)
+    _, prose = _parse(text)
+    assert sum(bool(OPENING.match(line.strip())) for _, line in prose) == rendered_openings(text)

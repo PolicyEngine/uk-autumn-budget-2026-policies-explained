@@ -9,6 +9,7 @@ links turned absolute so they work in a PDF. chart_specs() returns the post's
 
 import json
 import re
+from html.parser import HTMLParser
 from pathlib import Path
 
 from markdown_it import MarkdownIt
@@ -53,33 +54,86 @@ def _absolute_links(md, slug):
 OPENING = re.compile(r"Key (results|figures|findings)\b.*:\s*$")
 
 
+class _ShownText(HTMLParser):
+    """The text a browser shows as prose: everything outside code-like elements
+    and comments, with a line break at each block boundary."""
+
+    HIDDEN = {"code", "pre", "script", "style", "textarea", "template"}
+    BREAKS = {"br", "p", "div", "li", "ul", "ol", "blockquote", "table", "tr", "td", "th",
+              "h1", "h2", "h3", "h4", "h5", "h6", "hr", "section", "article", "details", "summary"}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.hidden, self.parts = 0, []
+
+    def handle_starttag(self, tag, attrs):
+        self.hidden += tag in self.HIDDEN
+        if tag in self.BREAKS:
+            self.parts.append("\n")
+
+    def handle_endtag(self, tag):
+        if tag in self.HIDDEN and self.hidden:
+            self.hidden -= 1
+        if tag in self.BREAKS:
+            self.parts.append("\n")
+
+    def handle_data(self, data):
+        if not self.hidden:
+            self.parts.append(data)
+
+
+def shown_lines(html):
+    """The lines of prose a browser shows for some HTML (see _ShownText)."""
+    parser = _ShownText()
+    parser.feed(html)
+    parser.close()
+    return "".join(parser.parts).split("\n")
+
+
+def _markdown():
+    # CommonMark, as the site's renderer follows, with tables
+    return MarkdownIt("commonmark").enable("table")
+
+
 def _parse(text):
     """The post's top-level Markdown blocks as (kind, first line, end line), end
-    exclusive, and the set of lines inside code blocks and fences at any depth.
+    exclusive, and (first line of its block, text) for each line of prose.
 
-    markdown-it follows CommonMark, as the site's renderer does, so a list
-    block holds every item whole: wrapped and lazy continuation lines, and
-    items set apart by blank lines.
+    markdown-it follows CommonMark, so a list block holds every item whole:
+    wrapped and lazy continuation lines, and items set apart by blank lines.
+    Prose is what the page shows outside code: the text of every paragraph,
+    heading and table cell at any depth (inside lists and quotes too), and of
+    HTML blocks, but not code spans, code blocks, fences, <pre>, comments or
+    image text.
     """
-    tokens = MarkdownIt("commonmark").enable("table").parse(text)
+    md = _markdown()
+    tokens = md.parse(text)
     blocks = [(t.type.removesuffix("_open"), *t.map) for t in tokens if t.level == 0 and t.nesting >= 0 and t.map]
-    code = {i for t in tokens if t.type in ("code_block", "fence") and t.map for i in range(*t.map)}
-    return blocks, code
+    prose = []
+    for t in tokens:
+        if t.type == "inline":
+            html = md.renderer.renderInline(t.children or [], md.options, {})
+        elif t.type == "html_block":
+            html = t.content
+        else:
+            continue
+        prose += [(t.map[0], line) for line in shown_lines(html)]
+    return blocks, prose
 
 
 def key_points(slug, extra_paragraphs=0):
     """The opening line, the bullet list, and `extra_paragraphs` paragraphs after them.
 
-    The build stops unless the post has exactly one opening line, standing as
-    a paragraph of its own, with a bullet list straight after it. Markdown
-    lets a paragraph start with up to three spaces, so the search ignores
-    indentation; it skips code, where Markdown reads no paragraph at all, and
-    counts every other copy, so a second opening anywhere in the prose stops it.
+    The build stops unless the post's rendered prose holds exactly one opening
+    line, and that line stands as a top-level paragraph of its own with a
+    bullet list straight after it. Counting what CommonMark renders as prose
+    catches a second opening however the post indents, nests or quotes it,
+    and ignores one in code.
     """
     text = _text(slug)
     lines = text.split("\n")
-    blocks, code = _parse(text)
-    starts = [i for i, x in enumerate(lines) if i not in code and OPENING.match(x.strip())]
+    blocks, prose = _parse(text)
+    starts = [first for first, line in prose if OPENING.match(line.strip())]
     if len(starts) != 1:
         raise SystemExit(f"{slug}: expected one 'Key results/figures/findings ...:' line, found {len(starts)}")
     k = next((j for j, (_, a, _b) in enumerate(blocks) if a == starts[0]), None)
