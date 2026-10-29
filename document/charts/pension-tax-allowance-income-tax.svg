@@ -950,6 +950,14 @@ L 463.104 83.983217
 " clip-path="url(#p5d8fd89257)" style="fill: none; stroke: #319795; stroke-width: 1.8; stroke-linecap: square"/>
    </g>
    <g id="text_15">
+    <g id="patch_5">
+     <path d="M 114.380345 64.679746 
+L 176.631049 64.679746 
+L 176.631049 54.865 
+L 114.380345 54.865 
+z
+" style="fill: #ffffff"/>
+    </g>
     <!-- Personal Allowance -->
     <g style="fill: #64748b" transform="translate(115.355345 62.136875) scale(0.065 -0.065)">
      <defs>
@@ -1095,6 +1103,14 @@ z
     </g>
    </g>
    <g id="text_16">
+    <g id="patch_6">
+     <path d="M 290.282681 74.679746 
+L 361.47901 74.679746 
+L 361.47901 64.865 
+L 290.282681 64.865 
+z
+" style="fill: #ffffff"/>
+    </g>
     <!-- Full new State Pension -->
     <g style="fill: #64748b" transform="translate(291.257681 72.136875) scale(0.065 -0.065)">
      <defs>
@@ -1196,6 +1212,14 @@ z
     </g>
    </g>
    <g id="text_17">
+    <g id="patch_7">
+     <path d="M 396.638725 64.679746 
+L 444.797631 64.679746 
+L 444.797631 54.865 
+L 396.638725 54.865 
+z
+" style="fill: #ffffff"/>
+    </g>
     <!-- PTA withdrawn -->
     <g style="fill: #64748b" transform="translate(397.613725 62.136875) scale(0.065 -0.065)">
      <defs>

@@ -1202,6 +1202,14 @@ L 463.104 168.570629
 " clip-path="url(#p5d8fd89257)" style="fill: none; stroke: #285e61; stroke-width: 1.8; stroke-linecap: square"/>
    </g>
    <g id="text_19">
+    <g id="patch_5">
+     <path d="M 96.361 64.679746 
+L 154.264828 64.679746 
+L 154.264828 54.865 
+L 96.361 54.865 
+z
+" style="fill: #ffffff"/>
+    </g>
     <!-- Current allowance -->
     <g style="fill: #64748b" transform="translate(97.336 62.136875) scale(0.065 -0.065)">
      <defs>
@@ -1283,6 +1291,14 @@ z
     </g>
    </g>
    <g id="text_20">
+    <g id="patch_6">
+     <path d="M 280.745 74.679746 
+L 329.303047 74.679746 
+L 329.303047 64.865 
+L 280.745 64.865 
+z
+" style="fill: #ffffff"/>
+    </g>
     <!-- New allowance -->
     <g style="fill: #64748b" transform="translate(281.72 72.136875) scale(0.065 -0.065)">
      <defs>
@@ -1325,6 +1341,14 @@ z
     </g>
    </g>
    <g id="text_21">
+    <g id="patch_7">
+     <path d="M 372.937 64.679746 
+L 462.364813 64.679746 
+L 462.364813 54.865 
+L 372.937 54.865 
+z
+" style="fill: #ffffff"/>
+    </g>
     <!-- 75% expenses equal £3,000 -->
     <g style="fill: #64748b" transform="translate(373.912 62.136875) scale(0.065 -0.065)">
      <defs>

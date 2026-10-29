@@ -189,12 +189,14 @@ def draw(spec, path, slug):
         for k, m in enumerate(markers):
             ax.axvline(m["x"], color=COLOURS["quinary"], linewidth=0.8, linestyle=(0, (3, 2)), zorder=1)
             # Alternate heights so neighbouring labels don't overlap; a label
-            # reads leftwards from its line only if it can't fit to the right
+            # reads leftwards from its line only if it can't fit to the right,
+            # and sits on the background so a neighbouring line passes behind it
             pos = ax.get_position()
             room = ((x1 - m["x"]) / (x1 - x0) * pos.width + (1 - pos.x1)) * fig.get_figwidth() * 72
             right = len(m["label"]) * 6.5 * 0.55 + 3 > room
             ax.annotate(m["label"], (m["x"], top), xytext=(-3 if right else 3, -4 - 10 * (k % 2)), textcoords="offset points",
-                        ha="right" if right else "left", va="top", fontsize=6.5, color=MUTED)
+                        ha="right" if right else "left", va="top", fontsize=6.5, color=MUTED,
+                        bbox={"boxstyle": "square,pad=0.15", "facecolor": ax.get_facecolor(), "edgecolor": "none"})
 
     ax.yaxis.set_major_formatter(FuncFormatter(money(fmt)))
     ax.set_ylabel(spec.get("yLabel", ""))

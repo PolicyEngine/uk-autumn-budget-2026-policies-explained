@@ -137,6 +137,11 @@
   padding-bottom: 0.7mm;
 }
 
+/* A section that would otherwise leave its heading at the foot of a page */
+.new-page {
+  break-before: page;
+}
+
 /* One page per explainer: its key points, then one of its charts */
 .explainer {
   break-before: page;

@@ -12,7 +12,8 @@ category names with "+", e.g. Income tax+NICs. <n> is the OBR measure number,
 the same as its Table 6.1 row.
 
 Placeholders in the template:
-  {{costing:<measure_id>:<n>:<lines>}}  table: OBR line(s), Table 6.1 total, the dashboard's estimate
+  {{costing:<measure_id>:<n>:<lines>[:<label>]}}  table: OBR line(s), Table 6.1 total, the dashboard's estimate
+                                  (its row labelled <label>, "PolicyEngine" if none)
   {{official:<n>:<lines>}}        table: OBR line(s) and Table 6.1 total
   {{official:<n>}}                table: OBR measure total only
   {{obr:<n>:<year>}}              one OBR measure total, signed, £m
@@ -207,11 +208,12 @@ def main():
         kind = parts[0]
         if kind == "costing":
             key, n, lines = parts[1], int(parts[2]), parts[3]
+            pe_label = parts[4] if len(parts) > 4 else "PolicyEngine"
             pe, line = pe_m(key), obr_line(n, lines)
             note_rows("obr", f"{n}, {lines}", line)
             note_rows("t61", n, t61[n]["values"])
             note_rows("pe", key, pe)
-            return costing_table([(f"Official: {line_label(lines)}", line), ("Table 6.1 total", t61[n]["values"])], pe) + others_note(n, lines)
+            return costing_table([(f"Official: {line_label(lines)}", line), ("Table 6.1 total", t61[n]["values"])], pe, pe_label) + others_note(n, lines)
         if kind == "official" and len(parts) == 3:
             n, lines = int(parts[1]), parts[2]
             line = obr_line(n, lines)
@@ -279,7 +281,7 @@ def main():
                 "revision": str(manifest["revision"]),
                 "updated_at": manifest["updated_at"][:16].replace("T", " ") + " UTC",
                 "url": a.manifest_url,
-                "source_label": "its test publication" if a.source == "test" else "the published dashboard",
+                "source_label": "its test publication manifest" if a.source == "test" else "its publication manifest",
             }[parts[1]]
         if kind == "signoff":
             entry = manifest["combined"][parts[1]]

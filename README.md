@@ -43,10 +43,10 @@ PRs from forks can't build, because CI reads the private template repo with an o
 
 - Every figure comes from the dashboard, a live PolicyEngine post or an official document, and the source section cites it.
 - Official comparisons use the line in the OBR's detailed forecast table 1.1 that matches what we model. Table 6.1's total, which the Treasury rounds to the nearest £5 million, is context only.
-  - Name it as "the government's costing, which the OBR certifies".
+  - Name it as "the government's costing, which the OBR certifies", and its lines as "the official … line", not "the OBR's": the Treasury makes the costing.
   - The exception is fuel duty: "the government's estimate, which the OBR used but could not certify".
   - A gap over 25% needs a reason we have verified; otherwise state the gap without one.
-- No claim about how a model works unless the dashboard notes, a post or the code supports it. Label inferences.
+- No claim about how a model works unless the dashboard notes, a post or the code supports it. Label inferences. Where the dashboard's description of a measure and its code differ, follow the code: the Carer's Allowance limit is £228 and £234 in the years we cost (`carers_allowance_earnings_taper.py` at 4de166f0), not the description's £212.
 - No link to a post that hasn't merged. No small cells or single-record values. No poverty or people-affected figures until the dashboard publishes them, apart from any inside an explainer's key points, which we quote word for word (Max, 29 Oct: keep the energy post's 19.7 million households verbatim).
 - Write for readers outside PolicyEngine: no notes to the team, no internal status, and no odds from the pre-Budget list, which the list gave without a source.
 - Sentence case and no emoji. Active voice: name who acts, with no passives, including reduced ones ("certified by", "not modelled"). Write "exceeds", not "is above". Use whole pounds in tables, with pence only where a formula spells them out or for a statutory rate.

@@ -992,6 +992,14 @@ L 463.104 161.274965
 " clip-path="url(#pb4a5a9a2a4)" style="fill: none; stroke: #319795; stroke-width: 1.8; stroke-linecap: square"/>
    </g>
    <g id="text_15">
+    <g id="patch_5">
+     <path d="M 189.659304 64.679746 
+L 259.166648 64.679746 
+L 259.166648 54.865 
+L 189.659304 54.865 
+z
+" style="fill: #ffffff"/>
+    </g>
     <!-- Weekly Earnings Limit -->
     <g style="fill: #64748b" transform="translate(190.634304 62.136875) scale(0.065 -0.065)">
      <defs>
@@ -1185,6 +1193,14 @@ z
     </g>
    </g>
    <g id="text_16">
+    <g id="patch_6">
+     <path d="M 211.232232 74.679746 
+L 273.482935 74.679746 
+L 273.482935 64.865 
+L 211.232232 64.865 
+z
+" style="fill: #ffffff"/>
+    </g>
     <!-- Personal Allowance -->
     <g style="fill: #64748b" transform="translate(212.207232 72.136875) scale(0.065 -0.065)">
      <defs>
@@ -1233,6 +1249,14 @@ z
     </g>
    </g>
    <g id="text_17">
+    <g id="patch_7">
+     <path d="M 408.707496 64.679746 
+L 469.468277 64.679746 
+L 469.468277 54.865 
+L 408.707496 54.865 
+z
+" style="fill: #ffffff"/>
+    </g>
     <!-- Allowance runs out -->
     <g style="fill: #64748b" transform="translate(409.682496 62.136875) scale(0.065 -0.065)">
      <defs>
