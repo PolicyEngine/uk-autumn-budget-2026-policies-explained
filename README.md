@@ -51,6 +51,7 @@ PRs from forks can't build, because CI reads the private template repo with an o
 - No claim about how a model works unless the dashboard notes, a post or the code supports it. Label inferences. Where the dashboard's description of a measure and its code differ, follow the code: the Carer's Allowance limit is £228 and £234 in the years we cost (`carers_allowance_earnings_taper.py` at 4de166f0), not the description's £212.
 - No link to a post that hasn't merged. No small cells or single-record values. No poverty or people-affected figures until the dashboard publishes them, apart from any inside an explainer's key points, which we quote word for word (Max, 29 Oct: keep the energy post's 19.7 million households verbatim).
 - Write for readers outside PolicyEngine: no notes to the team, no internal status, and no odds from the pre-Budget list, which the list gave without a source.
+- Say what the reader gets and what we found, never how or why we made it (Max, 29 Oct): no production choices, checks, reviews, build machinery or plans for later updates. Keep method that changes how a number reads, such as assumptions, sources and scope limits, and state each limitation in the present tense.
 - Sentence case and no emoji. Active voice: name who acts, with no passives, including reduced ones ("certified by", "not modelled"). Write "exceeds", not "is above". Use whole pounds in tables, with pence only where a formula spells them out or for a statutory rate.
 
 ## Sources

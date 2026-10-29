@@ -27,7 +27,8 @@ Placeholders in the template:
   {{t62sum:<row>}}                a Table 6.2 row summed over the six years, as £ without sign, £m
   {{pe:<measure_id>:<year>}}      one dashboard value, signed, £m, rounded
   {{meta:<key>}}                  manifest revision, updated_at, source URL, source label
-  {{signoff:<combined key>}}      whether the combined run carries both signatures
+  {{signoff:<combined key>}}      nothing once the combined run carries both signatures; until then a
+                                  sentence, with a leading space, saying the combined figure may change
   {{status_note}}                 the opening note: provisional or approved, test or production
   {{keypoints:<post slug>[:<n>]}} a live explainer's key points as published, and n paragraphs after them
   {{post_sha}}                    the policyengine-app-v2 commit the saved explainers come from
@@ -57,6 +58,11 @@ def signed(attestation):
     """Both signatures present, neither a preview placeholder."""
     att = attestation or {}
     return all(isinstance(v, str) and v and "PREVIEW ONLY" not in v for v in (att.get("checker"), att.get("second")))
+
+
+def signoff(attestation):
+    """What follows the combined figure: nothing once both have signed, else a sentence with a leading space."""
+    return "" if signed(attestation) else " The combined figure is provisional and may change."
 
 
 def year_label(y):
@@ -284,10 +290,7 @@ def main():
                 "source_label": "its test publication manifest" if a.source == "test" else "its publication manifest",
             }[parts[1]]
         if kind == "signoff":
-            entry = manifest["combined"][parts[1]]
-            if signed(entry.get("attestation")):
-                return "Before we published it, two of us checked that the combined run includes each measure exactly as the dashboard publishes it on its own."
-            return "We are still checking the combined run."
+            return signoff(manifest["combined"][parts[1]].get("attestation"))
         if kind == "post_sha":
             return (POSTS / "APP_V2_MAIN_SHA").read_text().strip()
         if kind == "keypoints":
@@ -298,7 +301,7 @@ def main():
             rev = f"revision {manifest['revision']} ({manifest['updated_at'][:16].replace('T', ' ')} UTC)"
             if a.source == "test":
                 lead = f"PolicyEngine figures are first estimates from the Budget dashboard's test publication, {rev}."
-                tail = f" They are still going through our checks and may change when we publish the dashboard at {DASHBOARD}."
+                tail = " They may change."
             else:
                 lead = f"Our figures come from our Budget dashboard at {DASHBOARD}, as it stood at {rev}."
                 tail = " The dashboard still marks some as provisional, and they may change." if provisional else ""

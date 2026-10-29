@@ -24,9 +24,15 @@ EXPLAINERS = "scripts/explainers.py"
 RENDER = "site/render.tsx"
 CHART = "site/vendor/components/blog/LazyBlogChart.tsx"
 PLOT = "site/vendor/components/blog/LazyPlot.tsx"
+FIGURES = "scripts/build_figures.py"
 
 # (what the mutation breaks, file, [(text, replacement), ...]); each text must occur once
 MUTATIONS = [
+    # The sentence after the combined figure
+    ("A signed run still says who checked it", FIGURES,
+     [('return "" if signed(attestation)', 'return " Two of us checked it." if signed(attestation)')]),
+    ("An unsigned run says nothing", FIGURES, [('else " The combined figure is provisional and may change."', 'else ""')]),
+    ("The sentence loses its leading space", FIGURES, [('else " The combined', 'else "The combined')]),
     ("A flat £0.50 tolerance, the old check's floor", CHARTS,
      [("return (0.5 * 10 ** -decimals if decimals is not None else 0) + EPSILON", "return 0.5 + EPSILON")]),
     ("No font filter", CHARTS,
