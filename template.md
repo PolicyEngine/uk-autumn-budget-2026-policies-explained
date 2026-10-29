@@ -394,7 +394,7 @@ This post covers the Household Energy Payment and the three more months of zero 
 
 :::
 
-## In the Budget, not in our dashboard {.section-page}
+## In the Budget, not in our dashboard
 
 ::: {.card}
 ### Triple lock: a new rule from April 2030 {#m-triple-lock}

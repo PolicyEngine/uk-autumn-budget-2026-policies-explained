@@ -14,7 +14,7 @@
   size: A4;
   margin: 16mm 25mm 20mm 25mm;
 
-  /* A slim header: the logo on the left, the title on the right, a hairline under both */
+  /* A slim header: the logo on the left, the title on the right */
   @top-left {
     content: url("assets/policyengine-teal.png");
     image-resolution: 1170dpi; /* about 4.5mm tall */
@@ -22,7 +22,6 @@
     vertical-align: bottom;
     padding-bottom: 1.6mm;
     margin-bottom: 4mm;
-    border-bottom: 0.4pt solid #CBD5E1; /* gray-300 */
   }
   @top-right {
     content: "Autumn Budget 2026: the policies explained";
@@ -33,7 +32,6 @@
     vertical-align: bottom;
     padding-bottom: 2mm;
     margin-bottom: 4mm;
-    border-bottom: 0.4pt solid #CBD5E1; /* gray-300 */
   }
   @bottom-left {
     content: none; /* the footer carries only the page number */
@@ -463,24 +461,20 @@ table {
 }
 
 /* ---------- Structure ----------
-   Sections open with a short teal bar and a teal number; measures and
+   Sections open with space and a teal number; measures and
    explainers are separated by a full-width rule; inside a measure, its
    heading block, description, costing, explanation and link sit in groups
    with larger gaps between groups than within them. */
 
 body {
-  font-size: 10pt;
+  font-size: 10.5pt;
 }
 
 h2 {
-  font-size: 17pt;
+  font-size: 16pt;
   color: #101828; /* gray-900 */
-  margin: 30pt 0 10pt;
-  padding-top: 9pt;
-  /* a short teal-500 bar above the heading, 14mm by 2.5pt */
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='53' height='3.3'><rect width='53' height='3.3' fill='%23319795'/></svg>");
-  background-repeat: no-repeat;
-  background-position: left top;
+  margin: 28pt 0 9pt;
+  padding-top: 0;
 }
 
 h2::before {
@@ -494,8 +488,12 @@ h2.section-page {
 }
 
 h3 {
-  font-size: 12pt;
+  font-size: 12.5pt;
   color: #101828; /* gray-900 */
+}
+
+.explainer h3 {
+  font-size: 12.5pt;
 }
 
 h3::before {
