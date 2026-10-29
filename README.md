@@ -14,8 +14,9 @@ The PDF opens with a cover for outside readers: it links the dashboard and our [
 | Draft adding a page for each of our six explainers (PR #1 at 7bbcdcb) | Slack: reply in the #uk-autumn-budget-2026 thread (29 Oct 01:27 UTC) | [`published/2026-10-29-explainers-draft`](published/2026-10-29-explainers-draft) |
 | Outward version with a cover (PR #1 at 942e628) | Slack: reply in the #uk-autumn-budget-2026 thread (29 Oct 02:58 UTC); email to the 12 people who registered for the webinar (29 Oct 03:15 UTC) | [`published/2026-10-29-outward`](published/2026-10-29-outward) |
 | Corrected version, after Pavel's review (PR #1 at 2291504) | Slack: reply in the #uk-autumn-budget-2026 thread (29 Oct 05:11 UTC) | [`published/2026-10-29-corrected`](published/2026-10-29-corrected) |
+| Reader version, without notes on how we made it, under the corrected version's file name (PR #3 at 9e6760c) | Slack: reply in the #uk-autumn-budget-2026 thread (29 Oct 13:59 UTC) | [`published/2026-10-29-reader`](published/2026-10-29-reader) |
 
-Commit b56b14c builds revision 17's PDF byte for byte, and 7bbcdcb the explainers draft. Commits 942e628 through 3f48787 build the outward version, and 2291504 through e6a16ff, the merge of PR #1, the corrected one. An earlier version went to #core-team at 19:07 UTC. We built it on the test manifest, and it quoted a triple lock figure we have since withdrawn, so we don't keep it here.
+Commit b56b14c builds revision 17's PDF byte for byte, and 7bbcdcb the explainers draft. Commits 942e628 through 3f48787 build the outward version, 2291504 through b4f92fb the corrected one, and 9e6760c and 8b2c3dc, the merge of PR #3, the reader version. An earlier version went to #core-team at 19:07 UTC. We built it on the test manifest, and it quoted a triple lock figure we have since withdrawn, so we don't keep it here.
 
 ## Build
 
