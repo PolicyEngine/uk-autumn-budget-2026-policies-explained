@@ -9,6 +9,7 @@ dependencies = [
     "openpyxl>=3.1",
     # PolicyEngine's document template and build CLI (private repo; org members can read it)
     "pe-doc @ git+https://github.com/PolicyEngine/document-templates@7c8bce3189f68cbddcb814150b363c155cb7596b",
+    "regex",
 ]
 
 [dependency-groups]

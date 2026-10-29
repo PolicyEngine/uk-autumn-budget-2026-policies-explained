@@ -9,10 +9,12 @@ links turned absolute so they work in a PDF. chart_specs() returns the post's
 
 import json
 import re
+import unicodedata
 from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 
+import regex
 from markdown_it import MarkdownIt
 
 POSTS = Path(__file__).resolve().parent.parent / "sources" / "posts"
@@ -53,22 +55,54 @@ def _absolute_links(md, slug):
 
 
 OPENING = re.compile(r"Key\s+(results|figures|findings)\b.*:\s*$")
-# The opening's words anywhere in a post's source, in any case and spacing
-MENTION = re.compile(r"\bkey\s+(results|figures|findings)\b", re.I)
 # A browser collapses each run of HTML whitespace, line breaks included, to one space
 WHITESPACE = re.compile(r"[ \t\n\r\f]+")
+# Characters a browser draws as nothing, such as a soft hyphen or a zero-width space
+IGNORABLE = regex.compile(r"\p{Default_Ignorable_Code_Point}")
+
+
+def visible(text):
+    """Text as a reader sees its letters: NFKC folds compatibility forms
+    ("Ｋｅｙ" to "Key", "ﬁ" to "fi"), and invisible characters go."""
+    return IGNORABLE.sub("", unicodedata.normalize("NFKC", text))
+
+
+# Markup that can sit inside or between the opening's words while the page
+# still shows the words: a comment, an HTML tag, a link's destination or
+# reference, a hard line break (which an image's alt text drops), or a
+# Markdown emphasis, strikethrough, code, escape or bracket mark
+_MARK = r"(?:<!--.*?-->|<[^<>]*>|\]\((?:[^()]|\([^()]*\))*\)|\]\[[^\[\]]*\]|(?: {2,}|\\)\n|[*_~`\\\[\]])"
+
+
+def _spelled(word):
+    return f"{_MARK}*+".join(word)
+
+
+# The opening's words anywhere in a post's source, in any case, with any run of
+# that markup inside a word or between the two. No letter or digit may touch
+# them, but an underscore may, since "_Key figures:_" shows in italics
+MENTION = regex.compile(
+    rf"(?<![^\W_]){_spelled('key')}(?:\s|{_MARK})++(?:{'|'.join(_spelled(w) for w in ('results', 'figures', 'findings'))})(?![^\W_])",
+    regex.I | regex.S,
+)
 
 
 def source_mentions(text):
     """How often the post's source mentions the opening's words, shown or not.
 
-    HTML entities are decoded and Markdown's emphasis, strikethrough, code
-    and escape marks dropped first, so "K*ey* figures" and "&#75;ey figures"
-    count. Mentions in code, comments, captions, footnotes and highlighted
-    blocks count too: the build quotes only from a post that mentions the
-    words once, so it never has to work out whether the site shows them.
+    HTML entities are decoded and the text made visible() first, and the
+    words may hold or sit among markup (_MARK), so "K*ey* figures",
+    "&#75;ey figures", "K&shy;ey figures" and "Key [figures](/x)" each count.
+    Mentions in code, comments, attributes, captions, footnotes and
+    highlighted blocks count too, and so does each of two that overlap: the
+    build quotes only from a post that mentions the words once, so it never
+    has to work out whether the site shows them.
+
+    This guards against accidents in posts we write and save ourselves. It
+    doesn't try to see through deliberate disguise, such as a look-alike
+    letter from another script or text that a stylesheet or script adds.
     """
-    return len(MENTION.findall(re.sub(r"[*_~`\\]", "", unescape(text))))
+    return len(MENTION.findall(visible(unescape(text)), overlapped=True))
 
 
 class _ShownText(HTMLParser):
@@ -107,11 +141,11 @@ class _ShownText(HTMLParser):
 
 
 def shown_lines(html):
-    """The lines of prose a browser shows for some HTML (see _ShownText)."""
+    """The lines of prose a browser shows for some HTML (see _ShownText), made visible()."""
     parser = _ShownText()
     parser.feed(html)
     parser.close()
-    return "".join(parser.parts).split("\n")
+    return visible("".join(parser.parts)).split("\n")
 
 
 def _highlighted_block(self, tokens, idx, options, env):
@@ -168,9 +202,9 @@ def key_points(slug, extra_paragraphs=0):
 
     The build stops unless two counts both come to one: the opening's words
     anywhere in the post's source (source_mentions), and opening lines in the
-    model of what the page shows (_parse), which also catches markup that
-    splits the words. That line must stand as a top-level paragraph of its
-    own with a bullet list straight after it.
+    model of what the page shows (_parse), which also finds the line. That
+    line must stand as a top-level paragraph of its own with a bullet list
+    straight after it.
     """
     text = _text(slug)
     lines = text.split("\n")
