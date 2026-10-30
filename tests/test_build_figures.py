@@ -41,3 +41,7 @@ def test_the_filled_line_reads_as_sentences(attestation, sentence):
     line = next(line for line in TEMPLATE.splitlines() if "{{signoff:" in line)
     filled = re.sub(r"\{\{signoff:[^}]+\}\}", signoff(attestation), line)
     assert filled.endswith(sentence)
+
+
+def test_the_briefing_compares_the_budget_with_nothing_we_expected():
+    assert not re.search(r"\bour list\b|\bon the list\b|pre-Budget list|\bodds\b|we had expected|\.badge|\.prev\b", TEMPLATE, re.I)

@@ -1,6 +1,6 @@
 # Autumn Budget 2026: the policies explained
 
-PolicyEngine's post-Budget briefing. It takes the 20 measures on Vahid's pre-Budget list and says what the Budget of 28 October 2026 did with each, adds the measures the list missed, and for the seven measures in the [Budget dashboard](https://www.policyengine.org/uk/autumn-budget-2026) sets our estimate beside the matching line of the OBR's costing.
+PolicyEngine's post-Budget briefing. It says what the Budget of 28 October 2026 did, measure by measure, and for the seven measures in the [Budget dashboard](https://www.policyengine.org/uk/autumn-budget-2026) sets our estimate beside the matching line of the OBR's costing.
 
 The PDF opens with a cover for outside readers: it links the dashboard and our [post-Budget briefing](https://www.policyengine.org/uk/research/uk-autumn-budget-2026-briefing) and credits the Nuffield Foundation, which funds our UK Budget work. `template.md` defines the cover, the contents page and the back page in fenced divs because `pe-doc` has none of them. `document/extra.css` sets the A4 layout: the teal cover under `pe-doc`'s letterhead, running headers and footers with page numbers, the measure cards, numbered figures and the teal back page. The logos in `document/assets/` come from the Budget dashboard.
 
@@ -50,7 +50,7 @@ PRs from forks can't build, because CI reads the private template repo with an o
   - A gap over 25% needs a reason we have verified; otherwise state the gap without one.
 - No claim about how a model works unless the dashboard notes, a post or the code supports it. Label inferences. Where the dashboard's description of a measure and its code differ, follow the code: the Carer's Allowance limit is £228 and £234 in the years we cost (`carers_allowance_earnings_taper.py` at 4de166f0), not the description's £212.
 - No link to a post that hasn't merged. No small cells or single-record values. No poverty or people-affected figures until the dashboard publishes them, apart from any inside an explainer's key points, which we quote word for word (Max, 29 Oct: keep the energy post's 19.7 million households verbatim).
-- Write for readers outside PolicyEngine: no notes to the team, no internal status, and no odds from the pre-Budget list, which the list gave without a source.
+- Write for readers outside PolicyEngine: no notes to the team, no internal status, and no comparison with what we expected the Budget to do.
 - Say what the reader gets and what we found, never how or why we made it (Max, 29 Oct): no production choices, checks, reviews, build machinery or plans for later updates. Keep method that changes how a number reads, such as assumptions, sources and scope limits, and state each limitation in the present tense.
 - Sentence case and no emoji. Active voice: name who acts, with no passives, including reduced ones ("certified by", "not modelled"). Write "exceeds", not "is above". Use whole pounds in tables, with pence only where a formula spells them out or for a statutory rate.
 
