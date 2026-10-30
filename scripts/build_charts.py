@@ -9,7 +9,7 @@ uses, and stops if one differs by more than the post's data rounds.
 
 document/charts/charts.json records each chart's post, block and checks.
 
-  build_charts.py --artifacts .cache/artifacts --out document/charts
+  build_charts.py --artifacts sources/artifacts-rev17 --out document/charts
 """
 
 import argparse

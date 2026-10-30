@@ -27,7 +27,7 @@ You need [uv](https://docs.astral.sh/uv/), [Bun](https://bun.sh) 1.3.12, pandoc 
 scripts/build.sh
 ```
 
-This fetches the artifacts that the pinned manifest ([`sources/manifest-rev17.json`](sources/manifest-rev17.json)) lists from production and checks each against its receipt's digest. It then writes `document/proposal.md`, `document/figures.json` and the charts in `document/charts/`, and builds the PDF with `pe-doc build` and `pe-doc check`. The PDF lands in `document/`, and git ignores it.
+This reads the artifacts we saved in [`sources/artifacts-rev17/`](sources/artifacts-rev17) for the pinned manifest ([`sources/manifest-rev17.json`](sources/manifest-rev17.json)), and checks each receipt against the manifest and each file against its receipt. It then writes `document/proposal.md`, `document/figures.json` and the charts in `document/charts/`, and builds the PDF with `pe-doc build` and `pe-doc check`. The PDF lands in `document/`, and git ignores it.
 
 `uv run pytest` runs the tests of the build scripts; CI runs them before every build. `uv run python tests/mutations.py` breaks each rule the tests claim, one at a time in a copy of the repo, and checks that some test fails each time.
 
