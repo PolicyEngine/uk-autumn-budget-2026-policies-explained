@@ -143,7 +143,7 @@ def costing_table(official_rows, pe=None, pe_label="PolicyEngine"):
     for label, vals in official_rows:
         lines.append(f"| {label} | " + " | ".join(fmt(vals[y]) for y in YEARS) + " |")
     if pe is not None:
-        lines.append(f"| {pe_label} | " + " | ".join(fmt(pe[y]) for y in YEARS) + " |")
+        lines.append(f"| [{pe_label}]{{.ours}} | " + " | ".join(fmt(pe[y]) for y in YEARS) + " |")
     return "\n".join(lines)
 
 

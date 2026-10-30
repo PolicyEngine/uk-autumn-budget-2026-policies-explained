@@ -1,124 +1,224 @@
 /*
  * Document-specific CSS, loaded after the PolicyEngine template.
- * Cards follow the layout of the pre-Budget "policies explained" PDF:
- * one bordered card per measure, a label column and a text column.
- * PolicyEngine ui-kit colors only.
+ *
+ * Layout: an A4 report. A teal cover under the letterhead, a contents page,
+ * numbered sections, numbered tables and figures with captions, running
+ * headers and footers with page numbers, and a teal back page with contact
+ * and links. Inside the report, teal marks only headings and links.
+ * PolicyEngine ui-kit colors only; type is pe-doc's vendored Inter.
  */
 
-.flag {
-  display: inline-block;
-  font-weight: 700;
-  font-size: 8pt;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #c2410c; /* text-warning */
-  border: 0.6pt solid #c2410c; /* text-warning */
-  border-radius: 3pt;
-  padding: 0 4pt;
-  margin-right: 4pt;
+/* ---------- Page frame ---------- */
+
+@page {
+  size: A4;
+  margin: 24mm 25mm 20mm 25mm; /* about 11mm clear between the header and the text */
+
+  /* A slim header: the logo on the left, the title on the right */
+  @top-left {
+    content: url("assets/policyengine-teal.png");
+    image-resolution: 1170dpi; /* about 4.5mm tall */
+    width: 50%;
+    vertical-align: bottom;
+    padding-bottom: 1.6mm;
+    margin-bottom: 11mm;
+  }
+  @top-right {
+    content: "Autumn Budget 2026: the policies explained";
+    font: 7pt "Inter", sans-serif;
+    color: #64748B; /* gray-500 */
+    width: 50%;
+    text-align: right;
+    vertical-align: bottom;
+    padding-bottom: 2mm;
+    margin-bottom: 11mm;
+  }
+  @bottom-left {
+    content: none; /* the footer carries only the page number */
+    font: 7.5pt "Inter", sans-serif;
+    color: #64748B; /* gray-500 */
+    vertical-align: top;
+    padding-top: 3mm;
+  }
+  @bottom-center {
+    content: "Page " counter(page) " of " counter(pages);
+    font: 7.5pt "Inter", sans-serif;
+    color: #64748B; /* gray-500 */
+    vertical-align: top;
+    padding-top: 3mm;
+    border-top: none;
+  }
+  @bottom-right {
+    content: none;
+  }
 }
 
-.card {
-  border: 0.6pt solid #E2E8F0; /* gray-200 */
-  border-radius: 6pt;
-  padding: 2mm 4mm 2.5mm 4mm;
-  margin: 0 0 4mm 0;
+/* The cover runs to the edges; the letterhead keeps its own padding. */
+@page :first {
+  margin: 0;
+  background: #2C7A7B; /* teal-600: the cover panel runs to the page foot */
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-left { content: none; border-top: none; }
+  @bottom-center { content: none; border-top: none; }
+  @bottom-right { content: none; border-top: none; }
+}
+
+/* The back page: teal to the edges, no running header or footer. */
+@page back {
+  margin: 0;
+  background: #234E52; /* teal-800 */
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-left { content: none; border-top: none; }
+  @bottom-center { content: none; border-top: none; }
+  @bottom-right { content: none; border-top: none; }
+}
+
+/* ---------- Type and section numbers ---------- */
+
+body {
+  font-size: 9.5pt;
+  line-height: 1.5;
+  counter-reset: sec table figure;
+}
+
+p {
+  margin: 0 0 2.6mm;
+}
+
+h2 {
+  font-size: 14pt;
+  line-height: 1.25;
+  color: #234E52; /* teal-800 */
+  margin: 8mm 0 3mm;
+  padding: 0;
+  border: none;
+  counter-increment: sec;
+  counter-reset: sub;
+  break-after: avoid;
+}
+
+h2::before {
+  content: counter(sec);
+  display: inline-block;
+  min-width: 9mm;
+}
+
+h3 {
+  font-size: 11pt;
+  line-height: 1.3;
+  color: #234E52; /* teal-800 */
+  margin: 7mm 0 1.5mm;
+  counter-increment: sub;
+  break-after: avoid;
+}
+
+h3::before {
+  content: counter(sec) "." counter(sub);
+  display: inline-block;
+  min-width: 9mm;
+}
+
+h3 a {
+  color: #234E52; /* teal-800 */
+  text-decoration: none;
+}
+
+h2 + p,
+h3 + p,
+h3 + p + p {
+  break-before: avoid;
+}
+
+ul,
+ol {
+  padding-left: 5mm;
+  margin: 0 0 3mm;
+}
+
+li {
+  margin-bottom: 1.2mm;
+}
+
+li::marker {
+  color: #475569; /* gray-600 */
+}
+
+/* ---------- Tables: numbered captions, light rules ---------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 0.9pt solid #1E293B; /* gray-800 */
+  border-bottom: 0.9pt solid #1E293B; /* gray-800 */
+  margin: 1.5mm 0 1.5mm;
+  font-size: 8.5pt;
+  line-height: 1.38;
+}
+
+/* The caption above each table: a paragraph kept with its table */
+.tcap {
+  display: block;
+  counter-increment: table;
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #1E293B; /* gray-800 */
+}
+
+.tcap::before {
+  content: "Table " counter(table) ": ";
+}
+
+p:has(> .tcap) {
+  margin: 3mm 0 1.2mm;
+  break-after: avoid;
+}
+
+th {
+  font-weight: 700;
+  color: #1E293B; /* gray-800 */
+  border-bottom: 0.5pt solid #1E293B; /* gray-800 */
+  padding: 1.2mm 1.5mm;
+  background: none;
+}
+
+td {
+  border-bottom: none;
+  padding: 0.9mm 1.5mm;
+}
+
+/* The cost tables: numbers right-aligned, our row in bold */
+.card table {
   break-inside: avoid;
 }
 
-.card h3 {
-  margin: 1mm 0 1mm 0;
-  font-size: 12pt;
+.card table th:not(:first-child),
+.card table td:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.card table tr:has(.ours) td {
+  font-weight: 700;
   color: #101828; /* gray-900 */
 }
 
-.card p {
-  margin: 1mm 0;
-}
-
-.badge {
-  display: inline-block;
-  font-size: 7.5pt;
+.ours {
   font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  border-radius: 3pt;
-  padding: 0.3pt 4pt;
-  margin-right: 4pt;
 }
 
-.badge.announced {
-  color: #FFFFFF; /* white */
-  background: #285E61; /* teal-700 */
-}
-
-.badge.changed {
-  color: #234E52; /* teal-800 */
-  background: #B2F5EA; /* teal-100 */
-}
-
-.badge.new {
-  color: #FFFFFF; /* white */
-  background: #026AA2; /* blue-700 */
-}
-
-.prev {
-  font-size: 8pt;
-  color: #64748B; /* gray-500 */
-}
-
-.why {
-  font-weight: 700;
-  color: #285E61; /* teal-700 */
-  margin-right: 3pt;
-}
-
-.card table {
-  margin: 1.5mm 0;
-  font-size: 9pt;
-}
-
-.card table td {
-  vertical-align: top;
-  padding-top: 1.2mm;
-  padding-bottom: 1.2mm;
-}
-
-.card table td:first-child strong {
-  color: #285E61; /* teal-700 */
-}
-
-.card {
-  font-size: 8.6pt;
-  line-height: 1.35;
-  margin-bottom: 3mm;
-  padding-top: 1.5mm;
-  padding-bottom: 1.5mm;
-}
-
-.card h3 {
-  font-size: 11pt;
-}
-
-.card p {
-  margin: 0.6mm 0;
-}
-
-.card table {
-  font-size: 8.3pt;
-  margin: 1mm 0;
-}
-
-.card table td,
-.card table th {
-  padding-top: 0.45mm;
-  padding-bottom: 0.45mm;
+/* A table's note: the paragraph straight after it */
+.card table + p:not(:has(.why)),
+.costs + p {
+  font-size: 7.8pt;
+  line-height: 1.4;
+  color: #475569; /* gray-600 */
+  margin-top: 1mm;
 }
 
 .costs table {
   table-layout: fixed;
-  width: 100%;
-  font-size: 8.2pt;
 }
 
 .costs table th,
@@ -127,108 +227,684 @@
   padding-right: 2pt;
 }
 
-.glance table {
-  font-size: 8.8pt;
+.costs table td {
+  border-bottom: 0.3pt solid #E2E8F0; /* gray-200 */
 }
 
 .glance table td,
-.glance table th {
-  padding-top: 0.7mm;
-  padding-bottom: 0.7mm;
+#on-our-list-not-in-the-budget + table td {
+  border-bottom: 0.3pt solid #E2E8F0; /* gray-200 */
 }
 
-/* A section that would otherwise leave its heading at the foot of a page */
-.new-page {
-  break-before: page;
+tr {
+  break-inside: avoid;
 }
 
-/* One page per explainer: its key points, then one of its charts */
-.explainer {
-  break-before: page;
+/* ---------- Measure sections ---------- */
+
+.card {
+  margin: 0 0 4mm;
 }
 
-.explainer h3 a {
+/* Standfirst: the measure's key fact */
+.keyfact {
+  display: block;
+  font-style: italic;
+  font-size: 10pt;
+  color: #334155; /* gray-700 */
+}
+
+.card p:has(> .keyfact) {
+  margin-bottom: 1mm;
+  break-after: avoid;
+}
+
+/* Status: how the Budget treated the measure, and its place on our list */
+.tags p {
+  font-size: 8.5pt;
+  color: #475569; /* gray-600 */
+  margin-bottom: 2.6mm;
+}
+
+.tags p::before {
+  content: "Status: ";
+  font-weight: 700;
+  color: #1E293B; /* gray-800 */
+}
+
+.badge::after {
+  content: ";";
+}
+
+/* Run-in labels: What changes, Who it affects, How we model it */
+.runin {
+  font-weight: 700;
   color: #101828; /* gray-900 */
+  margin-right: 1.5mm;
+}
+
+.runin::after {
+  content: ".";
+}
+
+/* Why ours differs: a run-in label on a paragraph with a thin rule */
+.card p:has(> .why) {
+  margin-top: 3mm;
+  padding-left: 3.5mm;
+  border-left: 0.8pt solid #94A3B8; /* gray-400 */
+}
+
+.why {
+  font-weight: 700;
+  color: #101828; /* gray-900 */
+  margin-right: 1.5mm;
+}
+
+.why::after {
+  content: ".";
+}
+
+/* Read more: a plain sentence with the link */
+.readmore p {
+  margin: 0;
+}
+
+.readmore .label::after {
+  content: ":";
+}
+
+.flag {
+  font-weight: 700;
+  color: #c2410c; /* text-warning */
+  margin-right: 4pt;
+}
+
+/* ---------- Figures ---------- */
+
+/* The caption above each chart */
+.figcap {
+  display: block;
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #1E293B; /* gray-800 */
+  counter-increment: figure;
+}
+
+.figcap::before {
+  content: "Figure " counter(figure) ": ";
+}
+
+.explainer p:has(> .figcap) {
+  margin: 5mm 0 1.5mm;
+  break-after: avoid;
+}
+
+.explainer p:has(img.chart) {
+  margin: 0 0 3mm;
+  break-inside: avoid;
+}
+
+.explainer p:has(img.chart) a {
   text-decoration: none;
 }
 
 img.chart {
   display: block;
   width: 100%;
-  margin: 4mm 0 0 0;
+  margin: 0;
 }
 
-/* Cover page: the letterhead (pe-doc's wordmark and address line) leads, then
-   the title block, the two links and the funder line. The letterhead appears
-   once, at the top of the first page, so these rules only touch the cover. */
-@page :first {
-  @bottom-center {
-    content: none;
-    border-top: none;
-  }
-  @bottom-right {
-    content: none;
-  }
+/* ---------- Vertical rhythm ----------
+   One 4pt base: headings sit closer to what follows than to what precedes;
+   paragraphs 7pt apart; 12pt clear around each table and figure, with the
+   caption 4pt above it and the note 3pt below. */
+
+p {
+  margin: 0 0 7pt;
 }
+
+h2 {
+  margin: 20pt 0 6pt;
+}
+
+h3 {
+  margin: 16pt 0 4pt;
+}
+
+h2 + h3 {
+  margin-top: 8pt;
+}
+
+ul,
+ol {
+  margin: 0 0 7pt;
+}
+
+li {
+  margin-bottom: 3pt;
+}
+
+li > p {
+  margin-bottom: 0;
+}
+
+/* Measure sections */
+.card {
+  margin: 0;
+}
+
+.card p:has(> .keyfact) {
+  margin: 0 0 2pt;
+}
+
+.tags p {
+  margin: 0 0 8pt;
+}
+
+.card p:has(> .why) {
+  margin: 12pt 0 7pt;
+  padding: 1pt 0 1pt 10pt;
+}
+
+.card table + p:has(> .why) {
+  margin-top: 12pt;
+}
+
+.readmore p {
+  margin: 0;
+}
+
+/* Tables: caption 4pt above, note 3pt below, 12pt clear around the group */
+p:has(> .tcap) {
+  margin: 12pt 0 4pt;
+}
+
+table {
+  margin: 0 0 12pt;
+}
+
+.costs table,
+.glance table {
+  margin-bottom: 3pt;
+}
+
+.card table:has(+ p:not(:has(.why))) {
+  margin-bottom: 3pt;
+}
+
+.card table + p:not(:has(.why)),
+.costs + p {
+  margin: 0 0 12pt;
+}
+
+.glance + p {
+  margin-top: 9pt;
+}
+
+#on-our-list-not-in-the-budget + p + table {
+  margin-bottom: 7pt;
+}
+
+/* Figures: caption 4pt above, 12pt clear around */
+.explainer p:has(> .figcap) {
+  margin: 12pt 0 4pt;
+}
+
+.explainer p:has(img.chart) {
+  margin: 0 0 12pt;
+}
+
+/* Sources and limitations */
+#sources-and-method + ol li,
+#limitations + ul li {
+  margin-bottom: 4pt;
+}
+
+/* ---------- Structure ----------
+   Sections open with space and a teal number; measures and
+   explainers are separated by a full-width rule; inside a measure, its
+   heading block, description, costing, explanation and link sit in groups
+   with larger gaps between groups than within them. */
+
+body {
+  font-size: 10.5pt;
+}
+
+h2 {
+  font-size: 16pt;
+  color: #101828; /* gray-900 */
+  margin: 28pt 0 9pt;
+  padding-top: 0;
+}
+
+h2::before {
+  color: #2C7A7B; /* teal-600 */
+  min-width: 10mm;
+}
+
+h2.section-page {
+  break-before: page;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 12.5pt;
+  color: #101828; /* gray-900 */
+}
+
+.explainer h3 {
+  font-size: 12.5pt;
+}
+
+h3::before {
+  color: #2C7A7B; /* teal-600 */
+  min-width: 11mm;
+}
+
+h3 a {
+  color: #101828; /* gray-900 */
+}
+
+/* Each measure and each explainer is its own unit under a full-width rule */
+.card,
+.explainer {
+  margin: 24pt 0 0;
+  padding-top: 12pt;
+  border-top: 0.5pt solid #94A3B8; /* gray-400 */
+}
+
+h2 + .card,
+h2 + p + .explainer,
+.card:first-child {
+  margin-top: 6pt;
+  padding-top: 0;
+  border-top: none;
+}
+
+.card h3,
+.explainer h3 {
+  margin-top: 0;
+}
+
+/* Heading block: number and title, standfirst, status */
+.card p:has(> .keyfact),
+.card .tags p {
+  padding-left: 11mm;
+}
+
+.card .tags p {
+  margin-bottom: 12pt;
+}
+
+/* Description: hanging labels in a 28mm column */
+.card p:has(> .runin) {
+  position: relative;
+  padding-left: 30mm;
+  margin-bottom: 6pt;
+}
+
+.runin {
+  position: absolute;
+  left: 0;
+  width: 27mm;
+  font-size: 8.6pt;
+  line-height: 1.75;
+  color: #2C7A7B; /* teal-600 */
+  margin: 0;
+}
+
+.runin::after {
+  content: "";
+}
+
+/* Costing: caption, table, note */
+.card p:has(> .tcap) {
+  margin-top: 16pt;
+}
+
+/* Explanation and link */
+.card p:has(> .why) {
+  margin: 14pt 0 8pt;
+}
+
+.readmore {
+  margin-bottom: 0;
+}
+
+/* Explainers: the figure with its caption and source as one group */
+.explainer p:has(> .figcap) {
+  margin-top: 14pt;
+}
+
+.explainer p:has(img.chart) {
+  margin-bottom: 0;
+}
+
+/* Cost tables: room for the six year columns */
+.costs col:nth-child(1) {
+  width: 15% !important;
+}
+
+.costs col:nth-child(2) {
+  width: 31% !important;
+}
+
+.costs col:nth-child(n+3) {
+  width: 9% !important;
+}
+
+.costs table {
+  font-size: 8pt;
+}
+
+/* A measure's heading block stays with its description */
+.card .tags p,
+.card p:has(> .keyfact) {
+  break-after: avoid;
+}
+
+/* ---------- Links ---------- */
+
+a {
+  color: #2C7A7B; /* teal-600 */
+  text-decoration: underline;
+  text-decoration-color: #81E6D9; /* teal-200 */
+}
+
+.toc a,
+.cover a,
+.back a {
+  text-decoration: none;
+}
+
+/* Sources: a numbered list of references; long link text wraps */
+#sources-and-method + ol {
+  padding-left: 9mm;
+}
+
+#sources-and-method + ol > li {
+  padding-left: 2mm;
+}
+
+#sources-and-method + ol li,
+#limitations + ul li {
+  font-size: 8.6pt;
+  line-height: 1.4;
+  margin-bottom: 1.4mm;
+  overflow-wrap: anywhere;
+}
+
+#sources-and-method + ol li::marker {
+  content: "[" counter(list-item) "]  ";
+  font-weight: 700;
+}
+
+/* ---------- Cover ---------- */
 
 #letterhead {
-  padding-top: 6mm;
-  padding-bottom: 4mm;
+  text-align: left;
+  border-bottom: none;
+  margin: 0;
+  padding: 16mm 20mm 9mm 20mm;
+  background: #FFFFFF; /* white, so the canonical wordmark sits on white */
 }
 
 #letterhead img {
-  width: 62mm;
+  width: 58mm;
+}
+
+#letterhead .org {
+  display: none; /* the address line is left out of this report */
+  font-size: 8pt;
+  color: #64748B; /* gray-500 */
+  margin-top: 2mm;
 }
 
 .cover {
   position: relative;
   box-sizing: border-box;
-  height: 200mm;
-  padding-top: 48mm;
+  height: 240mm;
+  margin: 0;
+  padding: 44mm 20mm 0 20mm;
+  background: #2C7A7B; /* teal-600 */
+  color: #FFFFFF; /* white */
   break-after: page;
 }
 
+.cover::before {
+  /* a short bar above the title */
+  content: "";
+  position: absolute;
+  top: 32mm;
+  left: 20mm;
+  width: 24mm;
+  height: 1.6mm;
+  background: #81E6D9; /* teal-200 */
+}
+
+/* Title: two deliberate lines, "Autumn Budget 2026:" then "the policies explained" */
 .cover h1 {
-  font-size: 30pt;
-  line-height: 1.1;
-  margin-bottom: 5mm;
+  font-size: 32pt;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #FFFFFF; /* white */
+  margin: 0 0 8mm;
 }
 
+/* Subtitle: regular weight, slightly larger, in pale teal */
 .cover h1 + p {
-  font-size: 12.5pt;
-  line-height: 1.3;
-  margin-bottom: 3mm;
+  font-size: 15pt;
+  line-height: 1.4;
+  color: #E6FFFA; /* teal-50 */
+  margin-bottom: 0;
+  max-width: 130mm;
 }
 
+.cover h1 + p strong {
+  font-weight: 400;
+  color: #E6FFFA; /* teal-50 */
+}
+
+/* Date line: small caps-style, set apart by a thin divider */
 .cover h1 + p + p {
-  font-size: 10.5pt;
-  margin-bottom: 0;
+  display: inline-block;
+  font-size: 8.5pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #B2F5EA; /* teal-100 */
+  margin: 9mm 0 0;
+  padding-top: 3.5mm;
+  border-top: 0.5pt solid #81E6D9; /* teal-200 */
 }
 
 .cover-links {
   margin-top: 22mm;
-  border-left: 1.5pt solid #319795; /* teal-500 */
-  padding-left: 4mm;
+  padding: 4mm 5mm 1mm 5mm;
+  border-left: none;
+  background: #234E52; /* teal-800 */
+  border-radius: 4pt;
+  max-width: 120mm;
 }
 
 .cover-links p {
-  margin: 0 0 4mm;
-  font-size: 10.5pt;
+  margin: 0 0 3mm;
+  font-size: 10pt;
+  line-height: 1.45;
+}
+
+/* The link sits under its label, in line with the label text */
+.cover-links a {
+  margin-left: 5.2mm;
 }
 
 .cover-links .label {
-  color: #475569; /* gray-600 */
+  color: #E6FFFA; /* teal-50 */
   font-size: 9pt;
+  font-weight: 700;
+}
+
+/* Nuffield Foundation logo, white on teal: 18mm tall, its guide's minimum, with clear space of more than the height of its N around it */
+.cover img.nuffield {
+  display: block;
+  height: 18mm; /* the Foundation's minimum on A4 */
+  width: auto;
+  margin: 0;
+}
+
+/* "Funded by" sits above the logo, on the same left edge */
+.cover .funder-text {
+  display: block;
+  font-size: 8pt;
+  color: #B2F5EA; /* teal-100 */
+  margin-bottom: 2.5mm;
+}
+
+/* Lucide-style line icons before each label */
+.cover-links svg.icon {
+  display: inline-block;
+  width: 3.4mm;
+  height: 3.4mm;
+  color: #81E6D9; /* teal-200 */
+  vertical-align: -0.6mm;
+  margin-right: 1.8mm;
 }
 
 .cover-links a {
+  color: #FFFFFF; /* white */
   font-weight: 700;
 }
 
 .cover .funder {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 12mm;
+  left: 20mm;
+  display: block;
+  font-size: 9pt;
+  color: #E6FFFA; /* teal-50 */
+}
+
+/* ---------- Contents ---------- */
+
+.toc {
+  break-after: page;
+  padding-top: 2mm;
+}
+
+.toc .toc-title {
+  display: block;
+  font-size: 20pt;
+  font-weight: 700;
+  color: #234E52; /* teal-800 */
+  margin-bottom: 6mm;
+}
+
+.toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.toc li {
+  margin: 0;
+  padding: 1.6mm 0 0;
+  font-size: 9.5pt;
+}
+
+.toc li::marker {
+  content: none;
+}
+
+.toc li ul {
+  margin: 0.6mm 0 1mm;
+}
+
+.toc li li {
+  padding: 0.5mm 0 0.5mm 9mm;
+  font-size: 8.6pt;
+}
+
+.toc a {
+  color: #1E293B; /* gray-800 */
+}
+
+.toc li > a {
+  font-weight: 700;
+}
+
+.toc li li > a {
+  font-weight: 400;
+  color: #334155; /* gray-700 */
+}
+
+.toc > ul {
+  counter-reset: tsec;
+}
+
+.toc > ul > li {
+  counter-increment: tsec;
+  counter-reset: tsub;
+}
+
+.toc li li {
+  counter-increment: tsub;
+}
+
+/* The contents lists every section and subsection in order, so its own
+   counters give the same numbers as the headings. */
+.toc li > a::before {
+  content: counter(tsec);
+  display: inline-block;
+  min-width: 9mm;
+}
+
+.toc li li > a::before {
+  content: counter(tsec) "." counter(tsub);
+  min-width: 10mm;
+}
+
+.toc a::after {
+  content: leader(".") target-counter(attr(href url), page);
+  color: #475569; /* gray-600 */
+}
+
+/* ---------- Back page ---------- */
+
+.back {
+  page: back;
+  break-before: page;
+  box-sizing: border-box;
+  height: 297mm;
+  padding: 120mm 22mm 0 22mm;
+  color: #FFFFFF; /* white */
+}
+
+.back p {
+  margin: 0 0 6mm;
+  font-size: 11pt;
+}
+
+.back img.back-logo {
+  width: 70mm;
+  margin-bottom: 8mm;
+}
+
+.back svg.icon {
+  display: inline-block;
+  width: 3.4mm;
+  height: 3.4mm;
+  vertical-align: -0.6mm;
+  margin-right: 2mm;
+}
+
+.back .label {
   font-size: 8.5pt;
-  color: #64748B; /* gray-500 */
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #B2F5EA; /* teal-100 */
+}
+
+.back a {
+  color: #FFFFFF; /* white */
+  font-weight: 700;
 }
