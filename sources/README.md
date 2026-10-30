@@ -1,6 +1,6 @@
 # Sources
 
-We saved here everything the briefing's figures and claims rest on, on 28 October 2026. The digest is the first 16 hex characters of each file's sha256.
+We saved here everything the briefing's figures and claims rest on: the artifacts on 30 October 2026, the rest on 28 October. The digest is the first 16 hex characters of each file's sha256.
 
 | File | What it is | Where it came from | sha256 |
 |:--|:--|:--|:--|
@@ -26,4 +26,4 @@ We saved here everything the briefing's figures and claims rest on, on 28 Octobe
 | `uk-autumn-budget-2026-trading-allowance.md` | `bef16a328e7ec9d6` |
 | `uk-triple-lock-budget-2026.md` | `901ee28ee7a12ec7` |
 
-`artifacts-rev17/` holds the dashboard's artifacts at revision 17: one folder per measure, with its CSVs and receipt. We saved them on 30 October because the dashboard no longer serves them: all eight returned 404 that day, at revision 60. `scripts/fetch_artifacts.py` downloads the artifacts of the live revision for `scripts/build.sh --latest`.
+`artifacts-rev17/` holds the dashboard's artifacts at revision 17: a folder for each of the seven measures and one for the combined run, each with its CSVs and receipt. We copied them on 30 October from our last build's download, because the dashboard no longer serves them: all eight returned 404 that day, at revision 60. `scripts/build_figures.py` checks each receipt against the digest in `manifest-rev17.json` and each file against its receipt. `scripts/fetch_artifacts.py` downloads the artifacts of the live revision for `scripts/build.sh --latest`.
