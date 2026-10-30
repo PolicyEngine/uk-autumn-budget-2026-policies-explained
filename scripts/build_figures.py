@@ -114,12 +114,14 @@ def load_obr(xlsx):
 
 
 def canonical(value):
-    """The JSON the dashboard hashes: RFC 8785 with null members dropped. Receipts hold no floats."""
+    """The JSON the dashboard hashes: RFC 8785 with null members dropped, for the numbers receipts hold."""
     if isinstance(value, dict):
         members = sorted(((k, v) for k, v in value.items() if v is not None), key=lambda m: m[0].encode("utf-16-be"))
         return "{" + ",".join(f"{json.dumps(k, ensure_ascii=False)}:{canonical(v)}" for k, v in members) + "}"
     if isinstance(value, list):
         return "[" + ",".join(canonical(v) for v in value) + "]"
+    if isinstance(value, float) or (isinstance(value, int) and abs(value) > 2**53 - 1):
+        raise SystemExit(f"{value!r}: canonical() writes integers up to 2**53 - 1 and no floats")
     return json.dumps(value, ensure_ascii=False)
 
 

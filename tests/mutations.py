@@ -37,6 +37,8 @@ MUTATIONS = [
     ("The build skips the receipt's file digests", FIGURES, [("            if got != digest:\n", "            if False:\n")]),
     ("The digest keeps null members", FIGURES, [("for k, v in value.items() if v is not None)", "for k, v in value.items())")]),
     ("The digest hashes the run's own fields", FIGURES, [('if k not in ("generated_at", "generator_argv")', "if True")]),
+    ("The digest sorts keys by code point", FIGURES, [('key=lambda m: m[0].encode("utf-16-be")', "key=lambda m: m[0]")]),
+    ("The digest writes floats and huge integers", FIGURES, [("if isinstance(value, float) or (isinstance(value, int) and abs(value) > 2**53 - 1):", "if False:")]),
     ("A flat £0.50 tolerance, the old check's floor", CHARTS,
      [("return (0.5 * 10 ** -decimals if decimals is not None else 0) + EPSILON", "return 0.5 + EPSILON")]),
     ("No font filter", CHARTS,
