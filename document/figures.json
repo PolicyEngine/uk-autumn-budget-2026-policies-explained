@@ -2765,6 +2765,66 @@
   },
   {
    "kind": "obr",
+   "key": "93, Total",
+   "year": "2026-27",
+   "value": -6.469587610000005,
+   "printed": "−6",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 93, Total",
+   "column": "2026-27"
+  },
+  {
+   "kind": "obr",
+   "key": "93, Total",
+   "year": "2027-28",
+   "value": -6.794368049999997,
+   "printed": "−7",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 93, Total",
+   "column": "2027-28"
+  },
+  {
+   "kind": "obr",
+   "key": "93, Total",
+   "year": "2028-29",
+   "value": -45.18480318999997,
+   "printed": "−45",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 93, Total",
+   "column": "2028-29"
+  },
+  {
+   "kind": "obr",
+   "key": "93, Total",
+   "year": "2029-30",
+   "value": -46.542213819999986,
+   "printed": "−47",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 93, Total",
+   "column": "2029-30"
+  },
+  {
+   "kind": "obr",
+   "key": "93, Total",
+   "year": "2030-31",
+   "value": -47.72320832,
+   "printed": "−48",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 93, Total",
+   "column": "2030-31"
+  },
+  {
+   "kind": "obr",
+   "key": "93, Total",
+   "year": "2031-32",
+   "value": -48.94426684,
+   "printed": "−49",
+   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
+   "row": "measure 93, Total",
+   "column": "2031-32"
+  },
+  {
+   "kind": "obr",
    "key": "82, Total",
    "year": "2026-27",
    "value": -362,
@@ -2961,26 +3021,6 @@
    "printed": "0",
    "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
    "row": "measure 35, Total",
-   "column": "2031-32"
-  },
-  {
-   "kind": "obr",
-   "key": "93, Total",
-   "year": "2028-29",
-   "value": -45.18480318999997,
-   "printed": "£45",
-   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
-   "row": "measure 93, Total",
-   "column": "2028-29"
-  },
-  {
-   "kind": "obr",
-   "key": "93, Total",
-   "year": "2031-32",
-   "value": -48.94426684,
-   "printed": "£49",
-   "file": "policy-555e7f74.xlsx (sha256 cdcc2a06), sheet 1.1",
-   "row": "measure 93, Total",
    "column": "2031-32"
   }
  ]

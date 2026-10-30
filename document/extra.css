@@ -231,8 +231,7 @@ td {
   border-bottom: 0.3pt solid #E2E8F0; /* gray-200 */
 }
 
-.glance table td,
-#on-our-list-not-in-the-budget + table td {
+.glance table td {
   border-bottom: 0.3pt solid #E2E8F0; /* gray-200 */
 }
 
@@ -257,23 +256,6 @@ tr {
 .card p:has(> .keyfact) {
   margin-bottom: 1mm;
   break-after: avoid;
-}
-
-/* Status: how the Budget treated the measure, and its place on our list */
-.tags p {
-  font-size: 8.5pt;
-  color: #475569; /* gray-600 */
-  margin-bottom: 2.6mm;
-}
-
-.tags p::before {
-  content: "Status: ";
-  font-weight: 700;
-  color: #1E293B; /* gray-800 */
-}
-
-.badge::after {
-  content: ";";
 }
 
 /* Run-in labels: What changes, Who it affects, How we model it */
@@ -394,11 +376,7 @@ li > p {
 }
 
 .card p:has(> .keyfact) {
-  margin: 0 0 2pt;
-}
-
-.tags p {
-  margin: 0 0 8pt;
+  margin: 0 0 12pt;
 }
 
 .card p:has(> .why) {
@@ -439,10 +417,6 @@ table {
 
 .glance + p {
   margin-top: 9pt;
-}
-
-#on-our-list-not-in-the-budget + p + table {
-  margin-bottom: 7pt;
 }
 
 /* Figures: caption 4pt above, 12pt clear around */
@@ -526,14 +500,9 @@ h2 + p + .explainer,
   margin-top: 0;
 }
 
-/* Heading block: number and title, standfirst, status */
-.card p:has(> .keyfact),
-.card .tags p {
+/* Heading block: number and title, standfirst */
+.card p:has(> .keyfact) {
   padding-left: 11mm;
-}
-
-.card .tags p {
-  margin-bottom: 12pt;
 }
 
 /* Description: hanging labels in a 28mm column */
@@ -598,7 +567,6 @@ h2 + p + .explainer,
 }
 
 /* A measure's heading block stays with its description */
-.card .tags p,
 .card p:has(> .keyfact) {
   break-after: avoid;
 }

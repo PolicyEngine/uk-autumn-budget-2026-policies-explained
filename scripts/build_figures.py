@@ -1,8 +1,9 @@
 """Fill the briefing template with figures from the dashboard manifest, the OBR's
 detailed forecast table 1.1 and the Treasury's Tables 6.1 and 6.2.
 
-Every PolicyEngine figure comes from a manifest artifact whose files match the
-digests in its receipt.json; every official figure comes from the OBR workbook
+Every PolicyEngine figure comes from a manifest artifact whose receipt.json
+matches the manifest's digest and whose files match the digests in that receipt;
+every official figure comes from the OBR workbook
 (checked against its sha256) or the Table 6.1 workbook. figures.json records the
 source of each figure printed.
 
@@ -112,6 +113,28 @@ def load_obr(xlsx):
     return out
 
 
+def canonical(value):
+    """The JSON the dashboard hashes: RFC 8785 with null members dropped, for the numbers receipts hold."""
+    if isinstance(value, dict):
+        members = sorted(((k, v) for k, v in value.items() if v is not None), key=lambda m: m[0].encode("utf-16-be"))
+        return "{" + ",".join(f"{json.dumps(k, ensure_ascii=False)}:{canonical(v)}" for k, v in members) + "}"
+    if isinstance(value, list):
+        return "[" + ",".join(canonical(v) for v in value) + "]"
+    if isinstance(value, float) or (isinstance(value, int) and abs(value) > 2**53 - 1):
+        raise SystemExit(f"{value!r}: canonical() writes integers up to 2**53 - 1 and no floats")
+    return json.dumps(value, ensure_ascii=False)
+
+
+def artifact_digest(document):
+    """The digest a manifest gives an artifact: its receipt, without the fields that describe the run."""
+    dashboard = {k: v for k, v in document["dashboard"].items() if k not in ("generated_at", "generator_argv")}
+    return hashlib.sha256(canonical({
+        "schema": document.get("schema"),
+        "execution_receipt": document.get("execution_receipt"),
+        "dashboard": dashboard,
+    }).encode()).hexdigest()
+
+
 def load_dashboard(manifest_path, art_dir):
     m = json.loads(Path(manifest_path).read_text())
     out = {}
@@ -120,7 +143,10 @@ def load_dashboard(manifest_path, art_dir):
         folder = Path(art_dir) / key
         if not folder.exists():
             continue
-        receipt = json.loads((folder / "receipt.json").read_text())["dashboard"]
+        document = json.loads((folder / "receipt.json").read_text())
+        if artifact_digest(document) != entry["artifact_sha256"]:
+            raise SystemExit(f"{key}: receipt differs from the manifest's artifact digest")
+        receipt = document["dashboard"]
         for name, digest in receipt["files"].items():
             got = sha(folder / name)
             if got != digest:
