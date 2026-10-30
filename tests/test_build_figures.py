@@ -44,4 +44,4 @@ def test_the_filled_line_reads_as_sentences(attestation, sentence):
 
 
 def test_the_briefing_compares_the_budget_with_nothing_we_expected():
-    assert not re.search(r"\bour list\b|\bon the list\b|pre-Budget list|\bodds\b|we had expected|\.badge|\.prev\b", TEMPLATE, re.I)
+    assert not re.search(r"\bour list\b|\bon the list\b|pre-Budget list|\bodds\b|we had (expected|listed)|\.badge|\.prev\b", TEMPLATE, re.I)

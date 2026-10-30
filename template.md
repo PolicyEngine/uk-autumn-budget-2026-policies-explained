@@ -129,7 +129,7 @@ Our estimates differ from the official costings for four main reasons: timing (w
 
 [0% VAT on domestic electricity · to July 2027 · Northern Ireland from April 2027]{.keyfact}
 
-[What changes]{.runin} The Budget extends the 0% rate on domestic electricity, in force in Great Britain since 1 October 2026, by three months to July 2027, and expects the rate to apply in Northern Ireland from April 2027; until then Northern Ireland's Executive gets funding for comparable support. We had listed an extension to March 2028.
+[What changes]{.runin} The Budget extends the 0% rate on domestic electricity, in force in Great Britain since 1 October 2026, by three months to July 2027, and expects the rate to apply in Northern Ireland from April 2027; until then Northern Ireland's Executive gets funding for comparable support.
 
 [Who it affects]{.runin} Around 29 million households across the UK. The Budget expects it to take around £50 off the annual Ofgem price cap in April 2027.
 
