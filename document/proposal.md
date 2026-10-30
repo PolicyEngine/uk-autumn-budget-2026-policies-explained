@@ -88,15 +88,15 @@ In our combined run, the seven measures in the [dashboard](https://www.policyeng
 
 ## How to read this {.section-page}
 
-The day before the Budget, we listed the 20 measures we thought it most likely to change. This briefing says what the Budget actually did with each, and adds the measures it made that our list missed. For every measure:
+The day before the Budget, we listed the 20 measures we thought it most likely to change. This briefing says what the Budget actually did with each, and adds the measures it made that our list missed. For every measure you will find:
 
 - **What changes**, and when, from the Budget documents.
 - **Who it affects**, using the government's own reach figures where it gives them.
-- **The official costing**: the government's costing, which the Office for Budget Responsibility (OBR) certifies, from the OBR's [detailed forecast table 1.1](https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/). For a measure in our dashboard we compare with the line or lines of that table that match what we model, and give the total in the Treasury's [Table 6.1](https://www.gov.uk/government/publications/supporting-documents-for-budget-2026), which rounds to the nearest £5 million and includes the measure's other lines, for context only. Fuel duty is the exception: its official figure is the government's estimate, which the OBR used but could not certify. For other measures we give the OBR's total for the measure. In every table a negative number is a cost to the public finances and a positive number raises money, in £ million.
+- **The official costing**: the government's costing, which the Office for Budget Responsibility (OBR) certifies, from the OBR's [detailed forecast table 1.1](https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/). For a measure in our dashboard we compare with the line or lines of that table that match what we model, and give the total in the Treasury's [Table 6.1](https://www.gov.uk/government/publications/supporting-documents-for-budget-2026) (rounded to the nearest £5 million). We include the measure's other lines for context. Fuel duty is the exception: its official figure is the government's estimate, which the OBR used but could not certify. For other measures we give the OBR's total for the measure. In every table a negative number is a cost to the public finances and a positive number raises money, in £ million.
 - **Our estimate**, only where the dashboard publishes one, with the reasons it differs from the official costing.
 - **How we model it**, if we do.
 
-After the cards for the measures in [our dashboard](https://www.policyengine.org/uk/autumn-budget-2026), a page for each of our six explainers gives its key points and one of its charts.
+After presenting the measures in [our dashboard](https://www.policyengine.org/uk/autumn-budget-2026), we dedicate a page to each of our six policy explainers with their key points and charts.
 
 Our estimates differ from the official costings for four main reasons: timing (we score each tax year's liability; the official costings are on a National Accounts basis, in which the tax people pay through Self Assessment can fall in a later year), coverage (we use household survey data, so we estimate less fully the effects outside households and on incomes the survey records thinly), behaviour (ours are static; most official costings include responses) and scope (the parts of a policy each models).
 
@@ -162,7 +162,7 @@ Our estimates differ from the official costings for four main reasons: timing (w
 
 Table 6.1's total also includes the measure's other line in the OBR's table: Other AME (current).
 
-[Why ours differs]{.why} Ours exceeds the official VAT line by £106 million (14%) in 2026-27 and by £57 million (19%) in 2027-28. The official costing also covers charities, residential care and some businesses, and counts households switching from gas to electricity; both make the official figure larger, so neither explains the gap. The two start from different spending: ours from the Department for Energy Security and Net Zero's domestic electricity volumes at the average prices households pay, which we grow with CPI, and the official costing from ONS consumer spending, which is 10% to 12% lower.
+[Why ours differs]{.why} Ours exceeds the official VAT line by £106 million (14%) in 2026-27 and by £57 million (19%) in 2027-28. The official costing also covers charities, residential care and some businesses, and counts households switching from gas to electricity; both make the official figure larger, so neither explains the gap. The two start from different spending. Ours starts from the Department for Energy Security and Net Zero's domestic electricity volumes at the average prices households pay, which we grow with CPI. The official costing instead starts from ONS consumer spending, which is 10% to 12% lower.
 
 ::: {.readmore}
 [Read more]{.label} [Analysis of the Autumn Budget 2026 energy bill measures](https://www.policyengine.org/uk/research/budget-2026-energy-bills)
@@ -372,7 +372,7 @@ Table 6.1's total also includes the measure's other lines in the OBR's table: PS
 
 ## Our explainers {.section-page}
 
-We have published six explainers, which together cover the seven measures in [our dashboard](https://www.policyengine.org/uk/autumn-budget-2026): one covers both energy measures. Each of the next six pages quotes an explainer's key points from [policyengine.org](https://www.policyengine.org) and includes one of its charts, using the post's own chart data. The three income decile charts show the dashboard's results. Words in square brackets replace a reference to another part of the post.
+We have published six explainers, which together cover the seven measures in [our dashboard](https://www.policyengine.org/uk/autumn-budget-2026): one covers both energy measures. Each of the next six pages quotes an explainer's key points from [policyengine.org](https://www.policyengine.org) and includes one of its charts, using the post's own chart data. The three income decile charts show the dashboard's results. We have simplified references to other parts of the posts using square brackets. Please refer to the posts for the full details.
 
 ::: {.explainer}
 ### [Analysis of the Autumn Budget 2026 energy bill measures](https://www.policyengine.org/uk/research/budget-2026-energy-bills) {#e-budget-2026-energy-bills}
@@ -629,7 +629,7 @@ The numbers give each measure's place on our list of 27 October, the day before 
 - Our fuel duty cut leaves out road fuel gases (LPG and natural gas), which the government's costing includes.
 - Our Pension Tax Allowance leaves out some people who reach State Pension age during the tax year.
 - We project household electricity spending with general inflation, not retail energy prices.
-- [PolicyEngine UK](https://github.com/PolicyEngine/policyengine-uk), our open-source model, doesn't include the measures [our dashboard](https://www.policyengine.org/uk/autumn-budget-2026) models, so its users can't run them.
+- [PolicyEngine UK](https://github.com/PolicyEngine/policyengine-uk), our open-source model, doesn't include the measures [our dashboard](https://www.policyengine.org/uk/autumn-budget-2026) models, so its users can't run them. We are working on it and will make it available soon.
 
 ## Sources and method
 
