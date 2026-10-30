@@ -92,7 +92,7 @@ The day before the Budget, we listed the 20 measures we thought it most likely t
 
 - **What changes**, and when, from the Budget documents.
 - **Who it affects**, using the government's own reach figures where it gives them.
-- **The official costing**: the government's costing, which the Office for Budget Responsibility (OBR) certifies, from the OBR's [detailed forecast table 1.1](https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/). For a measure in our dashboard we compare with the line or lines of that table that match what we model, and give the total in the Treasury's [Table 6.1](https://www.gov.uk/government/publications/supporting-documents-for-budget-2026) (rounded to the nearest £5 million). We include the measure's other lines for context. Fuel duty is the exception: its official figure is the government's estimate, which the OBR used but could not certify. For other measures we give the OBR's total for the measure. In every table a negative number is a cost to the public finances and a positive number raises money, in £ million.
+- **The official costing**: the government's costing, which the Office for Budget Responsibility (OBR) certifies, from the OBR's [detailed forecast table 1.1](https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/). For a measure in our dashboard we compare with the line or lines of that table that match what we model, and give the total in the Treasury's [Table 6.1](https://www.gov.uk/government/publications/supporting-documents-for-budget-2026), which rounds to the nearest £5 million and includes the measure's other lines, for context only. Fuel duty is the exception: its official figure is the government's estimate, which the OBR used but could not certify. For other measures we give the OBR's total for the measure. In every table a negative number is a cost to the public finances and a positive number raises money, in millions of pounds.
 - **Our estimate**, only where the dashboard publishes one, with the reasons it differs from the official costing.
 - **How we model it**, if we do.
 
@@ -629,7 +629,7 @@ The numbers give each measure's place on our list of 27 October, the day before 
 - Our fuel duty cut leaves out road fuel gases (LPG and natural gas), which the government's costing includes.
 - Our Pension Tax Allowance leaves out some people who reach State Pension age during the tax year.
 - We project household electricity spending with general inflation, not retail energy prices.
-- [PolicyEngine UK](https://github.com/PolicyEngine/policyengine-uk), our open-source model, doesn't include the measures [our dashboard](https://www.policyengine.org/uk/autumn-budget-2026) models, so its users can't run them. We are working on it and will make it available soon.
+- [PolicyEngine UK](https://github.com/PolicyEngine/policyengine-uk), our open-source model, doesn't include the measures [our dashboard](https://www.policyengine.org/uk/autumn-budget-2026) models, so its users can't run them.
 
 ## Sources and method
 
