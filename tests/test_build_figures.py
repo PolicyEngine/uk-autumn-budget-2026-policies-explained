@@ -55,6 +55,7 @@ def test_the_filled_line_reads_as_sentences(attestation, sentence):
 def test_the_briefing_compares_the_budget_with_nothing_we_expected():
     assert not re.search(r"\b(our|the) list\b|pre-Budget list|\bodds\b|\bwe (had )?(expected|listed)\b|\.badge|\.prev\b", TEMPLATE, re.I)
 
+
 def json_values():
     leaves = st.none() | st.booleans() | st.integers(-(2**53) + 1, 2**53 - 1) | st.text()
     return st.recursive(leaves, lambda v: st.lists(v, max_size=4) | st.dictionaries(st.text(), v, max_size=4), max_leaves=12)
