@@ -70,9 +70,21 @@ def test_canonical_json_reads_back_without_null_members(value):
     assert json.loads(canonical(value)) == without_null_members(value)
 
 
-@given(st.dictionaries(st.text(), st.integers(), max_size=6))
+@given(st.dictionaries(st.text(), st.integers(-(2**53) + 1, 2**53 - 1), max_size=6))
 def test_canonical_json_ignores_key_order(value):
     assert canonical(dict(reversed(value.items()))) == canonical(value)
+
+
+@pytest.mark.parametrize("number", [0.5, 1.0, 2**53, -(2**53)])
+def test_canonical_json_stops_on_numbers_it_cannot_write(number):
+    with pytest.raises(SystemExit, match="canonical"):
+        canonical({"a": [number]})
+
+
+def test_canonical_json_sorts_keys_as_rfc_8785_does():
+    keys = ["\u20ac", "\r", "\ufb33", "1", "\U0001f600", "\u0080", "\u00f6"]
+    written = json.loads(canonical({key: 0 for key in keys}))
+    assert list(written) == ["\r", "1", "\u0080", "\u00f6", "\u20ac", "\U0001f600", "\ufb33"]
 
 
 def test_every_saved_artifact_matches_the_manifest():
