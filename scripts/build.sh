@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Build the PDF from template.md.
 #
-#   scripts/build.sh           build on the pinned manifest, sources/manifest-rev17.json
-#   scripts/build.sh --latest  download the live production manifest first and build on that
+#   scripts/build.sh           build on the pinned manifest, sources/manifest-rev17.json,
+#                              and its saved artifacts, sources/artifacts-rev17/
+#   scripts/build.sh --latest  download the live production manifest and artifacts and build on those
 #
 # Writes document/proposal.md, document/figures.json and document/charts/ (all
 # committed, so a PR's diff shows every printed figure and chart that moved),
@@ -13,17 +14,15 @@ cd "$(dirname "$0")/.."
 
 BASE=https://www.policyengine.org/uk/autumn-budget-2026/data
 MANIFEST=sources/manifest-rev17.json
-ART=.cache/artifacts
+ART=sources/artifacts-rev17
 
-rm -rf "$ART"
 if [[ "${1:-}" == "--latest" ]]; then
   MANIFEST=.cache/manifest-latest.json
+  ART=.cache/artifacts
+  rm -rf "$ART"
   mkdir -p .cache
   uv run --frozen python -I scripts/fetch_artifacts.py \
     --manifest-url "$BASE/manifest.json" --manifest-out "$MANIFEST" --out "$ART"
-else
-  uv run --frozen python -I scripts/fetch_artifacts.py \
-    --manifest "$MANIFEST" --base-url "$BASE" --out "$ART"
 fi
 
 uv run --frozen python -I scripts/build_figures.py \
