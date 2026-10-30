@@ -26,4 +26,4 @@ We saved here everything the briefing's figures and claims rest on, on 28 Octobe
 | `uk-autumn-budget-2026-trading-allowance.md` | `bef16a328e7ec9d6` |
 | `uk-triple-lock-budget-2026.md` | `901ee28ee7a12ec7` |
 
-We don't save the dashboard's artifacts (one folder of CSVs per measure) here. `scripts/fetch_artifacts.py` downloads the ones `manifest-rev17.json` lists and checks every file against its receipt's digest.
+`artifacts-rev17/` holds the dashboard's artifacts at revision 17: one folder per measure, with its CSVs and receipt. We saved them on 30 October because the dashboard no longer serves them: all eight returned 404 that day, at revision 60. `scripts/fetch_artifacts.py` downloads the artifacts of the live revision for `scripts/build.sh --latest`.
