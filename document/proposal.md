@@ -7,6 +7,7 @@ pe-doc:
   split_tables: true
   budget_widths: false
   pdf_name: "PolicyEngine - Autumn Budget 2026 policies explained"
+  psl_foundation: false
 ---
 
 ::: {.cover}

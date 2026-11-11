@@ -20,7 +20,7 @@ Commit b56b14c builds revision 17's PDF byte for byte, and 7bbcdcb the explainer
 
 ## Build
 
-You need [uv](https://docs.astral.sh/uv/), [Bun](https://bun.sh) 1.3.12, pandoc 3, and read access to [PolicyEngine/document-templates](https://github.com/PolicyEngine/document-templates), which every PolicyEngine org member has. `uv sync` installs `pe-doc` from there, and `uv.lock` pins it to the commit that built the PDFs we posted.
+You need [uv](https://docs.astral.sh/uv/), [Bun](https://bun.sh) 1.3.12, pandoc 3, and read access to [PolicyEngine/document-templates](https://github.com/PolicyEngine/document-templates), which every PolicyEngine org member has. `uv sync` installs `pe-doc` from there, and `uv.lock` pins the version main builds with. The commits above build the posted PDFs on their own locks, which pin pe-doc 7c8bce3.
 
 ```bash
 (cd site && bun install --frozen-lockfile)
